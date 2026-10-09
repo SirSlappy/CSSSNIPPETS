@@ -5,6 +5,8 @@
 - [LAB-001 — Menu Icon Replacement](#lab-001--menu-icon-replacement)
 - [LAB-002 — Header Icon Replacements](#lab-002--header-icon-replacements)
 - [LAB-003 — Composer + Utility Actions](#lab-003--composer--utility-actions)
+- [LAB-004 — Rating Artwork](#lab-004--rating-artwork)
+- [LAB-005 — Empty-State Illustration](#lab-005--empty-state-illustration)
 - [LAB-006 — Bookmarks Panel](#lab-006--bookmarks-panel)
 - [LAB-007 — Distinct Bookmarks Tabs](#lab-007--distinct-bookmarks-tabs)
 - [LAB-009 — Message Bubble Ornament](#lab-009--message-bubble-ornament)
@@ -16,6 +18,8 @@
 - [LAB-015 — Portrait Glow](#lab-015--portrait-glow)
 - [LAB-015 — Portrait Positioning](#lab-015--portrait-positioning)
 - [LAB-015 — Expression Toggle](#lab-015--expression-toggle)
+- [LAB-015 — Decorative Overlay](#lab-015--decorative-overlay)
+- [LAB-015 — Expression Gear](#lab-015--expression-gear)
 - [LAB-016C — Pink Neon Search Icon](#lab-016c--pink-neon-search-icon)
 - [LAB-016D — Search Rainbow Button Fill](#lab-016d--search-rainbow-button-fill)
 - [LAB-016E — Fullscreen Gradient Outline](#lab-016e--fullscreen-gradient-outline)
@@ -114,6 +118,66 @@ Replace composer and utility icons across the toolbar without changing their fun
 **Before / After:** Show the toolbar in its default state before and the new icon set after.
 
 **Device notes:** Desktop: Confirmed. Mobile: Some toolbar controls may collapse or reposition; verify visible hierarchy and spacing.
+
+---
+
+## LAB-004 — Rating Artwork
+Give each rating choice a unique graphic so the user sees clear visual differentiation at a glance.
+
+```css
+[data-lab="rating"] button[aria-label="Rate 1 of 5"] img {
+  content: url("/api/images/6ac898fd42880c652f055e95") !important;
+}
+
+[data-lab="rating"] button[aria-label="Rate 2 of 5"] img {
+  content: url("/api/images/6ac8991542880c652f0562cb") !important;
+}
+
+[data-lab="rating"] button[aria-label="Rate 3 of 5"] img {
+  content: url("/api/images/6ac8992042880c652f05646f") !important;
+}
+
+[data-lab="rating"] button[aria-label="Rate 4 of 5"] img {
+  content: url("/api/images/6ac8995ad2d7799fdce4e272") !important;
+}
+
+[data-lab="rating"] button[aria-label="Rate 5 of 5"] img {
+  content: url("/api/images/6ac8996500c414e8e2a2153e") !important;
+}
+```
+
+**Customization:**
+- Each selector targets one specific rating choice
+- Use custom icon art for each value instead of a shared generic symbol
+- Great for making feedback more playful or more on-brand
+
+**Before / After:** Show the default rating row before and the five unique icon variations after.
+
+**Device notes:** Desktop: Confirmed. Mobile: Keep the row readable and not too visually dense on compact screens.
+
+---
+
+## LAB-005 — Empty-State Illustration
+Replace the empty-state illustration with a custom image while preserving the panel size and layout balance.
+
+```css
+[data-lab="bookmarks-panel"] img[src*="bary_search.webp"] {
+  content: url("/api/images/6ac899a700c414e8e2a21d73") !important;
+  width: 112px !important;
+  height: 138px !important;
+  object-fit: contain !important;
+  filter: none !important;
+}
+```
+
+**Customization:**
+- `width` and `height` = keep the illustration from breaking the panel proportions
+- `object-fit: contain` = preserves the artwork without cropping distortion
+- Replace the uploaded URL with your own local image later
+
+**Before / After:** Capture the standard empty state before and the custom replaced illustration after.
+
+**Device notes:** Desktop: Confirmed. Mobile: Check how the illustration scales in tighter sidebars or stacked layouts.
 
 ---
 
@@ -392,6 +456,53 @@ Style the expression toggle to feel like a dedicated button with a clear pressed
 
 ---
 
+## LAB-015 — Decorative Overlay
+Add a decorative background asset behind the expression frame to create a more elaborate portrait presentation without changing the main portrait itself.
+
+```css
+[data-lab="expression"]::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    url("/api/images/6ac8999c42880c652f0572b8")
+    center bottom / contain no-repeat !important;
+  pointer-events: none !important;
+}
+```
+
+**Customization:**
+- `background` = overlays a decorative asset behind the face art
+- `center bottom` = keeps the image anchored to the lower frame
+- `pointer-events: none` = ensures the overlay does not interfere with interaction
+
+**Before / After:** Show the portrait without the overlay before and the decorated final treatment after.
+
+**Device notes:** Desktop: Confirmed. Mobile: Keep decorative layers subtle so they do not compete with the portrait.
+
+---
+
+## LAB-015 — Expression Gear
+Add a gear action beside the expression controls so the expression management UI reads as a more intentional toolset.
+
+```css
+[data-lab="expression-manage"] img {
+  content: url("/api/images/6ac8997ed2d7799fdce4e72a") !important;
+  object-fit: contain !important;
+}
+```
+
+**Customization:**
+- `content: url(...)` = swaps the gear icon asset for the custom version
+- `object-fit: contain` = preserves proportions and avoids distortion
+- Keep the gear action visually familiar so it remains obvious as a settings control
+
+**Before / After:** Use the default expression tool cluster before and the gear-enhanced version after.
+
+**Device notes:** Desktop: Confirmed. Mobile: Verify the gear control remains easy to hit and visually clear in tighter panels.
+
+---
+
 ## LAB-016C — Pink Neon Search Icon
 Apply a neon pink glow to the Search icon while preserving the image transparency and artwork details.
 
@@ -551,17 +662,15 @@ Layer a color-adjusted filter onto the Gallery icon so the icon stays recognizab
 
 ---
 
-## Next Batch Suggestions
+## Final Batch Status
 
-The next entries to add should likely be:
+The guide now covers the main Lorebary Laboratory styling categories:
 
-1. LAB-001 — Menu icon replacement
-2. LAB-002 — Header icon replacements
-3. LAB-003 — Composer + utility icon styling
-4. LAB-007 — Distinct Bookmarks tabs
-5. LAB-010 — User vs character message differentiation
-6. LAB-011 — Thinking panel styling
-7. LAB-012 — Write menu states
-8. LAB-013 — Scene notes and template controls
+- icon replacements
+- panel redesigns
+- message differentiation
+- focus visibility
+- expression styling
+- contextual effects and glow treatments
 
-This keeps the guide balanced between image replacements, message styling, and UI effects.
+This is now in a strong state for a final pass: tighten wording, remove internal-only notes, and prepare a cleaner public README/public tutorial version later.
