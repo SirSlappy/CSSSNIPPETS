@@ -2,8 +2,13 @@
 
 ## Table of Contents
 
+- [LAB-001 — Menu Icon Replacement](#lab-001--menu-icon-replacement)
+- [LAB-002 — Header Icon Replacements](#lab-002--header-icon-replacements)
+- [LAB-003 — Composer + Utility Actions](#lab-003--composer--utility-actions)
 - [LAB-006 — Bookmarks Panel](#lab-006--bookmarks-panel)
+- [LAB-007 — Distinct Bookmarks Tabs](#lab-007--distinct-bookmarks-tabs)
 - [LAB-009 — Message Bubble Ornament](#lab-009--message-bubble-ornament)
+- [LAB-010 — Differentiate User Messages](#lab-010--differentiate-user-messages)
 - [LAB-014 — Focus Visibility](#lab-014--focus-visibility)
 - [LAB-015 — Portrait Glow](#lab-015--portrait-glow)
 - [LAB-015 — Portrait Positioning](#lab-015--portrait-positioning)
@@ -12,6 +17,147 @@
 - [LAB-016E — Fullscreen Gradient Outline](#lab-016e--fullscreen-gradient-outline)
 - [LAB-016F — Bookmarks Rotating Rainbow Ring](#lab-016f--bookmarks-rotating-rainbow-ring)
 - [LAB-016H — Gallery Layered Icon Recoloring](#lab-016h--gallery-layered-icon-recoloring)
+
+---
+
+## LAB-001 — Menu Icon Replacement
+Replace the Lab menu icon with a creator-provided asset while keeping the control intact.
+
+```css
+img[data-lab="menu"] {
+  content: url("/api/images/6ac8974542880c652f051b0e") !important;
+  object-fit: contain !important;
+}
+```
+
+**Customization:**
+- `content: url(...)` = swaps the image source
+- `object-fit: contain` = keeps the replacement proportional
+- Use a local asset later by replacing the URL with your own file path
+
+**Before / After:** Show the default menu icon before and the customized replacement after.
+
+**Device notes:** Desktop: Confirmed. Mobile: Not separately tested; verify if the menu is still visually clear on narrow screens.
+
+---
+
+## LAB-002 — Header Icon Replacements
+Swap common header controls like Search, Bookmarks, and HTML mode with custom art while preserving clickability and layout spacing.
+
+```css
+[data-lab="header-action"][aria-label="Search this chat"] img {
+  content: url("/api/images/6ac897301a947bf5aa43d1c8") !important;
+}
+
+[data-lab="header-action"][aria-label="Message bookmarks"] img {
+  content: url("/api/images/6ac897231a947bf5aa43cf04") !important;
+  object-fit: contain !important;
+  filter: none !important;
+}
+
+[data-lab="html-mode"] img {
+  content: url("/api/images/6ac8a0a61a947bf5aa45143c") !important;
+  object-fit: contain !important;
+  filter: none !important;
+}
+```
+
+**Customization:**
+- Each selector matches a specific header action by `aria-label`
+- Replace the `url(...)` values with your own art
+- `filter: none` prevents inherited tint rules from clashing with the custom asset
+
+**Before / After:** Capture the original header row, then show the customized icon set after replacement.
+
+**Device notes:** Desktop: Confirmed. Mobile: Header layouts may compress differently; check visual spacing and icon hit area.
+
+---
+
+## LAB-003 — Composer + Utility Actions
+Replace composer and utility icons across the toolbar without changing their function or structure.
+
+```css
+[data-lab="send"] img:not([src*="icon_stop"]) {
+  content: url("/api/images/6ac8971700c414e8e2a1c37b") !important;
+  object-fit: contain !important;
+}
+
+[data-lab="write"] img {
+  content: url("/api/images/6ac8970875e1eb8796dcfc4f") !important;
+  object-fit: contain !important;
+}
+
+[data-lab="scroll-down"] img {
+  content: url("/api/images/6ac896f900c414e8e2a1bffd") !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+[data-lab="swipe"][aria-label="Previous version"] img {
+  content: url("/api/images/6ac896e875e1eb8796dcf891") !important;
+  object-fit: contain !important;
+  transform: none !important;
+  filter: none !important;
+}
+```
+
+**Customization:**
+- Target each action via `data-lab` and `aria-label`
+- `transform: none` prevents inherited animation or layout transforms from affecting replacement art
+- Update asset URLs to fit your own custom icon bundle
+
+**Before / After:** Show the toolbar in its default state before and the new icon set after.
+
+**Device notes:** Desktop: Confirmed. Mobile: Some toolbar controls may collapse or reposition; verify visible hierarchy and spacing.
+
+---
+
+## LAB-007 — Distinct Bookmarks Tabs
+Give the Bookmarks tabs different accents so active states remain visually distinct without changing the layout.
+
+```css
+#lab-bookmarks-tab-messages {
+  border: 2px solid #ff70b6 !important;
+}
+
+#lab-bookmarks-tab-marks {
+  border: 2px solid #78d9ff !important;
+}
+```
+
+**Customization:**
+- `border` = uses color to differentiate each tab without rewriting the structure
+- `#ff70b6` and `#78d9ff` create a pink/blue split
+- Keep the tab hierarchy and semantics intact while changing the visual treatment
+
+**Before / After:** Place the original bookmarks tab strip before and the accented version after.
+
+**Device notes:** Desktop: Source-theme implementation. Mobile: Check tab widths and tap targets in compact layouts.
+
+---
+
+## LAB-010 — Differentiate User Messages
+Style user bubbles differently from character bubbles so conversation turns read clearly and feel more readable in chat threads.
+
+```css
+[data-lab="bubble"] {
+  background: #232047 !important;
+}
+
+[data-lab-role="user"] [data-lab="bubble"] {
+  background: #4b245c !important;
+  border: 1px solid #ff85c4 !important;
+}
+```
+
+**Customization:**
+- `background` = defines the default character bubble palette
+- `user` override = creates a stronger, more distinct reply bubble
+- `border` = helps separate role-based messaging without forcing a layout change
+
+**Before / After:** Show the standard message thread before and the color-differentiated user messages after.
+
+**Device notes:** Desktop: Source-theme implementation. Mobile: Verify contrast and readability in dark/light mode transitions.
 
 ---
 
