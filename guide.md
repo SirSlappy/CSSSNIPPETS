@@ -9,13 +9,18 @@
 - [LAB-007 — Distinct Bookmarks Tabs](#lab-007--distinct-bookmarks-tabs)
 - [LAB-009 — Message Bubble Ornament](#lab-009--message-bubble-ornament)
 - [LAB-010 — Differentiate User Messages](#lab-010--differentiate-user-messages)
+- [LAB-011 — Thinking Panel Styling](#lab-011--thinking-panel-styling)
+- [LAB-012 — Write Menu States](#lab-012--write-menu-states)
+- [LAB-013 — Scene Notes Controls](#lab-013--scene-notes-controls)
 - [LAB-014 — Focus Visibility](#lab-014--focus-visibility)
 - [LAB-015 — Portrait Glow](#lab-015--portrait-glow)
 - [LAB-015 — Portrait Positioning](#lab-015--portrait-positioning)
+- [LAB-015 — Expression Toggle](#lab-015--expression-toggle)
 - [LAB-016C — Pink Neon Search Icon](#lab-016c--pink-neon-search-icon)
 - [LAB-016D — Search Rainbow Button Fill](#lab-016d--search-rainbow-button-fill)
 - [LAB-016E — Fullscreen Gradient Outline](#lab-016e--fullscreen-gradient-outline)
 - [LAB-016F — Bookmarks Rotating Rainbow Ring](#lab-016f--bookmarks-rotating-rainbow-ring)
+- [LAB-016G — Search Illustration Recolor Experiment](#lab-016g--search-illustration-recolor-experiment)
 - [LAB-016H — Gallery Layered Icon Recoloring](#lab-016h--gallery-layered-icon-recoloring)
 
 ---
@@ -112,6 +117,27 @@ Replace composer and utility icons across the toolbar without changing their fun
 
 ---
 
+## LAB-006 — Bookmarks Panel
+Change the Bookmarks sidebar from the default panel look to a deeper purple gradient with a neon pink accent edge.
+
+```css
+[data-lab="bookmarks-panel"] {
+  background: linear-gradient(155deg, #3b215b, #151b45) !important;
+  border-left: 2px solid #ff77c8 !important;
+}
+```
+
+**Customization:**
+- `background` = panel tone and gradient depth
+- `border-left` = accent rail for quick visual separation
+- `!important` = keeps the styling from being overridden by app defaults
+
+**Before / After:** Place the original sidebar screenshot in the "before" slot and the recolored version in the "after" slot.
+
+**Device notes:** Desktop: Yes. Mobile: Check overlay width and compact spacing.
+
+---
+
 ## LAB-007 — Distinct Bookmarks Tabs
 Give the Bookmarks tabs different accents so active states remain visually distinct without changing the layout.
 
@@ -133,52 +159,6 @@ Give the Bookmarks tabs different accents so active states remain visually disti
 **Before / After:** Place the original bookmarks tab strip before and the accented version after.
 
 **Device notes:** Desktop: Source-theme implementation. Mobile: Check tab widths and tap targets in compact layouts.
-
----
-
-## LAB-010 — Differentiate User Messages
-Style user bubbles differently from character bubbles so conversation turns read clearly and feel more readable in chat threads.
-
-```css
-[data-lab="bubble"] {
-  background: #232047 !important;
-}
-
-[data-lab-role="user"] [data-lab="bubble"] {
-  background: #4b245c !important;
-  border: 1px solid #ff85c4 !important;
-}
-```
-
-**Customization:**
-- `background` = defines the default character bubble palette
-- `user` override = creates a stronger, more distinct reply bubble
-- `border` = helps separate role-based messaging without forcing a layout change
-
-**Before / After:** Show the standard message thread before and the color-differentiated user messages after.
-
-**Device notes:** Desktop: Source-theme implementation. Mobile: Verify contrast and readability in dark/light mode transitions.
-
----
-
-## LAB-006 — Bookmarks Panel
-Change the Bookmarks sidebar from the default panel look to a deeper purple gradient with a neon pink accent edge.
-
-```css
-[data-lab="bookmarks-panel"] {
-  background: linear-gradient(155deg, #3b215b, #151b45) !important;
-  border-left: 2px solid #ff77c8 !important;
-}
-```
-
-**Customization:**
-- `background` = panel tone and gradient depth
-- `border-left` = accent rail for quick visual separation
-- `!important` = keeps the styling from being overridden by app defaults
-
-**Before / After:** Place the original sidebar screenshot in the "before" slot and the recolored version in the "after" slot.
-
-**Device notes:** Desktop: Yes. Mobile: Check overlay width and compact spacing.
 
 ---
 
@@ -211,6 +191,111 @@ Add a decorative ornament above the message text so bubbles feel more stylized w
 **Before / After:** Insert the original bubble screenshot before and the ornamented version after.
 
 **Device notes:** Desktop: Yes. Mobile: Verify long-message wrapping and spacing.
+
+---
+
+## LAB-010 — Differentiate User Messages
+Style user bubbles differently from character bubbles so conversation turns read clearly and feel more readable in chat threads.
+
+```css
+[data-lab="bubble"] {
+  background: #232047 !important;
+}
+
+[data-lab-role="user"] [data-lab="bubble"] {
+  background: #4b245c !important;
+  border: 1px solid #ff85c4 !important;
+}
+```
+
+**Customization:**
+- `background` = defines the default character bubble palette
+- `user` override = creates a stronger, more distinct reply bubble
+- `border` = helps separate role-based messaging without forcing a layout change
+
+**Before / After:** Show the standard message thread before and the color-differentiated user messages after.
+
+**Device notes:** Desktop: Source-theme implementation. Mobile: Verify contrast and readability in dark/light mode transitions.
+
+---
+
+## LAB-011 — Thinking Panel Styling
+Restyle the thinking panel and toggle so the chat feedback area feels more like an intentional UI surface instead of a blank default block.
+
+```css
+[data-lab="thoughts"] {
+  background: #201d3e !important;
+  border: 1px solid #a18bff !important;
+}
+
+[data-lab="thoughts-toggle"] {
+  background: #352954 !important;
+  color: #fff !important;
+}
+```
+
+**Customization:**
+- `background` = darkens the panel while keeping a structured UI feel
+- `border` = adds a subtle purple boundary for separation
+- `color` = keeps toggle text readable on darker backgrounds
+
+**Before / After:** Place the plain thinking panel before and the styled panel after.
+
+**Device notes:** Desktop: Source-theme implementation. Mobile: Confirm the toggle still remains obvious and touch-friendly on compact screens.
+
+---
+
+## LAB-012 — Write Menu States
+Style the write menu and its options so selected states, hover states, and panel structure are easier to distinguish.
+
+```css
+[data-lab="write-menu"] {
+  background: #201c3e !important;
+  border: 1px solid #ff83ce !important;
+}
+
+[data-lab="write-option"]:hover {
+  background: #46305d !important;
+}
+
+[data-lab="write-option"][aria-checked="true"] {
+  box-shadow: inset 3px 0 #ffcf70 !important;
+}
+```
+
+**Customization:**
+- `background` = gives the menu a richer visual shell
+- `hover` = differentiates selection and interaction states
+- `box-shadow` = highlights the active option without changing layout
+
+**Before / After:** Show the plain write panel before and the styled, stateful menu after.
+
+**Device notes:** Desktop: Source-theme implementation. Mobile: Verify menu spacing and tap targets when space is constrained.
+
+---
+
+## LAB-013 — Scene Notes Controls
+Add contrast and emphasis to the Scene Notes panel and selected template controls so important actions stand out more clearly.
+
+```css
+#lab-scene-notes {
+  background: #282449 !important;
+  border: 1px solid #8ce9e2 !important;
+}
+
+[aria-label="Scene note templates"] button[aria-pressed="true"] {
+  border: 2px solid #ffcf79 !important;
+}
+```
+
+**Customization:**
+- `background` = improves contrast in the note panel
+- `border` = visually separates the panel from surrounding chat UI
+- `aria-pressed` selector = makes the selected template state obvious
+
+**Before / After:** Use a default notes panel screenshot before and the accentuated version after.
+
+**Device notes:** Desktop: Source-theme implementation. Mobile: Confirm notes remain legible and buttons still easy to tap.
 
 ---
 
@@ -278,6 +363,32 @@ Shift the expression portrait to the right side of the layout so it sits as a fl
 **Before / After:** Show the original portrait alignment before and the right-side positioning after.
 
 **Device notes:** Desktop: Confirmed. Mobile: Check for clipping on narrower layouts.
+
+---
+
+## LAB-015 — Expression Toggle
+Style the expression toggle to feel like a dedicated button with a clear pressed state and glow.
+
+```css
+[data-lab="expression-toggle"] {
+  background: #27214c !important;
+  border: 2px solid #ff84d5 !important;
+  box-shadow: 0 0 8px #ff84d566 !important;
+}
+
+[data-lab="expression-toggle"][aria-pressed="true"] {
+  background: #623c7d !important;
+}
+```
+
+**Customization:**
+- `border` = adds a pleasing accent edge around the toggle
+- `box-shadow` = gives the button a soft glow without overpowering the UI
+- `aria-pressed` = visually differentiates the active state clearly
+
+**Before / After:** Show the default expression control before and the glow/highlighted version after.
+
+**Device notes:** Desktop: Confirmed. Mobile: Ensure the control still reads as a button when compressed.
 
 ---
 
@@ -387,6 +498,26 @@ Add a rotating rainbow ring around the Bookmarks button without replacing the ac
 **Before / After:** Place the standard Bookmarks button before and the animated rotating ring after.
 
 **Device notes:** Desktop: Confirmed; clickable. Mobile: Not separately tested; confirm touch hit area and spacing.
+
+---
+
+## LAB-016G — Search Illustration Recolor Experiment
+Optional recolor experiment for the Search empty-state illustration. Keep this clearly labeled as a stylistic variant rather than a baseline recommendation.
+
+```css
+[data-lab="bookmarks-panel"] img[src*="bary_search.webp"] {
+  filter: invert(1) drop-shadow(0 0 3px #ff79ca) drop-shadow(0 0 7px #ff79ca) !important;
+}
+```
+
+**Customization:**
+- `invert(1)` = flips the artwork toward a high-contrast look
+- `drop-shadow` = adds a pink glow to the illustration
+- Best for experimentation, not as the default styling baseline
+
+**Before / After:** Show the default Search illustration before and the recolored version after.
+
+**Device notes:** Desktop: Confirmed as optional experiment. Mobile: Not a default recommendation; validate visual clarity in smaller layouts before publishing.
 
 ---
 
