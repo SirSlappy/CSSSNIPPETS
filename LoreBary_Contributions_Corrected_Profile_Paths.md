@@ -3524,6 +3524,7 @@ Each content panel uses `data-profile="content-panel"`. Its `data-section` value
 
 | Section | Exact panel selector |
 | --- | --- |
+| Favorites | `[data-profile="content-panel"][data-section="favorites"]` |
 | Lorebooks | `[data-profile="content-panel"][data-section="lorebooks"]` |
 | Plugins | `[data-profile="content-panel"][data-section="plugins"]` |
 | Scenarios | `[data-profile="content-panel"][data-section="scenarios"]` |
@@ -3532,15 +3533,15 @@ Each content panel uses `data-profile="content-panel"`. Its `data-section` value
 | Prompts | `[data-profile="content-panel"][data-section="prompts"]` |
 | Bundles | `[data-profile="content-panel"][data-section="bundles"]` |
 
-These are the seven section-container values confirmed in the supplied panel HTML. Main navigation buttons use `data-tab`; content panels use `data-section`.
+The table includes Favorites alongside the section-container values used by the other captured panels. Main navigation buttons use `data-tab`; content panels use `data-section`.
 
 **Style one section container**
 
 ![Content Panel Surface](./images/profile/header-content-panel-surface.png)
 
 ```css
-/* Lorebooks panel: outer surface only. */
-[data-profile="content-panel"][data-section="lorebooks"] {
+/* Favorites panel: outer surface only. */
+[data-profile="content-panel"][data-section="favorites"] {
   background: #193446 !important;
   border: 1px solid #91cfed !important;
   border-radius: 16px !important;
@@ -3548,7 +3549,7 @@ These are the seven section-container values confirmed in the supplied panel HTM
 }
 ```
 
-**Customization:** Change `lorebooks` to another value from the table to style that section. Copy the rule with another value to give different sections their own surfaces.
+**Customization:** Change `favorites` to another value from the table to style that section. Copy the rule with another value to give different sections their own surfaces.
 
 The header and footer have their own backgrounds. This rule styles the outer panel; their separate rules come next in this chapter.
 
@@ -3569,32 +3570,32 @@ Place the section-container selector before a part’s selector to limit a later
 
 **Heading, Title, and Count**
 
-This example styles the Lorebooks header, title, heading image, and little number beside that image separately.
+This example styles the Favorites header, title, heading image, and little number beside that image separately.
 
 ![Content Header Surface](./images/profile/header-content-header-surface.png)
 
 ```css
 /* Header surface. */
-[data-section="lorebooks"] [data-profile="content-header"] {
+[data-section="favorites"] [data-profile="content-header"] {
   background: #24483e !important;
   border-bottom: 1px solid #8fd8bb !important;
   border-radius: 16px 16px 0 0 !important;
 }
 
 /* Title text. */
-[data-section="lorebooks"] [data-profile="content-title"] {
+[data-section="favorites"] [data-profile="content-title"] {
   color: #b8ffe0 !important;
   text-shadow: 0 1px 3px #10251e !important;
 }
 
-/* Lorebooks heading image only. */
-[data-section="lorebooks"] [data-profile="content-header"]
-img[src="/img/pixel/lorebooks.webp"] {
+/* Favorites heading image only. */
+[data-section="favorites"] [data-profile="content-header"]
+img[src="/img/pixel/heart.webp"] {
   filter: sepia(1) saturate(2) hue-rotate(95deg) !important;
 }
 
 /* Number beside the heading image, when present. */
-[data-section="lorebooks"] [data-profile="content-count"] {
+[data-section="favorites"] [data-profile="content-count"] {
   color: #ffd580 !important;
   font-weight: 700 !important;
   text-shadow: 0 1px 3px #10251e !important;
@@ -3605,7 +3606,7 @@ img[src="/img/pixel/lorebooks.webp"] {
 
 | Section value | Heading image |
 | --- | --- |
-| `lorebooks` | `/img/pixel/lorebooks.webp` |
+| `favorites` | `/img/pixel/heart.webp` |
 | `plugins` | `/img/pixel/plugins.webp` |
 | `scenarios` | `/img/pixel/scenarios.webp` |
 | `personas` | `/img/pixel/personas.webp` |
@@ -3674,39 +3675,39 @@ The search box uses `[data-profile="search"]`. Inside it, `.header-search` is th
 ![Section Search Field](./images/profile/header-section-search-field.png)
 
 ```css
-/* Lorebooks search box: surface and border. */
-[data-section="lorebooks"] [data-profile="search"] .header-search {
+/* Favorites search box: surface and border. */
+[data-section="favorites"] [data-profile="search"] .header-search {
   background: #193446 !important;
   border: 1px solid #91cfed !important;
   border-radius: 12px !important;
 }
 
 /* Typed text and typing cursor. */
-[data-section="lorebooks"] [data-profile="search"] .header-search-input {
+[data-section="favorites"] [data-profile="search"] .header-search-input {
   background: transparent !important;
   color: #e2f4ff !important;
   caret-color: #8fd8bb !important;
 }
 
 /* Placeholder text shown before typing. */
-[data-section="lorebooks"] [data-profile="search"]
+[data-section="favorites"] [data-profile="search"]
 .header-search-input::placeholder {
   color: #91cfed !important;
   opacity: 1 !important;
 }
 
 /* Magnifying-glass font icon only. */
-[data-section="lorebooks"] [data-profile="search"] .fa-search {
+[data-section="favorites"] [data-profile="search"] .fa-search {
   color: #8fd8bb !important;
 }
 
 /* Search box border while its input has focus. */
-[data-section="lorebooks"] [data-profile="search"] .header-search:focus-within {
+[data-section="favorites"] [data-profile="search"] .header-search:focus-within {
   border-color: #8fd8bb !important;
 }
 ```
 
-**Customization:** Change `lorebooks` to another section value to target its search box. Change the surface, border, typed text, placeholder, cursor, and icon independently.
+**Customization:** Change `favorites` to another section value to target its search box. Change the surface, border, typed text, placeholder, cursor, and icon independently.
 
 The magnifying glass is a Font Awesome icon, so it uses `color`, not an image filter. These rules preserve the existing search behavior and placeholder wording.
 
@@ -3782,7 +3783,7 @@ The sort control uses `data-profile="content-sort"`. Its button is labeled “So
 }
 ```
 
-**Customization:** These rules style existing sort triggers across sections. Add `[data-section="lorebooks"]` before a selector to limit that rule to Lorebooks.
+**Customization:** These rules style existing sort triggers across sections. Add `[data-section="favorites"]` before a selector to limit that rule to Favorites.
 
 | Captured button label | Native image |
 | --- | --- |
@@ -3802,23 +3803,23 @@ Style the grid, scroll region, fades, empty message, and footer while retaining 
 
 These are three separate layers: the body holds the content, the scroll region moves it, and the grid arranges the cards.
 
-| Layer | Lorebooks selector |
+| Layer | Favorites selector |
 | --- | --- |
-| Body | `[data-section="lorebooks"] [data-profile="content-body"]` |
-| Scroll region | `[data-section="lorebooks"] [data-profile="content-scroll"]` |
-| Card grid | `[data-profile="grid"][data-section="lorebooks"]` |
+| Body | `[data-section="favorites"] [data-profile="content-body"]` |
+| Scroll region | `[data-section="favorites"] [data-profile="content-scroll"]` |
+| Card grid | `[data-profile="grid"][data-section="favorites"]` |
 
 ![Content Body and Scroll Area](./images/profile/message-content-body-and-scroll-area.png)
 
 ```css
 /* Body: background and space around the scrolling area. */
-[data-section="lorebooks"] [data-profile="content-body"] {
+[data-section="favorites"] [data-profile="content-body"] {
   background: #193446 !important;
   padding: 12px !important;
 }
 
 /* Scroll region: inner surface and space around its content. */
-[data-section="lorebooks"] [data-profile="content-scroll"] {
+[data-section="favorites"] [data-profile="content-scroll"] {
   background: #122b39 !important;
   border: 1px solid #416b80 !important;
   border-radius: 12px !important;
@@ -3826,13 +3827,13 @@ These are three separate layers: the body holds the content, the scroll region m
 }
 
 /* Card grid: spacing between columns and rows. */
-[data-profile="grid"][data-section="lorebooks"] {
+[data-profile="grid"][data-section="favorites"] {
   column-gap: 16px !important;
   row-gap: 24px !important;
 }
 ```
 
-**Customization:** Change `lorebooks` to another section value. Body padding adds space outside the scroll region; scroll padding adds space inside it. Grid gaps change the space between cards.
+**Customization:** Change `favorites` to another section value. Body padding adds space outside the scroll region; scroll padding adds space inside it. Grid gaps change the space between cards.
 
 The grid hook is `data-profile="grid"`, not `content-grid`. It also carries its own `data-section` value. The gap example keeps LoreBary’s existing column layout and scrolling behavior. An empty section may have no card grid to style.
 
@@ -3842,7 +3843,7 @@ Add this rule if you also want to change card sizing and how many fit in each ro
 
 ```css
 /* Fit as many columns as the available width allows. */
-[data-profile="grid"][data-section="lorebooks"] {
+[data-profile="grid"][data-section="favorites"] {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr)) !important;
 }
 ```
@@ -3856,8 +3857,8 @@ Empty sections show messages such as “No lorebooks found.” In the supplied H
 ![Content Empty-State Text](./images/profile/message-content-empty-state-text.png)
 
 ```css
-/* Lorebooks empty-state message only. */
-[data-section="lorebooks"] [data-profile="content-scroll"]
+/* Favorites empty-state message only. */
+[data-section="favorites"] [data-profile="content-scroll"]
 > div.text-center > p {
   color: #b8ffe0 !important;
   font-weight: 700 !important;
@@ -3865,7 +3866,7 @@ Empty sections show messages such as “No lorebooks found.” In the supplied H
 }
 ```
 
-**Customization:** Change `lorebooks` to another captured section value, such as `plugins` or `bundles`. Change the message’s color, weight, and shadow independently.
+**Customization:** Change `favorites` to another captured section value, such as `plugins` or `bundles`. Change the message’s color, weight, and shadow independently.
 
 This targets the captured empty-message structure rather than every paragraph in the scroll region. The message appears when the section has no matching items; the rule styles its existing wording without replacing it.
 
@@ -3875,21 +3876,21 @@ These overlays soften the top and bottom edges of the scrolling content. They ha
 
 ```css
 /* Top edge: mint fading downward. */
-[data-section="lorebooks"] [data-profile="content-fade-top"] {
+[data-section="favorites"] [data-profile="content-fade-top"] {
   background: linear-gradient(180deg, rgba(143, 216, 187, 0.85), rgba(143, 216, 187, 0)) !important;
   height: 24px !important;
   pointer-events: none !important;
 }
 
 /* Bottom edge: pink fading upward. */
-[data-section="lorebooks"] [data-profile="content-fade-bottom"] {
+[data-section="favorites"] [data-profile="content-fade-bottom"] {
   background: linear-gradient(0deg, rgba(237, 145, 183, 0.85), rgba(237, 145, 183, 0)) !important;
   height: 24px !important;
   pointer-events: none !important;
 }
 ```
 
-**Customization:** Change the RGB colors, the starting opacity (`0.85`), and the fade height. For a subtle blend, match the RGB color to your scroll-region background. Replace `lorebooks` to target another section.
+**Customization:** Change the RGB colors, the starting opacity (`0.85`), and the fade height. For a subtle blend, match the RGB color to your scroll-region background. Replace `favorites` to target another section.
 
 The rules style existing fade elements. They may only be rendered at applicable scroll positions. If earlier theme code hides these hooks with `display: none` or `opacity: 0`, remove that hiding rule before testing.
 
@@ -3900,30 +3901,32 @@ The footer uses `data-profile="content-footer"`. Its surface and text have separ
 ![Content Footer](./images/profile/footer-content-footer.png)
 
 ```css
-/* Lorebooks footer surface. */
-[data-section="lorebooks"] [data-profile="content-footer"] {
+/* Favorites footer surface. */
+[data-section="favorites"] [data-profile="content-footer"] {
   background: #24483e !important;
   border-top: 1px solid #8fd8bb !important;
   box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* Standard footer text: section name and username. */
-[data-section="lorebooks"] [data-profile="content-footer"] > span {
+[data-section="favorites"] [data-profile="content-footer"] > span {
   color: #b8ffe0 !important;
 }
 
 /* Footer-tip text in the captured alternate layout. */
-[data-section="lorebooks"] [data-profile="content-footer"]
+[data-section="favorites"] [data-profile="content-footer"]
 [data-modal-footer-tip] {
   color: #b8ffe0 !important;
 }
 ```
 
-**Customization:** Replace `lorebooks` to target another section. Change the surface, upper border, shadow, and text colors independently. Each text rule applies to its matching captured layout.
+**Customization:** Replace `favorites` to target another section. Change the surface, upper border, shadow, and text colors independently. Each text rule applies to its matching captured layout.
 
 **Back to Top**
 
 The captured button appears in two places: floating at the lower-right of the content body, or within the content footer. Both use `.back-to-top-button` and the image `/img/sketch/arrow_up.webp`.
+
+![Back to Top](./images/profile/footer-back-to-top.png)
 
 ```css
 /* Button surface in either content-panel placement. */
@@ -3995,6 +3998,8 @@ All seven of these card types appeared in the captured Favorites grid.
 | Bundles | `[data-section="favorites"] [data-profile="card"][data-card="bundles"]` |
 
 Try these two rules to see the difference between card types:
+
+![Favorites Card-Type Comparison](./images/profile/message-favorites-card-type-comparison.png)
 
 ```css
 /* Character cards inside Favorites: pink outline. */
@@ -4342,6 +4347,8 @@ These are separate overlay elements. The captured character card has all three, 
 | `card-wash` | Gradient layer masked to the frame, using multiply blending |
 | `card-fade` | Gradient over the cover that improves lower-text readability |
 
+![Tint, Wash, and Fade Overlays](./images/profile/message-card-tint-wash-and-fade.png)
+
 ```css
 /* Frame tint: mint color layer. */
 [data-card="characters"] [data-profile="card-tint"] {
@@ -4569,6 +4576,8 @@ Ratings use the `card-rating` wrapper. The captured markers are acorn images wit
 | Filled | `/img/Icons/icon_acon.png` |
 | Empty | `/img/Icons/icon_acon_emtpy.webp` |
 
+![Rating Artwork](./images/profile/message-rating-artwork.png)
+
 ```css
 /* Filled rating artwork: mint tint. */
 [data-profile="card-rating"] img[src="/img/Icons/icon_acon.png"] {
@@ -4635,6 +4644,8 @@ A captured vine can include a masked color overlay beside its image; that overla
 
 The Featured sticker is an image. The corner ribbon is a rotated text element; the captured ribbons include labels such as Featured, Updated, and Shared.
 
+![Featured Stickers and Ribbons](./images/profile/message-featured-stickers-and-ribbons.png)
+
 ```css
 /* Featured sticker artwork only. */
 [data-profile="card"] img[src="/img/content/featured_sticker.webp"] {
@@ -4670,6 +4681,8 @@ These rules style existing decorations without adding stickers or changing featu
 **Normal and Featured Frames**
 
 Normal and featured cards can use different frame images. Match the exact filename to style one without changing the other.
+
+![Normal and Featured Frames](./images/profile/message-normal-and-featured-frames.png)
 
 ```css
 /* Normal Character frame: mint tint. */
@@ -4792,6 +4805,8 @@ Captured Bundle cards have no `card-cover`, `card-cover-img`, `card-body`, or `c
 | Description/tag area | `[data-card="bundles"] [data-card-window] + div` |
 | Statistics row | `[data-card="bundles"] [data-profile="card-lift"] > div:has(> [data-stat="pieces"])` |
 
+![Bundle Cards Without Standard Hooks](./images/profile/message-bundle-cards-without-standard-hooks.png)
+
 ```css
 /* Preview window: surface and border. */
 [data-card="bundles"] [data-card-window] {
@@ -4864,6 +4879,8 @@ The feed, its item list, and its continuation control have separate hooks.
 | Feed container | `[data-profile="feed"]` |
 | Feed item list | `[data-profile="feed-list"]` |
 | Continuation wrapper | `[data-profile="feed-more"]` |
+
+![Feed and Continuation Wrapper](./images/profile/message-post-feed-and-continuation-wrapper.png)
 
 ```css
 /* Feed container: surrounding surface and spacing. */
@@ -7346,103 +7363,6 @@ button.dashboard-action-button img[src="/img/pixel/check.webp"] {
 
 **Customization:** Back to top can appear floating in the body or in the footer; the dialog-root selector accommodates both without moving it or forcing it visible. Okay is identified by the footer action button containing its native checkmark, not by invented aria-label text. Its plate, label, and checkmark stay separate. Native scrolling and dismiss actions remain intact.
 
-### Experimental: Popular Creations Dialog
-
-**Experimental — Profile-scope exception:** The checked dialog sits outside Profile scope. Despite the general scoping guidance, these examples intentionally target narrowly named dialog roots directly. Define required variables on those roots. Other layouts still need testing.
-
-The captured root is `[role="dialog"][aria-label="Popular creations"]`. It lacks data-profile=modal-panel, so requiring that hook would miss it. Do not require Profile-scope ancestry either.
-
-This dialog is separate from the popular-content preview shelf and its carousel. 
-
-**Exact labelled root**
-
-```css
-/* Named dialog root. */
-[role="dialog"][aria-label="Popular creations"] {
-  --pc-bg: #193446;
-  --pc-edge: #91cfed;
-  background: var(--pc-bg) !important;
-  border: 1px solid var(--pc-edge) !important;
-  color: #e2f4ff !important;
-}
-```
-
-**Customization:** Change the root background and edge independently. These variables are defined where the dialog can inherit them, rather than only on Profile scope. Keep native position, dimensions, overflow, and scroll structure.
-
-**Header icon**
-
-```css
-/* Native heading artwork inside the header surface. */
-[role="dialog"][aria-label="Popular creations"] .surface-header
-img[src="/img/pixel/lorebooks.webp"] {
-  filter: sepia(1) saturate(2) hue-rotate(220deg) !important;
-}
-```
-
-**Customization:** Change the native icon tint without filtering the header container or card covers. The lorebooks artwork is reused as this dialog’s heading; it does not make the dialog the Lorebooks section. Header scoping is important if the same path appears on a card.
-
-**Close button**
-
-```css
-/* Close surface and inherited icon color. */
-[role="dialog"][aria-label="Popular creations"] button[aria-label="Close"] {
-  background: #49365e !important;
-  border: 1px solid #bd9bea !important;
-  border-radius: 50% !important;
-  color: #e0c7ff !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
-}
-
-/* Enabled hover. */
-[role="dialog"][aria-label="Popular creations"] button[aria-label="Close"]:enabled:hover {
-  background: #604778 !important;
-  color: #ffd580 !important;
-}
-
-/* Keyboard focus. */
-[role="dialog"][aria-label="Popular creations"] button[aria-label="Close"]:focus-visible {
-  outline: 2px solid #ffd580 !important;
-  outline-offset: 2px !important;
-}
-```
-
-**Customization:** Change surface, border, rounding, shadow, hover, and focus independently. An explicitly colored font glyph can override inherited button color. Native dimensions and dismissal behavior remain intact.
-
-**Decorative sketch**
-
-```css
-/* Native Bary pencil sketch only. */
-[role="dialog"][aria-label="Popular creations"] img[src="/img/sketch/bary_pencil.webp"] {
-  filter: sepia(1) saturate(2) hue-rotate(155deg) !important;
-  opacity: 0.2 !important;
-  pointer-events: none !important;
-}
-```
-
-**Customization:** Change sketch tint and opacity without touching user covers or portraits. The decorative image stays click-through and retains its native size and placement.
-
-If an older theme hides the image or replaces it with a mask, edit that treatment separately. This image rule does not recolor a replacement pseudo-element.
-
-**Shared card styling**
-
-The dialog reuses content-card hooks. Existing unscoped card rules can already reach them; rules requiring Profile-scope ancestry may not reach cards in an outside dialog.
-
-```css
-/* Outline matching card wrappers in this dialog only. */
-[role="dialog"][aria-label="Popular creations"] [data-profile="card"] {
-  outline: 1px solid var(--pc-edge) !important;
-  outline-offset: 2px !important;
-}
-
-/* Downloads numbers inside the dialog’s cards. */
-[role="dialog"][aria-label="Popular creations"] [data-profile="card"] [data-stat="downloads"] > span {
-  color: #ffd580 !important;
-}
-```
-
-**Customization:** Keep the root-variable block with the outline example. To target one card type, add its captured data-card value to the card selector, such as [data-profile="card"][data-card="plugins"].
-
-Reuse the card anatomy tutorials for frames, overlays, titles, tags, ratings, and statistics. Prefix those component selectors with this named dialog root when the treatment should apply only here. This adds a scope variant without duplicating or replacing contributor examples.
 
 Avoid a filter on the entire card or dialog: it would also recolor uploaded covers and text. The outline affects no layout dimensions, but an ancestor’s clipping can still crop an outside outline.
 
