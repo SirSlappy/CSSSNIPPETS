@@ -105,7 +105,7 @@ The banner has four nested containers. This example gives each a different color
 
 **Outer hero frame**
 
-![Outer Hero Frame](./images/profiles/header-outer-hero-frame.png)
+![Outer Hero Frame](./images/profile/header-outer-hero-frame.png)
 
 ```css
 /* Outer wrapper: pink background, border, and rounding. */
@@ -120,7 +120,7 @@ The banner has four nested containers. This example gives each a different color
 
 The background color sits beneath the banner artwork, so the image may cover it.
 
-![Hero Panel](./images/profiles/header-hero-panel.png)
+![Hero Panel](./images/profile/header-hero-panel.png)
 
 ```css
 /* Banner panel: purple surface, border, rounding, and shadow. */
@@ -137,7 +137,7 @@ The background color sits beneath the banner artwork, so the image may cover it.
 
 A translucent blue background shows the content area while letting some artwork remain visible.
 
-![Hero Content](./images/profiles/header-hero-content.png)
+![Hero Content](./images/profile/header-hero-content.png)
 
 ```css
 /* Banner content area: blue surface and border. */
@@ -150,7 +150,7 @@ A translucent blue background shows the content area while letting some artwork 
 
 **Hero row**
 
-![Hero Row](./images/profiles/header-hero-row.png)
+![Hero Row](./images/profile/header-hero-row.png)
 
 ```css
 /* Avatar and identity layout row: green surface and border. */
@@ -259,7 +259,7 @@ These three containers sit inside the hero row. Give each a separate style to se
 
 **Identity card**
 
-![Identity Card](./images/profiles/header-identity-card.png)
+![Identity Card](./images/profile/header-identity-card.png)
 
 ```css
 /* Outer identity area: purple panel with a pink border. */
@@ -286,7 +286,7 @@ These three containers sit inside the hero row. Give each a separate style to se
 
 **Identity row**
 
-![Identity Row](./images/profiles/header-identity-row.png)
+![Identity Row](./images/profile/header-identity-row.png)
 
 ```css
 /* Display-name row: green panel. */
@@ -306,7 +306,7 @@ The examples style the **containers**. Name text, badges, and individual control
 
 Use these four properties to change a panel’s appearance. This example targets only the **outer identity card** beside the avatar.
 
-![Identity Panel Gradient](./images/profiles/header-identity-panel-gradient.png)
+![Identity Panel Gradient](./images/profile/header-identity-panel-gradient.png)
 
 ```css
 /* Outer identity card: gradient, border, rounded corners, and shadow. */
@@ -370,7 +370,7 @@ The **level notch** sits at the top of the hero. The **navigation notch** holds 
 
 **Level notch**
 
-![Level Notch](./images/profiles/header-level-notch.png)
+![Level Notch](./images/profile/header-level-notch.png)
 
 ```css
 /* Level panel: purple surface with a pink border. */
@@ -398,7 +398,7 @@ The icon selector works with whichever level image is displayed; it does not dep
 
 **Navigation notch**
 
-![Navigation Notch](./images/profiles/header-navigation-notch.png)
+![Navigation Notch](./images/profile/header-navigation-notch.png)
 
 ```css
 /* Profile navigation panel: green surface with a mint border. */
@@ -432,7 +432,7 @@ Style the calendar icon and membership text independently. These rules leave the
 
 **Calendar icon**
 
-![Member-Since Calendar Artwork](./images/profiles/header-member-since-calendar-artwork.png)
+![Member-Since Calendar Artwork](./images/profile/header-member-since-calendar-artwork.png)
 
 ```css
 /* Member-since calendar: mint tint and a soft glow. */
@@ -446,7 +446,7 @@ The calendar is an image, so `color` does not recolor it. `filter` tints its art
 
 **Membership text**
 
-![Member-Since Text](./images/profiles/header-member-since-text.png)
+![Member-Since Text](./images/profile/header-member-since-text.png)
 
 ```css
 /* Member-since text only: mint with a soft shadow. */
@@ -474,7 +474,7 @@ These are the two count buttons beneath the profile metadata. Each has its own s
 
 **Followers button**
 
-![Followers Button](./images/profiles/header-followers-button.png)
+![Followers Button](./images/profile/header-followers-button.png)
 
 ```css
 /* Followers button: rose surface and pink border. */
@@ -494,7 +494,7 @@ These are the two count buttons beneath the profile metadata. Each has its own s
 
 **Following button**
 
-![Following Button](./images/profiles/header-following-button.png)
+![Following Button](./images/profile/header-following-button.png)
 
 ```css
 /* Following button: green surface and mint border. */
@@ -516,7 +516,7 @@ These are the two count buttons beneath the profile metadata. Each has its own s
 
 **Button icons**
 
-![Followers and Following Artwork](./images/profiles/header-followers-and-following-artwork.png)
+![Followers and Following Artwork](./images/profile/header-followers-and-following-artwork.png)
 
 ```css
 /* Followers icon only: pink recolor. */
@@ -615,7 +615,7 @@ The **display-name** element is the heading; **name-text** is the text inside it
 
 **Solid name color**
 
-![Display Name Solid Color](./images/profiles/header-display-name-solid-color.png)
+![Display Name Solid Color](./images/profile/header-display-name-solid-color.png)
 
 ```css
 /* Name text only: bright pink. */
@@ -630,7 +630,7 @@ The **display-name** element is the heading; **name-text** is the text inside it
 
 Replace the solid name-color block with this alternative. It paints the letters with a gradient rather than adding a rectangular background.
 
-![Display Name Gradient](./images/profiles/header-display-name-gradient.png)
+![Display Name Gradient](./images/profile/header-display-name-gradient.png)
 
 ```css
 /* Name text only: pink, lavender, and mint gradient. */
@@ -684,7 +684,7 @@ Style the quote’s panel and its text separately. These rules leave the display
 
 **Quote container**
 
-![Header Quote Container](./images/profiles/header-header-quote-container.png)
+![Header Quote Container](./images/profile/header-header-quote-container.png)
 
 ```css
 /* Quote panel: purple surface, pink border, and rounded corners. */
@@ -699,7 +699,7 @@ Style the quote’s panel and its text separately. These rules leave the display
 
 **Quote text**
 
-![Header Quote Text](./images/profiles/header-header-quote-text.png)
+![Header Quote Text](./images/profile/header-header-quote-text.png)
 
 ```css
 /* Quote text only: pink, italic, and centered. */
@@ -735,7 +735,7 @@ The captured upload label has no dedicated `data-profile` hook. `label:has(> inp
 
 **Overlay surface**
 
-![Change-Avatar Overlay](./images/profiles/avatar-change-avatar-overlay.png)
+![Change-Avatar Overlay](./images/profile/avatar-change-avatar-overlay.png)
 
 ```css
 /* Change-avatar overlay: rose tint inside the portrait. */
@@ -754,7 +754,7 @@ Hover over the avatar or focus its upload input to see the overlay. These rules 
 
 In the supplied overlay, the second child span contains “Change avatar” and the third contains “Click or drop an image.”
 
-![Change-Avatar Title and Hint](./images/profiles/avatar-change-avatar-title-and-hint.png)
+![Change-Avatar Title and Hint](./images/profile/avatar-change-avatar-title-and-hint.png)
 
 ```css
 /* Change-avatar title only. */
@@ -778,7 +778,7 @@ These text selectors follow the captured child order; they may need updating if 
 
 **Upload icon**
 
-![Upload Artwork](./images/profiles/avatar-upload-artwork.png)
+![Upload Artwork](./images/profile/avatar-upload-artwork.png)
 
 ```css
 /* Upload image icon only: pink recolor. */
@@ -810,7 +810,7 @@ The streak beside the avatar has an outer badge, an image, and a number over the
 
 **Streak badge**
 
-![Streak Badge Wrapper](./images/profiles/avatar-streak-badge-wrapper.png)
+![Streak Badge Wrapper](./images/profile/avatar-streak-badge-wrapper.png)
 
 ```css
 /* Outer streak badge: blue surface and pink border. */
@@ -826,7 +826,7 @@ The pink shape inside the badge is the filtered image itself. Changing the badge
 
 **Streak artwork**
 
-![Streak Badge Artwork](./images/profiles/avatar-streak-badge-artwork.png)
+![Streak Badge Artwork](./images/profile/avatar-streak-badge-artwork.png)
 
 ```css
 /* Streak artwork only: pink recolor. */
@@ -872,7 +872,7 @@ Every example below includes `[data-profile="identity-card"]` so it targets the 
 
 **Badge-list surface**
 
-![Badge List Wrapper](./images/profiles/avatar-badge-list-wrapper.png)
+![Badge List Wrapper](./images/profile/avatar-badge-list-wrapper.png)
 
 ```css
 /* Identity badge list: purple surface and pink border. */
@@ -896,7 +896,7 @@ Every example below includes `[data-profile="identity-card"]` so it targets the 
 
 **One badge: Glorp**
 
-![Individual Badge](./images/profiles/avatar-individual-badge.png)
+![Individual Badge](./images/profile/avatar-individual-badge.png)
 
 ```css
 /* Glorp button only: green tile behind the artwork. */
@@ -1057,7 +1057,7 @@ The arrows scroll the main profile-tab strip. Each direction has its own accessi
 
 **Left arrow**
 
-![Main Navigation Scroll Arrow](./images/profiles/header-main-navigation-scroll-arrow.png)
+![Main Navigation Scroll Arrow](./images/profile/header-main-navigation-scroll-arrow.png)
 
 ```css
 /* Left arrow surface. */
@@ -1134,7 +1134,7 @@ The two chains above the About card are separate decorative elements. Both use `
 
 **Left chain**
 
-![About Chain Decoration](./images/profiles/header-about-chain-decoration.png)
+![About Chain Decoration](./images/profile/header-about-chain-decoration.png)
 
 ```css
 /* Left chain: pink tint and independent placement. */
@@ -1201,7 +1201,7 @@ Use the existing native-card framing example for the panel surface and placement
 
 The direct-header signature confines these additions to the About card’s own header.
 
-![About Card and Header](./images/profiles/header-about-card-and-header.png)
+![About Card and Header](./images/profile/header-about-card-and-header.png)
 
 ```css
 /* Entire About panel, including its header. */
@@ -1237,7 +1237,7 @@ section:has([data-profile="about-card"]) > header.surface-header img[src="/img/p
 
 The text is bright pink so the change is easy to see. Custom HTML elements with their own colors may need separate selectors.
 
-![About Biography Text](./images/profiles/header-about-biography-text.png)
+![About Biography Text](./images/profile/header-about-biography-text.png)
 
 ```css
 /* Links inside the biography. */
@@ -1255,7 +1255,7 @@ The text is bright pink so the change is easy to see. Custom HTML elements with 
 
 These rules target the Role, Availability, and Relationship summary shown beneath the biography.
 
-![About Overview Details](./images/profiles/header-about-overview-details.png)
+![About Overview Details](./images/profile/header-about-overview-details.png)
 
 ```css
 /* Overview: Role text. */
@@ -1299,7 +1299,7 @@ span[title="Relationship"] img {
 
 Style the button surface and its pencil icon separately.
 
-![About Edit Button](./images/profiles/header-about-edit-button.png)
+![About Edit Button](./images/profile/header-about-edit-button.png)
 
 ```css
 /* Edit button background and border. */
@@ -1335,7 +1335,7 @@ The **About you** group uses `data-info="about"`. This is an inner information c
 
 **Group panel and heading**
 
-![About You Card](./images/profiles/header-about-you-card.png)
+![About You Card](./images/profile/header-about-you-card.png)
 
 ```css
 /* About-you panel only. */
@@ -1356,7 +1356,7 @@ The **About you** group uses `data-info="about"`. This is an inner information c
 
 The heading’s circular token is background artwork. The user icon is a separate image inside it. Tint the token with a translucent background layer, then style the icon independently.
 
-![About You Heading Icon](./images/profiles/header-about-you-heading-icon.png)
+![About You Heading Icon](./images/profile/header-about-you-heading-icon.png)
 
 ```css
 /* Heading token: pink overlay on the native token artwork. */
@@ -1376,7 +1376,7 @@ The token rule follows the supplied group header’s structure. Changing its bac
 
 **Field labels and values**
 
-![About You Field Labels](./images/profiles/header-about-you-field-labels.png)
+![About You Field Labels](./images/profile/header-about-you-field-labels.png)
 
 ```css
 /* About-you field labels: pale lavender. */
@@ -1395,7 +1395,7 @@ The token rule follows the supplied group header’s structure. Changing its bac
 
 **Field-label icons**
 
-![About You Field Icons](./images/profiles/header-about-you-field-icons.png)
+![About You Field Icons](./images/profile/header-about-you-field-icons.png)
 
 ```css
 /* Also-known-as and Gender label icons. */
@@ -1417,7 +1417,7 @@ These are raster image icons, so their artwork uses `filter`, while text uses `c
 
 The Roleplay group uses `data-info="roleplay"`. Its heading icon is `/img/sketch/dialogue.webp`.
 
-![Roleplay Card](./images/profiles/header-roleplay-card.png)
+![Roleplay Card](./images/profile/header-roleplay-card.png)
 
 ```css
 /* Roleplay panel. */
@@ -1478,7 +1478,7 @@ The Roleplay group uses `data-info="roleplay"`. Its heading icon is `/img/sketch
 
 The tags under Favorite genres are separate pills. Their own colors can override the surrounding field value color.
 
-![Roleplay Genre Pills](./images/profiles/header-roleplay-genre-pills.png)
+![Roleplay Genre Pills](./images/profile/header-roleplay-genre-pills.png)
 
 ```css
 /* Roleplay genre/tag pill surfaces. */
@@ -1510,7 +1510,7 @@ The tags under Favorite genres are separate pills. Their own colors can override
 
 The Preferences group uses `data-info="preferences"`. Its heading uses a Font Awesome sliders icon, not an image.
 
-![Preferences Card](./images/profiles/header-preferences-card.png)
+![Preferences Card](./images/profile/header-preferences-card.png)
 
 ```css
 /* Preferences panel. */
@@ -1552,7 +1552,7 @@ Image artwork uses `filter`; Font Awesome icons and text use `color`. The token 
 
 The Boundaries group uses `data-info="boundaries"`. Its heading icon is the Font Awesome lock.
 
-![Boundaries Card](./images/profiles/header-boundaries-card.png)
+![Boundaries Card](./images/profile/header-boundaries-card.png)
 
 ```css
 /* Boundaries panel. */
@@ -1592,7 +1592,7 @@ The Boundaries group uses `data-info="boundaries"`. Its heading icon is the Font
 
 The Relationships group uses `data-info="relationships"`. Its heading uses a Font Awesome heart; field labels use heart images.
 
-![Relationships Card](./images/profiles/header-relationships-card.png)
+![Relationships Card](./images/profile/header-relationships-card.png)
 
 ```css
 /* Relationships panel. */
@@ -1666,7 +1666,7 @@ Font Awesome heading icons use `color`; raster field icons use `filter`. The tok
 
 The visible heading is **Links & socials**, but the group’s exact `data-info` value is **socials**. Its heading uses a Font Awesome link icon; the captured Website field uses a chain-link image.
 
-![Links and Socials Card](./images/profiles/header-links-and-socials-card.png)
+![Links and Socials Card](./images/profile/header-links-and-socials-card.png)
 
 ```css
 /* Links & socials panel. */
@@ -1931,7 +1931,7 @@ The existing composer example supplies the shared surfaces and text colors. Thes
 
 The captured composer sits directly inside `feed-list`. Its `.surface-post` shell contains an inner div, which holds `composer-header`.
 
-![Post Composer Outer Card](./images/profiles/input-post-composer-outer-card.png)
+![Post Composer Outer Card](./images/profile/input-post-composer-outer-card.png)
 
 ```css
 /* Outer composer card in the captured feed layout. */
@@ -2084,7 +2084,7 @@ Insert, Text background, and Edit as HTML lack composer-btn and data-btn in the 
 
 Toolbar icons are font glyphs on `[data-profile="icon"]` elements. Use color rather than an image filter.
 
-![Formatting Font Icons](./images/profiles/input-formatting-font-icons.png)
+![Formatting Font Icons](./images/profile/input-formatting-font-icons.png)
 
 ```css
 /* All captured toolbar font icons. */
@@ -2160,7 +2160,7 @@ Style privacy separately from notification state. Notify supports both its heade
 
 The supplied layouts place privacy in the header or footer. Scope the exact button labels to both locations.
 
-![Composer Privacy Button](./images/profiles/input-composer-privacy-button.png)
+![Composer Privacy Button](./images/profile/input-composer-privacy-button.png)
 
 ```css
 /* Privacy button: shared surface. */
@@ -2217,7 +2217,7 @@ The footer label contains a visually hidden checkbox followed immediately by a d
 | Visual track | That input followed by `+ div` |
 | Thumb | The track’s `::after` |
 
-![Notify Followers Checked Track](./images/profiles/input-notify-followers-checked-track.png)
+![Notify Followers Checked Track](./images/profile/input-notify-followers-checked-track.png)
 
 ```css
 /* Notify followers when rendered as a header button. */
@@ -2272,7 +2272,7 @@ Style the footer row and Post button, including the backing plate and native dis
 
 The footer contains the terms paragraph, privacy/notification controls, and Submit button.
 
-![Post Composer Footer](./images/profiles/footer-post-composer-footer.png)
+![Post Composer Footer](./images/profile/footer-post-composer-footer.png)
 
 ```css
 /* Terms paragraph. */
@@ -2318,7 +2318,7 @@ The image plate covers most of the button background. Change that image’s filt
 
 The captured Submit button uses one background plate and a foreground text span. There is no separate foreground Submit icon in this supplied example.
 
-![Post Submit Plate and Label](./images/profiles/footer-post-submit-plate-and-label.png)
+![Post Submit Plate and Label](./images/profile/footer-post-submit-plate-and-label.png)
 
 ```css
 /* Submit background plate. */
@@ -2367,7 +2367,7 @@ Target the Poke Bary image rather than one source filename so the same treatment
 
 **Recolor while retaining the Poke action**
 
-![Composer Bary Ears and Cheeky Paw](./images/profiles/input-composer-bary-ears-and-cheeky-paw.png)
+![Composer Bary Ears and Cheeky Paw](./images/profile/input-composer-bary-ears-and-cheeky-paw.png)
 
 ```css
 /* Image inside the captured composer Bary control. */
@@ -2443,7 +2443,7 @@ Style the nested poll card, its fields, answer controls, end-date switch, and da
 
 **Outer card and header**
 
-![Poll Composer Card and Header](./images/profiles/input-poll-composer-card-and-header.png)
+![Poll Composer Card and Header](./images/profile/input-poll-composer-card-and-header.png)
 
 ```css
 /* Composer card identified by its question input. */
@@ -2473,7 +2473,7 @@ This identifies a composer rather than a published poll. Because it uses a desce
 
 **Question and answer fields**
 
-![Poll Question and Answer Fields](./images/profiles/input-poll-question-and-answer-fields.png)
+![Poll Question and Answer Fields](./images/profile/input-poll-question-and-answer-fields.png)
 
 ```css
 /* Question field. */
@@ -2524,7 +2524,7 @@ The poll card sits inside the outer post composer. Keep the question-field signa
 
 **Labels and helper text**
 
-![Poll Labels and Helper Text](./images/profiles/input-poll-labels-and-helper-text.png)
+![Poll Labels and Helper Text](./images/profile/input-poll-labels-and-helper-text.png)
 
 ```css
 /* End date label and adjacent No time limit text. */
@@ -2546,7 +2546,7 @@ No composer error or live-feedback element is present in this capture. Its selec
 
 **Captured answer controls and artwork**
 
-![Poll Answer Controls](./images/profiles/input-poll-answer-controls.png)
+![Poll Answer Controls](./images/profile/input-poll-answer-controls.png)
 
 ```css
 /* Remove poll: explicit label. */
@@ -2580,7 +2580,7 @@ fieldset + div > button img[src="/img/pixel/plus_squirrel.webp"] {
 
 **End-date checkbox, track, and thumb**
 
-![Poll End-Date Switch](./images/profiles/input-poll-end-date-switch.png)
+![Poll End-Date Switch](./images/profile/input-poll-end-date-switch.png)
 
 ```css
 /* Unchecked track. */
@@ -2627,7 +2627,7 @@ The original composer capture displays No time limit with the switch unchecked. 
 
 The poll is submitted with the outer composer’s ordinary Post button. No separate poll-submit button appears. Scope it to the outer composer containing a poll:
 
-![Poll Submission Control](./images/profiles/input-poll-submission-control.png)
+![Poll Submission Control](./images/profile/input-poll-submission-control.png)
 
 ```css
 /* Main Post label when this composer contains a poll. */
@@ -2662,7 +2662,7 @@ The poll is submitted with the outer composer’s ordinary Post button. No separ
 
 The supplied additional markup confirms a datetime-local input labelled Poll end date, followed by a paragraph displaying America/Los_Angeles.
 
-![Poll End-Date Field and Timezone](./images/profiles/input-poll-end-date-field-and-timezone.png)
+![Poll End-Date Field and Timezone](./images/profile/input-poll-end-date-field-and-timezone.png)
 
 ```css
 /* End-date field surface, text, and caret. */
@@ -2806,7 +2806,7 @@ Style the preview and full Gallery separately, including their grids and image w
 
 The captured `gallery-preview` hook belongs to an outer div. Its direct section child draws the preview card.
 
-![Gallery Preview](./images/profiles/header-gallery-preview.png)
+![Gallery Preview](./images/profile/header-gallery-preview.png)
 
 ```css
 /* Preview wrapper: space above the card. */
@@ -2854,7 +2854,7 @@ The exact header-artwork path avoids recoloring uploaded gallery images. These r
 
 Scope the grid to gallery-preview to style the preview thumbnails separately from the full Gallery section.
 
-![Gallery Image Wrappers](./images/profiles/message-gallery-image-wrappers.png)
+![Gallery Image Wrappers](./images/profile/message-gallery-image-wrappers.png)
 
 ```css
 /* Preview grid spacing. */
@@ -2895,7 +2895,7 @@ These rules keep the captured four-column preview, square proportions, image cro
 
 Gallery uses `data-section="gallery"` and the heading image `/img/pixel/lab-gallery.webp`.
 
-![Full Gallery Section](./images/profiles/message-full-gallery-section.png)
+![Full Gallery Section](./images/profile/message-full-gallery-section.png)
 
 ```css
 /* Gallery panel. */
@@ -2977,7 +2977,7 @@ The existing engagement example supplies button surfaces, raster recolors, and t
 
 ```
 
-![Comment Count and Artwork](./images/profiles/footer-comment-count-and-artwork.png)
+![Comment Count and Artwork](./images/profile/footer-comment-count-and-artwork.png)
 
 ```css
 /* Existing comment count. */
@@ -2987,7 +2987,7 @@ The existing engagement example supplies button surfaces, raster recolors, and t
 
 ```
 
-![Share Button Plate and Artwork](./images/profiles/footer-share-button-plate-and-artwork.png)
+![Share Button Plate and Artwork](./images/profile/footer-share-button-plate-and-artwork.png)
 
 ```css
 /* Share foreground artwork, separately from its backing plate. */
@@ -3129,7 +3129,7 @@ The **body** wraps the area below the profile header. The **inner body** is the 
 
 Add space between the body’s edges and the layout inside it.
 
-![Profile Body Padding](./images/profiles/header-profile-body-padding.png)
+![Profile Body Padding](./images/profile/header-profile-body-padding.png)
 
 ```css
 /* Body: space inside the outer wrapper. */
@@ -3142,7 +3142,7 @@ Add space between the body’s edges and the layout inside it.
 
 Adjust the grid’s inner padding and the space between its direct sections.
 
-![Profile Body Layout Spacing](./images/profiles/header-profile-body-layout-spacing.png)
+![Profile Body Layout Spacing](./images/profile/header-profile-body-layout-spacing.png)
 
 ```css
 /* Inner body: space around and between grid sections. */
@@ -3192,7 +3192,7 @@ The action bar contains two groups: Letter and Wave on one side, and Follow/Foll
 
 **Whole action bar**
 
-![Action Bar Wrapper](./images/profiles/header-action-bar-wrapper.png)
+![Action Bar Wrapper](./images/profile/header-action-bar-wrapper.png)
 
 ```css
 /* Action bar: purple surface around both groups. */
@@ -3209,7 +3209,7 @@ The action bar contains two groups: Letter and Wave on one side, and Follow/Foll
 
 The captured inner wrappers use `display: contents`, which gives them no visible box. Changing them to `inline-flex` lets their backgrounds, borders, and padding appear.
 
-![Letter and Wave Button Group](./images/profiles/header-letter-and-wave-button-group.png)
+![Letter and Wave Button Group](./images/profile/header-letter-and-wave-button-group.png)
 
 ```css
 /* Letter and Wave wrapper: rose group surface. */
@@ -3228,7 +3228,7 @@ The captured inner wrappers use `display: contents`, which gives them no visible
 
 **Follow and Alerts group**
 
-![Follow and Alerts Button Group](./images/profiles/header-follow-and-alerts-button-group.png)
+![Follow and Alerts Button Group](./images/profile/header-follow-and-alerts-button-group.png)
 
 ```css
 /* Follow and Alerts wrapper: green group surface. */
@@ -3256,7 +3256,7 @@ Style the Letter button’s surface, label, and image icon independently. These 
 
 **Button surface**
 
-![Letter Button Surface](./images/profiles/header-letter-button-surface.png)
+![Letter Button Surface](./images/profile/header-letter-button-surface.png)
 
 ```css
 /* Letter button: rose surface and pink border. */
@@ -3278,7 +3278,7 @@ Style the Letter button’s surface, label, and image icon independently. These 
 
 The captured label is the button’s second direct child span; the first holds its icon.
 
-![Letter Button Text](./images/profiles/header-letter-button-text.png)
+![Letter Button Text](./images/profile/header-letter-button-text.png)
 
 ```css
 /* Letter label only. */
@@ -3291,7 +3291,7 @@ The captured label is the button’s second direct child span; the first holds i
 
 **Letterbox icon**
 
-![Letter Button Artwork](./images/profiles/header-letter-button-artwork.png)
+![Letter Button Artwork](./images/profile/header-letter-button-artwork.png)
 
 ```css
 /* Letterbox image only: pink recolor. */
@@ -3367,7 +3367,7 @@ Both states use the same `action-follow` button. Its `aria-label` changes from `
 
 **Follow state**
 
-![Follow Button](./images/profiles/header-follow-button.png)
+![Follow Button](./images/profile/header-follow-button.png)
 
 ```css
 /* Follow surface: rose background and pink border. */
@@ -3405,7 +3405,7 @@ img[src="/img/pixel/heart.webp"] {
 
 **Following state**
 
-![Following Button State](./images/profiles/header-following-button-state.png)
+![Following Button State](./images/profile/header-following-button-state.png)
 
 ```css
 /* Following surface: green background and mint border. */
@@ -3453,7 +3453,7 @@ The Alerts action uses `action-bell`. In the supplied HTML, its label reads “A
 
 **Button surface**
 
-![Alerts Button and Bell Artwork](./images/profiles/header-alerts-button-and-bell-artwork.png)
+![Alerts Button and Bell Artwork](./images/profile/header-alerts-button-and-bell-artwork.png)
 
 ```css
 /* Alerts button: purple surface and lavender border. */
@@ -3525,7 +3525,7 @@ These are the seven section-container values confirmed in the supplied panel HTM
 
 **Style one section container**
 
-![Content Panel Surface](./images/profiles/header-content-panel-surface.png)
+![Content Panel Surface](./images/profile/header-content-panel-surface.png)
 
 ```css
 /* Lorebooks panel: outer surface only. */
@@ -3560,7 +3560,7 @@ Place the section-container selector before a part’s selector to limit a later
 
 This example styles the Lorebooks header, title, heading image, and little number beside that image separately.
 
-![Content Header Surface](./images/profiles/header-content-header-surface.png)
+![Content Header Surface](./images/profile/header-content-header-surface.png)
 
 ```css
 /* Header surface. */
@@ -3614,7 +3614,7 @@ Content chains use background artwork, not `<img>` elements. Both use `/img/nav/
 | Left chain | `[data-profile="content-chain-left"]` |
 | Right chain | `[data-profile="content-chain-right"]` |
 
-![Content Chain Decorations](./images/profiles/header-content-chain-decorations.png)
+![Content Chain Decorations](./images/profile/header-content-chain-decorations.png)
 
 ```css
 /* Left content chain: artwork, size, and position. */
@@ -3660,7 +3660,7 @@ Style the search field and the captured Filter and Sort triggers without changin
 
 The search box uses `[data-profile="search"]`. Inside it, `.header-search` is the surface, `.header-search-input` is the input, and `.fa-search` is the magnifying-glass font icon.
 
-![Section Search Field](./images/profiles/header-section-search-field.png)
+![Section Search Field](./images/profile/header-section-search-field.png)
 
 ```css
 /* Lorebooks search box: surface and border. */
@@ -3703,7 +3703,7 @@ The magnifying glass is a Font Awesome icon, so it uses `color`, not an image fi
 
 The captured Favorites filter uses `data-profile="content-type-filter"`. Its button is labeled “Filter favorites by type.”
 
-![Section Filter Trigger](./images/profiles/header-section-filter-trigger.png)
+![Section Filter Trigger](./images/profile/header-section-filter-trigger.png)
 
 ```css
 /* Filter button surface. */
@@ -3797,7 +3797,7 @@ These are three separate layers: the body holds the content, the scroll region m
 | Scroll region | `[data-section="lorebooks"] [data-profile="content-scroll"]` |
 | Card grid | `[data-profile="grid"][data-section="lorebooks"]` |
 
-![Content Body and Scroll Area](./images/profiles/message-content-body-and-scroll-area.png)
+![Content Body and Scroll Area](./images/profile/message-content-body-and-scroll-area.png)
 
 ```css
 /* Body: background and space around the scrolling area. */
@@ -3842,7 +3842,7 @@ Add this rule if you also want to change card sizing and how many fit in each ro
 
 Empty sections show messages such as “No lorebooks found.” In the supplied HTML, this paragraph sits inside a centered wrapper directly within the scroll region.
 
-![Content Empty-State Text](./images/profiles/message-content-empty-state-text.png)
+![Content Empty-State Text](./images/profile/message-content-empty-state-text.png)
 
 ```css
 /* Lorebooks empty-state message only. */
@@ -3886,7 +3886,7 @@ The rules style existing fade elements. They may only be rendered at applicable 
 
 The footer uses `data-profile="content-footer"`. Its surface and text have separate rules.
 
-![Content Footer](./images/profiles/footer-content-footer.png)
+![Content Footer](./images/profile/footer-content-footer.png)
 
 ```css
 /* Lorebooks footer surface. */
@@ -4218,7 +4218,7 @@ The **shell** is the clickable wrapper that sets the card’s size. The **lift l
 | Shell | `[data-card="lorebooks"] [data-profile="card-shell"]` |
 | Lift layer | `[data-card="lorebooks"] [data-profile="card-lift"]` |
 
-![Content Card Shell](./images/profiles/message-content-card-shell.png)
+![Content Card Shell](./images/profile/message-content-card-shell.png)
 
 ```css
 /* Shell: pink outline around the clickable card area. */
@@ -4252,7 +4252,7 @@ To limit a rule to lorebook cards in Favorites, put `[data-section="favorites"]`
 
 The frame is a separate image directly inside `card-lift`. Target that image to recolor the frame without filtering the cover or card text.
 
-![Content Card Frame](./images/profiles/message-content-card-frame.png)
+![Content Card Frame](./images/profile/message-content-card-frame.png)
 
 ```css
 /* Lorebook frame artwork only. */
@@ -4280,7 +4280,7 @@ These are captured frame examples; normal/featured frame differences have their 
 
 The **cover container** holds and clips the cover area. The **cover image** is the artwork inside it. Their hooks are `card-cover` and `card-cover-img`.
 
-![Card Cover Container](./images/profiles/message-card-cover-container.png)
+![Card Cover Container](./images/profile/message-card-cover-container.png)
 
 ```css
 /* Lorebook cover container: surface, border, and clipping shape. */
@@ -4307,7 +4307,7 @@ The container keeps its captured position and dimensions. Its existing overflow 
 
 Use this in place of the crop rule if you want the whole image visible.
 
-![Card Cover Image Fit](./images/profiles/message-card-cover-image-fit.png)
+![Card Cover Image Fit](./images/profile/message-card-cover-image-fit.png)
 
 ```css
 /* Full cover image, with empty space where its proportions differ. */
@@ -4372,7 +4372,7 @@ Style card regions and their contents without changing the native values, trunca
 
 Some card types expose separate structural regions. Plugins has all three captured hooks, so this example styles their surfaces independently.
 
-![Plugin Card Header Body and Footer](./images/profiles/message-plugin-card-header-body-and-footer.png)
+![Plugin Card Header Body and Footer](./images/profile/message-plugin-card-header-body-and-footer.png)
 
 ```css
 /* Plugin card header surface. */
@@ -4416,7 +4416,7 @@ Change `plugins` to another type only where the matching hook exists. These are 
 
 `card-tip` is reused for titles, descriptions, and tags. Give it surrounding context so a rule reaches only the intended wrapper. This example uses captured Plugin cards.
 
-![Plugin Card Title and Description](./images/profiles/message-plugin-card-title-and-description.png)
+![Plugin Card Title and Description](./images/profile/message-plugin-card-title-and-description.png)
 
 ```css
 /* Title wrapper inside the card header. */
@@ -4454,7 +4454,7 @@ The description selector uses the captured `translate="yes"` attribute to distin
 
 Captured Plugin cards have bordered tag pills inside a `card-tip` row. The additional-tag count has its own hook: `card-tags-more`.
 
-![Plugin Card Tag Pills and Count](./images/profiles/message-plugin-card-tag-pills-and-count.png)
+![Plugin Card Tag Pills and Count](./images/profile/message-plugin-card-tag-pills-and-count.png)
 
 ```css
 /* Tag pill surfaces only. */
@@ -4503,7 +4503,7 @@ Each captured statistic has a `data-stat` value. The number is a child `<span>`;
 | Downloads | `data-stat="downloads"` | `/img/pixel/download.webp` |
 | Bundle pieces | `data-stat="pieces"` | `/img/pixel/templates.webp` |
 
-![Card Statistics](./images/profiles/message-card-statistics.png)
+![Card Statistics](./images/profile/message-card-statistics.png)
 
 ```css
 /* Views number only. */
@@ -4585,7 +4585,7 @@ Style the card’s native decorative artwork separately from its cover, title, a
 
 Vines use `data-profile="card-vine"`. The two captured images have separate filenames, so each can be styled independently.
 
-![Card Vines](./images/profiles/message-card-vines.png)
+![Card Vines](./images/profile/message-card-vines.png)
 
 ```css
 /* Vine A wrapper: size only. */
@@ -4713,7 +4713,7 @@ The exact path leaves uploaded Plugin covers separate. This rule only applies wh
 
 These preview cards use the exact, case-sensitive value `data-card="profileStyles"`. The captured examples appear in Favorites and have their own portrait frame and preview image.
 
-![Profile-Style Preview Card](./images/profiles/message-profile-style-preview-card.png)
+![Profile-Style Preview Card](./images/profile/message-profile-style-preview-card.png)
 
 ```css
 /* Profile-style card wrapper. */
@@ -4904,7 +4904,7 @@ The supplied continuation button says “Load more posts” and uses `/img/pixel
 
 `data-profile="post"` selects the outer post surface.
 
-![Post Container](./images/profiles/message-post-container.png)
+![Post Container](./images/profile/message-post-container.png)
 
 ```css
 /* Post surface, border, rounding, spacing, and shadow. */
@@ -4928,7 +4928,7 @@ The supplied continuation button says “Load more posts” and uses `/img/pixel
 
 The post header holds the avatar, author information, and options trigger. The author-name row is the element containing `post-author` as a direct child.
 
-![Post Author Row](./images/profiles/message-post-author-row.png)
+![Post Author Row](./images/profile/message-post-author-row.png)
 
 ```css
 /* Author-name row: its own surface and spacing. */
@@ -4996,7 +4996,7 @@ The portrait rule keeps native dimensions and original image colors. Name and me
 
 `post-body` is the content container. `.rich-text-content` holds the written post inside it.
 
-![Post Body](./images/profiles/message-post-body.png)
+![Post Body](./images/profile/message-post-body.png)
 
 ```css
 /* Post-body surface and spacing. */
@@ -5043,7 +5043,7 @@ These rules preserve the existing preview-height limit and expansion behavior. N
 
 The published indicator is a span with a lock image and visible Followers only text in the latest capture. Two aria-label variants are recorded: `Private post, followers only` and `Visible to followers only`. Use the label matching the rendered indicator; both captured variants are included below. Its title describes the audience; avoid selectors tied to a particular profile name.
 
-![Private-Post Indicator](./images/profiles/message-private-post-indicator.png)
+![Private-Post Indicator](./images/profile/message-private-post-indicator.png)
 
 ```css
 /* Published private-post indicator: both captured labels. */
@@ -5079,7 +5079,7 @@ Style pinned-post tape independently from the post’s action trigger.
 
 The captured pinned post has `/img/sketch/tape_plain.webp` as a direct child of its post container. Its hidden “Pinned post” label is a separate element.
 
-![Pinned-Post Tape](./images/profiles/message-pinned-post-tape.png)
+![Pinned-Post Tape](./images/profile/message-pinned-post-tape.png)
 
 ```css
 /* Pinned-post tape artwork only. */
@@ -5101,7 +5101,7 @@ The direct-child `>` matters: the supplied page also uses this tape image deeper
 
 The options wrapper is `post-actions`. Its button is labeled “Post options” and contains the `ellipsis-h` font icon.
 
-![Post Options Button](./images/profiles/message-post-options-button.png)
+![Post Options Button](./images/profile/message-post-options-button.png)
 
 ```css
 /* Post options button surface. */
@@ -5157,7 +5157,7 @@ Distinguish event posts through their captured artwork signatures, then style th
 
 The captured Level Up event contains a native Level image with the `.aspect-square` class. Together, the image path and class distinguish this event artwork from smaller Level icons elsewhere.
 
-![Level Up Event Post](./images/profiles/message-level-up-event-post.png)
+![Level Up Event Post](./images/profile/message-level-up-event-post.png)
 
 ```css
 /* Whole post containing the captured Level Up signature. */
@@ -5204,7 +5204,7 @@ The inner-panel rule follows the supplied layout: panel → image row → Level 
 
 The captured RP-partner, relationship, and marriage events share `/img/pixel/heart.webp` with `.aspect-square`. This signature styles all three layouts together.
 
-![Relationship Event Post](./images/profiles/message-relationship-event-post.png)
+![Relationship Event Post](./images/profile/message-relationship-event-post.png)
 
 ```css
 /* Whole relationship-family post. */
@@ -5264,7 +5264,7 @@ The `.aspect-square` qualifier keeps the event image separate from smaller heart
 
 The captured Glorp event uses `/img/Badges/badge_glorp.webp` with `.aspect-square`. The same file also appears as a small author badge, so the class qualifier is essential.
 
-![Glorp Event Post](./images/profiles/message-glorp-event-post.png)
+![Glorp Event Post](./images/profile/message-glorp-event-post.png)
 
 ```css
 /* Whole Glorp event post. */
@@ -5478,7 +5478,7 @@ Use these as a shared base. Earlier selectors containing `[data-embed="published
 
 `post-media` wraps the attachment area. `post-media-grid` controls the arrangement inside it.
 
-![Post Media Container](./images/profiles/message-post-media-container.png)
+![Post Media Container](./images/profile/message-post-media-container.png)
 
 ```css
 /* Outer media container. */
@@ -5507,7 +5507,7 @@ These rules preserve native column arrangements and image dimensions. They targe
 
 The captured media area has two reveal layers: an outer wrapper around the grid, and individual wrappers inside it.
 
-![Media-Reveal Wrapper](./images/profiles/message-media-reveal-wrapper.png)
+![Media-Reveal Wrapper](./images/profile/message-media-reveal-wrapper.png)
 
 ```css
 /* Outer reveal wrapper. */
@@ -5574,7 +5574,7 @@ The shared signature requires a direct header structure and the captured nested 
 
 **Card, header, voting rows, results, feedback, and End poll**
 
-![Published Poll Card and Header](./images/profiles/message-published-poll-card-and-header.png)
+![Published Poll Card and Header](./images/profile/message-published-poll-card-and-header.png)
 
 ```css
 /* Captured inner poll card. */
@@ -5722,7 +5722,7 @@ Keep voting buttons, aria-pressed, live-feedback updates, native disabled attrib
 
 **Poll Tape and Ended-Time Badge**
 
-![Closed Poll Tape and Ended Metadata](./images/profiles/message-closed-poll-tape-and-ended-metadata.png)
+![Closed Poll Tape and Ended Metadata](./images/profile/message-closed-poll-tape-and-ended-metadata.png)
 
 ```css
 /* Tape immediately before a card with the captured poll structure. */
@@ -5874,7 +5874,7 @@ The published hooks are confirmed in the supplied HTML. Composer-specific rich-t
 
 The previous entry established the scopes. These examples supply the full quote appearance, pairing the stylesheet’s editor blockquote target with the dedicated published hook.
 
-![Blockquote](./images/profiles/message-blockquote.png)
+![Blockquote](./images/profile/message-blockquote.png)
 
 ```css
 /* Quote surface, border, accent, spacing, and shadow. */
@@ -5904,7 +5904,7 @@ The published selector is confirmed by supplied HTML. The editor element target 
 
 Published HTML confirms details.editor-details with data-profile=post-decoration and data-decoration=collapsible. Its summary is the native disclosure control. The paired editor class target comes from the supplied CSS reference.
 
-![Collapsible Section](./images/profiles/message-collapsible-section.png)
+![Collapsible Section](./images/profile/message-collapsible-section.png)
 
 ```css
 /* Details container. */
@@ -6012,7 +6012,7 @@ These tutorials supplement the shared targeting reference. Markup evidence and r
 
 The supplied published HTML contains table, thead, th, tbody, tr, and td. No dedicated table-decoration hook or table-only overflow wrapper is captured. Editor table selectors come from the supplied CSS reference.
 
-![Rich-Text Table](./images/profiles/message-rich-text-table.png)
+![Rich-Text Table](./images/profile/message-rich-text-table.png)
 
 ```css
 /* Table surface and border model. */
@@ -6105,7 +6105,7 @@ Published table markup is confirmed; composer table markup and visual outcomes r
 
 The supplied HTML includes hr.editor-divider, its editor-divider-dotted variant, and the published post-decoration values divider, divider-dotted, and paws.
 
-![Solid Dotted and Paw Dividers](./images/profiles/message-solid-dotted-and-paw-dividers.png)
+![Solid Dotted and Paw Dividers](./images/profile/message-solid-dotted-and-paw-dividers.png)
 
 ```css
 /* Solid line in composer and published content. */
@@ -6646,7 +6646,7 @@ Supplied individual Level filenames remain deferred for the later Level inventor
 
 The examples share a palette defined on the two named roots. Keep this root block with the component rules.
 
-![Followers and Following Dialog Surfaces](./images/profiles/header-followers-and-following-dialog-surfaces.png)
+![Followers and Following Dialog Surfaces](./images/profile/header-followers-and-following-dialog-surfaces.png)
 
 ```css
 /* Named roots and self-contained palette. */
@@ -6758,7 +6758,7 @@ These examples keep native dialog positioning, sizing, scrolling, search behavio
 
 These Experimental examples use exact native paths inside the named Followers and Following roots. They do not require the palette variables from the preceding tutorial.
 
-![Followers and Following Heading Icon](./images/profiles/header-followers-and-following-heading-icon.png)
+![Followers and Following Heading Icon](./images/profile/header-followers-and-following-heading-icon.png)
 
 ```css
 /* Heading icon inside the header. */
@@ -6785,7 +6785,7 @@ These rules retain native artwork size, position, and image rendering. If an ear
 
 These Experimental examples style the captured direct row-avatar images separately from nested native badge artwork.
 
-![List-Row Avatars and Badges](./images/profiles/message-list-row-avatars-and-badges.png)
+![List-Row Avatars and Badges](./images/profile/message-list-row-avatars-and-badges.png)
 
 ```css
 /* Row avatars: border and shadow. */
@@ -6821,7 +6821,7 @@ The native-path badge rule does not cover uploaded custom badges. Do not broaden
 
 Both visible Follow and Following row buttons use modal-row-follow in the supplied captures.
 
-![Shared List-Row Follow Buttons](./images/profiles/message-shared-list-row-follow-buttons.png)
+![Shared List-Row Follow Buttons](./images/profile/message-shared-list-row-follow-buttons.png)
 
 ```css
 /* Shared row-button surface and text. */
@@ -6869,7 +6869,7 @@ Also distinguish the dialog name from a row-button state: aria-label=Following o
 
 Use the exact Close label under the named dialog roots.
 
-![Followers and Following Close Button](./images/profiles/header-followers-and-following-close-button.png)
+![Followers and Following Close Button](./images/profile/header-followers-and-following-close-button.png)
 
 ```css
 /* Close-button surface and inherited font-icon color. */
@@ -6931,7 +6931,7 @@ Keep the Experimental status until the specific example is visually verified. No
 
 The static screenshot shows the frame artwork and glow; LoreBary controls the animation.
 
-![Bary Animation Frame Recolor](./images/profiles/input-bary-animation-frame-recolor.png)
+![Bary Animation Frame Recolor](./images/profile/input-bary-animation-frame-recolor.png)
 
 ```css
 [data-profile="modal-panel"][aria-label="Send a wave"] img:is(
@@ -6948,7 +6948,7 @@ The static screenshot shows the frame artwork and glow; LoreBary controls the an
 
 Replace earlier sketch styling with this block. It supplies the background and Close treatment, replaces the sketch with a click-through mask, and moves tape inside a rectangular note. Keep the Bary animation, wish, footer, and Send rules below.
 
-![Wave Note and Tape Fastener](./images/profiles/input-wave-note-and-tape-fastener.png)
+![Wave Note and Tape Fastener](./images/profile/input-wave-note-and-tape-fastener.png)
 
 ```css
 /* Wave root: background and local replacement variables. */
@@ -7086,7 +7086,7 @@ div:has(> img[src="/img/sketch/bary_pencil.webp"])::before {
 
 **Checked/unchecked wish pills**
 
-![Wave Wish Pills](./images/profiles/input-wave-wish-pills.png)
+![Wave Wish Pills](./images/profile/input-wave-wish-pills.png)
 
 ```css
 [data-profile="modal-panel"][aria-label="Send a wave"] [role="radiogroup"][aria-label="Wish"]
@@ -7114,7 +7114,7 @@ button[role="radio"]:focus-visible > span {
 
 **Footer, Send button, plate, and wave icon**
 
-![Wave Footer and Send Button](./images/profiles/footer-wave-footer-and-send-button.png)
+![Wave Footer and Send Button](./images/profile/footer-wave-footer-and-send-button.png)
 
 ```css
 [data-profile="modal-panel"][aria-label="Send a wave"] :is(.surface-footer, [data-modal-footer="true"]) {
@@ -7156,7 +7156,7 @@ Use `[data-profile="content-panel"][role="dialog"]` directly, without requiring 
 
 **Dialog root and surfaces**
 
-![Section Dialog Surfaces](./images/profiles/header-section-dialog-surfaces.png)
+![Section Dialog Surfaces](./images/profile/header-section-dialog-surfaces.png)
 
 ```css
 [data-profile="content-panel"][role="dialog"] {
@@ -7183,7 +7183,7 @@ Use `[data-profile="content-panel"][role="dialog"]` directly, without requiring 
 
 **Previous/Next section arrows and Close**
 
-![Section Dialog Navigation and Close Buttons](./images/profiles/header-section-dialog-navigation-and-close-buttons.png)
+![Section Dialog Navigation and Close Buttons](./images/profile/header-section-dialog-navigation-and-close-buttons.png)
 
 ```css
 [data-profile="content-panel"][role="dialog"] button:is(
@@ -7235,7 +7235,7 @@ img[src$="/arrow-right-v2.webp"] {
 
 **Search and Filter/Sort triggers**
 
-![Section Dialog Search and Sort](./images/profiles/header-section-dialog-search-and-sort.png)
+![Section Dialog Search and Sort](./images/profile/header-section-dialog-search-and-sort.png)
 
 ```css
 [data-profile="content-panel"][role="dialog"] [data-profile="search"] .header-search {
@@ -7292,7 +7292,7 @@ button[aria-label="Sort items"] {
 
 **Footer, Back to top, and Okay**
 
-![Section Dialog Footer and Okay Button](./images/profiles/footer-section-dialog-footer-and-okay-button.png)
+![Section Dialog Footer and Okay Button](./images/profile/footer-section-dialog-footer-and-okay-button.png)
 
 ```css
 [data-profile="content-panel"][role="dialog"] [data-profile="content-footer"] {
