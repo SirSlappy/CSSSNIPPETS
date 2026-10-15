@@ -1,9 +1,4 @@
 # LoreBary Profile CSS — Complementary Additions
-
-These additions build on the supplied Profile tutorials in Caddel’s Quick Guide. Sections with matching names contain extra subheadings for those tutorials; their starter examples remain the foundation. New component sections cover additional structures.
-
-Use the existing theme palette where examples reference --theme-* variables. Literal colors in the additional component examples are editable choices. Keep each example’s local variables and dependencies with it.
-
 ## Contents
 
 - [Profile Theme Structure and Palette](#profile-theme-structure-and-palette)
