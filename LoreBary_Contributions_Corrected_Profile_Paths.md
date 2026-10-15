@@ -40,7 +40,6 @@ Use the existing theme palette where examples reference --theme-* variables. Lit
   - [Preview Shelf Layout and Exact Control Targets](#preview-shelf-layout-and-exact-control-targets)
   - [Gallery Preview and Full Gallery](#gallery-preview-and-full-gallery)
 - [Comment, Share, and Like Buttons](#comment-share-and-like-buttons)
-  - [Reaction Counts and Separate Share Artwork](#reaction-counts-and-separate-share-artwork)
 - [Profile Background and Layout](#profile-background-and-layout)
   - [Background Size, Position, and Tint](#background-size-position-and-tint)
   - [Body and Grid Spacing](#body-and-grid-spacing)
@@ -226,23 +225,6 @@ This example uses strong pink to make the tint easy to see. The mask rules remov
 - Use `background: transparent` to remove this tint.
 - Remove both mask declarations to retain LoreBary’s existing fade.
 
-**Clear the previous tutorial’s colored surfaces**
-
-If you used the Banner Layers example, its content and row backgrounds can obscure the tint. These rules make those surfaces transparent while retaining their borders.
-
-```css
-/* Reveal the banner layers beneath the content. */
-[data-profile="scope"] [data-profile="hero-content"] {
-  background: transparent !important;
-}
-
-[data-profile="scope"] [data-profile="hero-row"] {
-  background: transparent !important;
-}
-```
-
-Adjust the artwork or tint layer instead of applying `opacity` to the whole hero, which would also fade its text and controls.
-
 ### Identity Rows and Individual Surface Treatments
 
 Style the identity card and its inner rows, then choose a solid or gradient surface treatment.
@@ -273,6 +255,8 @@ These three containers sit inside the hero row. Give each a separate style to se
 ```
 
 **Identity column**
+
+![Identity Column](./images/profile/header-identity-column.png)
 
 ```css
 /* Name and metadata column: blue panel. */
@@ -540,6 +524,8 @@ These filters replace the icons’ original colors with approximately pink and m
 
 In “2 Following,” the number has its own `count-value` element. The word is text inside the surrounding span. Style that span for the label, then give the number its own color.
 
+![Numbers and Labels](./images/profile/header-followers-and-following-count-text.png)
+
 ```css
 /* Followers label: pale pink. */
 [data-profile="scope"] [data-profile="count-followers"]
@@ -604,6 +590,8 @@ The **display-name** element is the heading; **name-text** is the text inside it
 
 **Heading weight and shadow**
 
+![Heading Weight and Shadow](./images/profile/header-display-name-weight-and-shadow.png)
+
 ```css
 /* Display-name heading: weight, letter spacing, and shadow. */
 [data-profile="scope"] [data-profile="display-name"] {
@@ -649,6 +637,8 @@ Replace the solid name-color block with this alternative. It paints the letters 
 **Username Text**
 
 The captured username (`@handle`) has no dedicated `data-profile` label. It is a paragraph immediately after the display-name row inside the identity column.
+
+![Username Text](./images/profile/header-username-text.png)
 
 ```css
 /* Username paragraph directly after the identity row. */
@@ -778,7 +768,7 @@ These text selectors follow the captured child order; they may need updating if 
 
 **Upload icon**
 
-![Upload Artwork](./images/profile/avatar-upload-artwork.png)
+![Upload Icon](./images/profile/avatar-upload-artwork.png)
 
 ```css
 /* Upload image icon only: pink recolor. */
@@ -839,6 +829,8 @@ The pink shape inside the badge is the filtered image itself. Changing the badge
 This recolors whichever streak image LoreBary displays. It produces an approximate pink silhouette; use `filter: none` to retain the original colors and shading.
 
 **Streak count**
+
+![Streak Count](./images/profile/avatar-streak-count.png)
 
 ```css
 /* Number over the artwork: mint with a dark outline. */
@@ -1253,7 +1245,7 @@ The text is bright pink so the change is easy to see. Custom HTML elements with 
 
 **Overview status row**
 
-These rules target the Role, Availability, and Relationship summary shown beneath the biography.
+These rules target the Role, Availability, Gender/Identity, and Relationship summary shown beneath the biography. The captured Gender/Identity item uses `title="Gender"` and the native idcard artwork.
 
 ![About Overview Details](./images/profile/header-about-overview-details.png)
 
@@ -1280,6 +1272,19 @@ span[title="Role"] img {
 [data-profile="scope"] [data-profile="about-card"]
 span[title="Availability"] img {
   filter: sepia(1) saturate(2) hue-rotate(95deg) !important;
+}
+
+/* Overview: Gender/Identity text. */
+[data-profile="scope"] [data-profile="about-card"]
+[data-profile="additional-info"] > span[title="Gender"] {
+  color: #e0c7ff !important;
+}
+
+/* Overview: Gender/Identity icon only. */
+[data-profile="scope"] [data-profile="about-card"]
+[data-profile="additional-info"] > span[title="Gender"]
+img[src="/img/pixel/idcard.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(220deg) !important;
 }
 
 /* Overview: Relationship text. */
@@ -1639,6 +1644,8 @@ The Relationships group uses `data-info="relationships"`. Its heading uses a Fon
 
 **RP partner links and avatars**
 
+![RP Partner Links and Avatars](./images/profile/header-rp-partner-links-and-avatars.png)
+
 ```css
 /* RP partner links. */
 [data-info="relationships"] dd a {
@@ -1713,6 +1720,8 @@ The visible heading is **Links & socials**, but the group’s exact `data-info` 
 
 **Website and social links**
 
+![Website and Social Links](./images/profile/message-website-and-social-links.png)
+
 ```css
 /* Links inside field values. */
 [data-info="socials"] dd a {
@@ -1739,6 +1748,8 @@ The link rules apply to existing Website and social anchors inside this group. T
 
 Favorite models uses the captured `data-info="models"` target.
 
+![Favorite Models Card](./images/profile/header-favorite-models-card.png)
+
 ```css
 /* Favorite models card. */
 [data-profile="scope"] [data-profile="about"]
@@ -1752,6 +1763,8 @@ Favorite models uses the captured `data-info="models"` target.
 
 **Captured component notes**
 
+**Model pills need their own styling.** The card-surface rule above does not recolor the pills. The optional code below styles the pill surface, border, text, and hover, along with the heading and its brain icon.
+
 | Part | Target within the models card | Evidence |
 | --- | --- | --- |
 | Card | `[data-profile="info-group"][data-info="models"]` | Exact named hook |
@@ -1762,6 +1775,8 @@ Favorite models uses the captured `data-info="models"` target.
 | Pill label | `dd > span > span[translate="no"] > span` | Nested text span |
 
 Card color is inherited only where descendants have no own color. The captured model pills explicitly set their surface and text colors, so the card rule alone does not recolor them. Optional matching heading/icon/pill styling:
+
+![Favorite Models Pills](./images/profile/header-favorite-models-pills.png)
 
 ```css
 [data-profile="scope"] [data-profile="about"]
@@ -1808,6 +1823,8 @@ Style the About Me editing controls through their captured toolbar class, named 
 | Footer | Direct About-card div containing Save and Cancel buttons | These are ordinary buttons, not composer-submit or pixel-plate buttons. |
 
 **Narrow editing-view targets**
+
+![About Me Editor](./images/profile/input-about-me-editor.png)
 
 ```css
 /* Only the captured About card containing this editable textbox. */
@@ -1984,6 +2001,8 @@ The supplied header contains a Followers only status span. Another supplied layo
 **Composer Avatar**
 
 The body wraps a row containing the avatar image and editor column. The avatar has no dedicated composer-avatar hook in the captured markup.
+
+![Composer Avatar](./images/profile/input-composer-avatar.png)
 
 ```css
 /* Avatar border and shadow. */
@@ -2271,8 +2290,6 @@ Style the footer row and Post button, including the backing plate and native dis
 **Footer and Submit Button**
 
 The footer contains the terms paragraph, privacy/notification controls, and Submit button.
-
-![Post Composer Footer](./images/profile/footer-post-composer-footer.png)
 
 ```css
 /* Terms paragraph. */
@@ -2964,8 +2981,6 @@ The full-section rules above include the heading artwork, count, grid gaps, and 
 
 ## Comment, Share, and Like Buttons
 
-### Reaction Counts and Separate Share Artwork
-
 The existing engagement example supplies button surfaces, raster recolors, and the pressed Like state. Add these targets when the number, Share backing, or foreground icon should differ from that shared treatment.
 
 ```css
@@ -3129,8 +3144,6 @@ The **body** wraps the area below the profile header. The **inner body** is the 
 
 Add space between the body’s edges and the layout inside it.
 
-![Profile Body Padding](./images/profile/header-profile-body-padding.png)
-
 ```css
 /* Body: space inside the outer wrapper. */
 [data-profile="scope"] [data-profile="body"] {
@@ -3141,8 +3154,6 @@ Add space between the body’s edges and the layout inside it.
 **Inner layout spacing**
 
 Adjust the grid’s inner padding and the space between its direct sections.
-
-![Profile Body Layout Spacing](./images/profile/header-profile-body-layout-spacing.png)
 
 ```css
 /* Inner body: space around and between grid sections. */
