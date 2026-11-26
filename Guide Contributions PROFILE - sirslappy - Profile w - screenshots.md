@@ -8545,187 +8545,399 @@ button.dashboard-action-button img[src="/img/pixel/check.webp"] {
 
 ## Profile Selector Quick Reference
 
+Start with the native selector for the element you want to style. Add a parent or state qualifier when the same selector appears in multiple places or when a rule is meant for one view. For example, use `[data-modal=wave]` for the Wave dialog and `[data-modal=wave] [data-profile=modal-panel]` for its card.
+
+### Native Profile Selectors
+
+The following tables cover the full native list. Selectors that use a sibling or descendant combinator, such as the Share button or modal avatar, describe a relationship in the markup. A native listing establishes the available target. Refer to the individual tutorial for tested states and layouts.
+
+#### Profile Shell, Banner, and Identity
+
+| Target | Selector |
+| --- | --- |
+| Any glyph icon | `[data-profile="icon"]` |
+| Avatar area | `[data-profile="avatar-wrap"]` |
+| Avatar buttons | `[data-profile="avatar-actions"]` |
+| Avatar frame | `[data-profile="avatar"]` |
+| Avatar image | `[data-profile="avatar-img"]` |
+| Background image | `[data-profile="page-background"]` |
+| Background tint | `[data-profile="page-tint"]` |
+| Banner | `[data-profile="hero"]` |
+| Banner content | `[data-profile="hero-content"]` |
+| Banner frame | `[data-profile="hero-frame"]` |
+| Banner row | `[data-profile="hero-row"]` |
+| Banner tint | `[data-profile="hero-tint"]` |
+| Body | `[data-profile="body"]` |
+| Body inner | `[data-profile="body-inner"]` |
+| Body tint | `[data-profile="body-tint"]` |
+| Compact profile banner | `[data-profile="hero"][data-compact="true"]` |
+| Content page layout | `[data-profile="scope"][data-profile-view="content"]` |
+| Display name | `[data-profile="display-name"]` |
+| Haunting streak | `[data-profile="streak"]` |
+| Level badge | `[data-profile="level"]` |
+| Level icon | `[data-profile="level-icon"]` |
+| Level notch | `[data-profile="level-notch"]` |
+| Level text | `[data-profile="level-text"]` |
+| Member since | `[data-profile="member-since"]` |
+| Member since icon | `[data-profile="member-since-icon"]` |
+| Member since inner | `[data-profile="member-since-inner"]` |
+| Member since text | `[data-profile="member-since-text"]` |
+| Meta block | `[data-profile="meta"]` |
+| Name card | `[data-profile="identity-card"]` |
+| Name column | `[data-profile="identity-col"]` |
+| Name row | `[data-profile="identity"]` |
+| Name text | `[data-profile="name-text"]` |
+| Quote | `[data-profile="quote"]` |
+| Quote text | `[data-profile="quote-text"]` |
+| Remove avatar button | `[data-profile="avatar-remove"]` |
+| Streak icon | `[data-profile="streak-icon"]` |
+| Streak number | `[data-profile="streak-count"]` |
+| Whole profile | `[data-profile="scope"]` |
+
+#### Profile Navigation, Counts, and Actions
+
+| Target | Selector |
+| --- | --- |
+| Action bar | `[data-profile="action-bar"]` |
+| Active tab | `[data-profile="tab"][data-active="true"]` |
+| Count number | `[data-profile="count-value"]` |
+| Follow button | `[data-profile="action-follow"]` |
+| Follow counts | `[data-profile="counts"]` |
+| Followers button | `[data-profile="count-followers"]` |
+| Following button | `[data-profile="count-following"]` |
+| Left actions | `[data-profile="actions"]` |
+| Letter button | `[data-profile="action-letter"]` |
+| Menu bar | `[data-profile="tabs"]` |
+| Menu bar notch | `[data-profile="tab-notch"]` |
+| Right actions | `[data-profile="actions-right"]` |
+| Tab | `[data-profile="tab"]` |
+| Tab count | `[data-profile="tab-count"]` |
+| Tab pane | `[data-profile="tab-pane"]` |
+| Wave button | `[data-profile="action-wave"]` |
+| Alerts button | `[data-profile="action-bell"]` |
+| About tab key | `[data-tab="about"]` |
+| Bundles tab key | `[data-tab="bundles"]` |
+| Characters tab key | `[data-tab="characters"]` |
+| Favorites tab key | `[data-tab="favorites"]` |
+| Lorebooks tab key | `[data-tab="lorebooks"]` |
+| Personas tab key | `[data-tab="personas"]` |
+| Plugins tab key | `[data-tab="plugins"]` |
+| Prompts tab key | `[data-tab="prompts"]` |
+| Scenarios tab key | `[data-tab="scenarios"]` |
+
+#### About Me and Profile HTML
+
+| Target | Selector |
+| --- | --- |
+| About card | `[data-profile="about-card"]` |
+| About column | `[data-profile="about"]` |
+| About columns | `[data-profile="about-row"]` |
+| Additional info | `[data-profile="additional-info"]` |
+| Bio text | `[data-profile="about-bio"]` |
+| Custom HTML block | `[data-profile="html-block"]` |
+| Edit button | `[data-profile="about-edit"]` |
+| Empty about | `[data-profile="about-empty"]` |
+| Info panel | `[data-profile="info-group"]` |
+| Left about chain | `[data-profile="about-chain-left"]` |
+| Relationships panel | `[data-profile="info-group"][data-info="relationships"]` |
+| Right about chain | `[data-profile="about-chain-right"]` |
+| Show more | `[data-profile="about-more"]` |
+| Boundaries information group | `[data-info="boundaries"]` |
+| Preferences information group | `[data-info="preferences"]` |
+| Relationships information group | `[data-info="relationships"]` |
+| Roleplay information group | `[data-info="roleplay"]` |
+| Socials information group | `[data-info="socials"]` |
+
+#### Composer and Toolbar
+
+| Target | Selector |
+| --- | --- |
+| Any toolbar button | `[data-profile="composer-btn"]` |
+| Attach button | `[data-btn="attach"]` |
+| Bold button | `[data-btn="bold"]` |
+| Bullet list button | `[data-btn="bullet-list"]` |
+| Centre align button | `[data-btn="center"]` |
+| Composer body | `[data-profile="composer-body"]` |
+| Composer footer | `[data-profile="composer-footer"]` |
+| Composer header | `[data-profile="composer-header"]` |
+| Composer spot | `[data-profile="composer-slot"]` |
+| Composer text area | `[data-profile="composer-editor"]` |
+| Composer toolbar | `[data-profile="composer-toolbar"]` |
+| Emoji picker button | `[data-btn="emote"]` |
+| GIF button | `[data-btn="gifs-stickers"]` |
+| GIF picker button | `[data-btn="gif"]` |
+| Heading button | `[data-btn="heading"]` |
+| Insert link button | `[data-btn="insert-link"]` |
+| Italic button | `[data-btn="italic"]` |
+| Justify button | `[data-btn="justify"]` |
+| Left align button | `[data-btn="left-align"]` |
+| Normal text button | `[data-btn="normal"]` |
+| Numbered list button | `[data-btn="numbered-list"]` |
+| Post button | `[data-profile="composer-submit"]` |
+| Right align button | `[data-btn="right-align"]` |
+| Sticker picker button | `[data-btn="sticker"]` |
+| Text colour button | `[data-btn="text-color"]` |
+| Underline button | `[data-btn="underline"]` |
+| Text color bar | `[data-btn="text-color-bar"]` |
+
+#### Published Posts, Feed, and Embeds
+
+| Target | Selector |
+| --- | --- |
+| Any post decoration | `[data-profile="post-decoration"]` |
+| Comment button | `[data-profile="post-comment-button"]` |
+| Comment count | `[data-profile="post-comment-count"]` |
+| Embed — Bary | `[data-profile="post-embed"][data-embed="bary"]` |
+| Embed — leaderboard | `[data-profile="post-embed"][data-embed="leaderboard"]` |
+| Embed — multiplayer | `[data-profile="post-embed"][data-embed="multiplayer"]` |
+| Embed — new upload | `[data-profile="post-embed"][data-embed="published"]` |
+| Embed — update | `[data-profile="post-embed"][data-embed="updated"]` |
+| Embed card | `[data-profile="embed-card"]` |
+| Embed title | `[data-profile="embed-title"]` |
+| Embedded content card | `[data-profile="post-embed"]` |
+| Feed column | `[data-profile="feed"]` |
+| Feed empty | `[data-profile="feed-empty"]` |
+| Feed loading | `[data-profile="feed-loading"]` |
+| Like button | `[data-profile="post-like"]` |
+| Likes summary | `[data-profile="post-likes"]` |
+| Load more | `[data-profile="feed-more"]` |
+| Post | `[data-profile="post"]` |
+| Post author | `[data-profile="post-author"]` |
+| Post avatar | `[data-profile="post-avatar"]` |
+| Post body | `[data-profile="post-body"]` |
+| Post engagement bar | `[data-profile="post-engagement"]` |
+| Post GIF | `[data-profile="post-gif"]` |
+| Post header | `[data-profile="post-header"]` |
+| Post list | `[data-profile="feed-list"]` |
+| Post media | `[data-profile="post-media"]` |
+| Post media grid | `[data-profile="post-media-grid"]` |
+| Post menu | `[data-profile="post-actions"]` |
+| Post read more | `[data-profile="post-more"]` |
+| Post type pill | `[data-profile="post-pill"]` |
+| Repost count | `[data-profile="post-reposts"]` |
+| Share button | `[data-profile="post-comment-button"] + *` |
+| Spoiler overlay | `[data-profile="media-reveal"]` |
+
+#### Comments and Replies
+
+| Target | Selector |
+| --- | --- |
+| Comment | `[data-profile="comment"]` |
+| Comment author | `[data-profile="comment-author"]` |
+| Comment avatar | `[data-profile="comment-avatar"]` |
+| Comment row | `[data-profile="comment-row"]` |
+| Comment submit | `[data-profile="comment-submit"]` |
+| Comment text area | `[data-profile="comment-editor"]` |
+| Comment timestamp | `[data-profile="comment-time"]` |
+| Comment toolbar | `[data-profile="comment-toolbar"]` |
+| Deleted comment | `[data-profile="comment-deleted"]` |
+| Deleted reply | `[data-profile="reply-deleted"]` |
+| Load more comments | `[data-profile="comment-more"]` |
+| Reply | `[data-profile="reply"]` |
+| Reply author | `[data-profile="reply-author"]` |
+| Reply avatar | `[data-profile="reply-avatar"]` |
+| Reply button | `[data-profile="comment-reply-btn"]` |
+| Reply header | `[data-profile="reply-header"]` |
+| Reply timestamp | `[data-profile="reply-time"]` |
+| Sign-in prompt | `[data-profile="comment-locked"]` |
+
+#### Gallery, Featured Creators, and Content Sections
+
+| Target | Selector |
+| --- | --- |
+| Binderies container | `[data-profile="content-panel"][data-section="binderies"]` |
+| Bottom scroll fade | `[data-profile="content-fade-bottom"]` |
+| Bundles container | `[data-profile="content-panel"][data-section="bundles"]` |
+| Chained container frame | `[data-profile="content-chain-frame"]` |
+| Characters container | `[data-profile="content-panel"][data-section="characters"]` |
+| Chats container | `[data-profile="content-panel"][data-section="chats"]` |
+| Content body | `[data-profile="content-body"]` |
+| Content container | `[data-profile="content-panel"]` |
+| Content count | `[data-profile="content-count"]` |
+| Content footer | `[data-profile="content-footer"]` |
+| Content grid | `[data-profile="grid"]` |
+| Content header | `[data-profile="content-header"]` |
+| Content sorting | `[data-profile="content-sort"]` |
+| Content title | `[data-profile="content-title"]` |
+| Content type filter | `[data-profile="content-type-filter"]` |
+| Favorites container | `[data-profile="content-panel"][data-section="favorites"]` |
+| Featured container | `[data-profile="content-panel"][data-section="featured"]` |
+| Featured empty | `[data-profile="featured-empty"]` |
+| Featured rail | `[data-profile="featured-rail"]` |
+| Featured section | `[data-profile="featured-section"]` |
+| Featured tab | `[data-profile="featured"]` |
+| Featured title | `[data-profile="featured-title"]` |
+| Featured view all button | `[data-profile="featured-view-all"]` |
+| Gallery buttons | `[data-profile="gallery-actions"]` |
+| Gallery container | `[data-profile="content-panel"][data-section="gallery"]` |
+| Gallery grid | `[data-profile="gallery-grid"]` |
+| Gallery preview | `[data-profile="gallery-preview"]` |
+| Left container chain | `[data-profile="content-chain-left"]` |
+| Loading state | `[data-profile="loading"]` |
+| Lorebooks container | `[data-profile="content-panel"][data-section="lorebooks"]` |
+| Personas container | `[data-profile="content-panel"][data-section="personas"]` |
+| Plugins container | `[data-profile="content-panel"][data-section="plugins"]` |
+| Popular content | `[data-profile="popular-content"]` |
+| Profile search | `[data-profile="search"]` |
+| Prompts container | `[data-profile="content-panel"][data-section="prompts"]` |
+| Right container chain | `[data-profile="content-chain-right"]` |
+| Scenarios container | `[data-profile="content-panel"][data-section="scenarios"]` |
+| Scrollable content | `[data-profile="content-scroll"]` |
+| Search and sorting area | `[data-profile="content-actions"]` |
+| Top scroll fade | `[data-profile="content-fade-top"]` |
+
+#### Content Cards, Badges, and Stats
+
+| Target | Selector |
+| --- | --- |
+| Author badge | `[data-profile="author-badge"]` |
+| Badge icons | `[data-profile="badge-list"]` |
+| Badge row | `[data-profile="badges"]` |
+| Bindery card | `[data-card="binderies"]` |
+| Card body | `[data-profile="card-body"]` |
+| Card colour tint | `[data-profile="card-tint"]` |
+| Card cover | `[data-profile="card-cover"]` |
+| Card cover gradient | `[data-profile="card-fade"]` |
+| Card cover image | `[data-profile="card-cover-img"]` |
+| Card footer | `[data-profile="card-footer"]` |
+| Card frame ornament | `[data-profile="card-vine"]` |
+| Card frame wash | `[data-profile="card-wash"]` |
+| Card header | `[data-profile="card-header"]` |
+| Card inner layer | `[data-profile="card-lift"]` |
+| Card overlay panel | `[data-profile="card-overlay"]` |
+| Card rating | `[data-profile="card-rating"]` |
+| Card shell | `[data-profile="card-shell"]` |
+| Card stat icon | `[data-profile="card-stat-icon"]` |
+| Card tag overflow count | `[data-profile="card-tags-more"]` |
+| Card tooltip wrapper | `[data-profile="card-tip"]` |
+| Character card | `[data-card="characters"]` |
+| Content card | `[data-profile="card"]` |
+| Creator card | `[data-profile="creator-card"]` |
+| Donator badge | `[data-badge="donatorSingle"]` |
+| Downloads stat | `[data-stat="downloads"]` |
+| Draft outline | `[data-profile="card-draft-outline"]` |
+| Featured creator badge | `[data-badge="featured"]` |
+| Hidden overflow tag | `[data-overflow="true"]` |
+| Likes stat | `[data-stat="likes"]` |
+| Lorebook card | `[data-card="lorebooks"]` |
+| Mod badge | `[data-badge="mod"]` |
+| Monthly donator badge | `[data-badge="donatorMonthly"]` |
+| Persona card | `[data-card="personas"]` |
+| Plugin card | `[data-card="plugins"]` |
+| Prompt card | `[data-card="prompts"]` |
+| Scenario card | `[data-card="scenarios"]` |
+| Staff badge | `[data-badge="staff"]` |
+| Verified check | `[data-profile="verified"]` |
+| Views stat | `[data-stat="views"]` |
+| Pieces stat | `[data-stat="pieces"]` |
+
+#### Rich Text and Decorations
+
+| Target | Selector |
+| --- | --- |
+| Collapsible section | `[data-decoration="collapsible"]` |
+| Divider | `[data-decoration="divider"]` |
+| Dotted divider | `[data-decoration="divider-dotted"]` |
+| More menu icon | `[data-icon="ellipsis-h"]` |
+| Paw trail | `[data-decoration="paws"]` |
+| Quote block | `[data-decoration="quote"]` |
+| Send icon | `[data-icon="paper-plane"]` |
+| Spoiler | `[data-decoration="spoiler"]` |
+| Verified check icon | `[data-icon="check"]` |
+
+#### Dialogs and Modals
+
+| Target | Selector |
+| --- | --- |
+| Avatar zoom | `[data-profile="modal"][data-modal="avatar-zoom"]` |
+| Block confirm | `[data-profile="modal"][data-modal="block"]` |
+| Followers and Following wrapper | `[data-profile="modal"][data-modal="follow"]` |
+| Mobile biography editor | `[data-profile="modal"][data-modal="about"]` |
+| Mobile profile details | `[data-profile="modal"][data-modal="details"]` |
+| Modal avatar | `[data-profile="modal-list"] img` |
+| Modal backdrop | `[data-profile="modal-backdrop"]` |
+| Modal body | `[data-profile="modal-body"]` |
+| Modal card | `[data-profile="modal-panel"]` |
+| Modal empty state | `[data-profile="modal-list"] ~ p` |
+| Modal footer | `[data-profile="modal-footer"]` |
+| Modal header | `[data-profile="modal-header"]` |
+| Modal list | `[data-profile="modal-list"]` |
+| Modal overlay (full screen) | `[data-profile="modal"]` |
+| Modal row | `[data-profile="modal-list"] > *` |
+| Modal row follow button | `[data-profile="modal-row-follow"]` |
+| Modal search field | `[data-profile="modal-search"]` |
+| Modal title | `[data-profile="modal-title"]` |
+| Remove avatar | `[data-profile="modal"][data-modal="remove-avatar"]` |
+| Remove banner | `[data-profile="modal"][data-modal="remove-banner"]` |
+| Wave | `[data-profile="modal"][data-modal="wave"]` |
+
+### Native CSS Custom Properties
+
+Set these properties on the component that consumes them. Custom properties inherit, so a declaration higher in the profile can affect several components.
+
+| Property | Use |
+| --- | --- |
+| `--library-card-shadow` | Library card shadow. The property is listed in the supplied inventory. Its consuming selector and value format still need confirmation before adding a copyable recipe. |
+| `--scroll-shade-rgb` | RGB channels for the scroll-fade color. Use a channel list such as `25, 52, 70` on the folder toolbar or featured rail. |
+| `--scroll-shade-solid` | Solid scroll-shade stop. The captured tab-notch example sets it to `transparent`. |
+| `--scroll-shade-clear` | Clear scroll-shade stop. The captured tab-notch example sets it to `transparent`. |
+
+```css
+/* Match the folder strip's fades to a #193446 surface. */
+[data-section=gallery] [aria-label="Folders"] {
+  --scroll-shade-rgb: 25, 52, 70;
+}
+
+/* Make these two stops transparent on the navigation notch. */
+[data-profile=tab-notch] {
+  --scroll-shade-solid: transparent;
+  --scroll-shade-clear: transparent;
+}
+```
+
 ### Additional Component and State Selectors
 
-These entries extend the existing quick reference with compound, named-control, and structural targets. The component tutorials provide the complete rules.
+These recipes qualify the native hooks with a state, a label, or a captured structure. For example, add `[data-profile=composer-toolbar]` before a `[data-btn]` selector when the rule is meant only for the post composer. Check label and structural selectors in the view where you use them.
 
 | UI area | Individual target | CSS selector / target |
 | --- | --- | --- |
-| About & information | About Bio | `[data-profile="scope"] [data-profile="about-bio"]` |
-| About & information | About Chain Left | `[data-profile="scope"] [data-profile="about-chain-left"]` |
-| About & information | About Chain Right | `[data-profile="scope"] [data-profile="about-chain-right"]` |
-| Profile shell & header | Action Bar | `[data-profile="scope"] [data-profile="action-bar"]` |
-| Profile shell & header | Action Follow | `[data-profile="scope"] [data-profile="action-follow"]` |
-| Profile shell & header | Action Letter | `[data-profile="scope"] [data-profile="action-letter"]` |
-| Profile shell & header | Action Wave | `[data-profile="scope"] [data-profile="action-wave"]` |
-| Profile shell & header | Author Badge | `[data-profile="scope"] [data-profile="author-badge"]` |
-| Profile shell & header | Badge List | `[data-profile="scope"] [data-profile="badge-list"]` |
-| Profile shell & header | Badges | `[data-profile="scope"] [data-profile="badges"]` |
-| Profile shell & header | Body | `[data-profile="scope"] [data-profile="body"]` |
-| Profile shell & header | Card Fade | `[data-profile="scope"] [data-profile="card-fade"]` |
-| Profile shell & header | Card Rating | `[data-profile="scope"] [data-profile="card-rating"]` |
-| Profile shell & header | Card Stat Icon | `[data-profile="scope"] [data-profile="card-stat-icon"]` |
-| Profile shell & header | Card Tint | `[data-profile="scope"] [data-profile="card-tint"]` |
-| Profile shell & header | Card Wash | `[data-profile="scope"] [data-profile="card-wash"]` |
-| Feed & composer | Composer Btn | `[data-profile="scope"] [data-profile="composer-btn"]` |
-| Feed & composer | Composer Submit | `[data-profile="scope"] [data-profile="composer-submit"]` |
-| Content & navigation | Content Body | `[data-profile="scope"] [data-profile="content-body"]` |
-| Content & navigation | Content Chain Left | `[data-profile="scope"] [data-profile="content-chain-left"]` |
-| Content & navigation | Content Chain Right | `[data-profile="scope"] [data-profile="content-chain-right"]` |
-| Content & navigation | Content Fade Bottom | `[data-profile="scope"] [data-profile="content-fade-bottom"]` |
-| Content & navigation | Content Fade Top | `[data-profile="scope"] [data-profile="content-fade-top"]` |
-| Content & navigation | Content Footer | `[data-profile="scope"] [data-profile="content-footer"]` |
-| Content & navigation | Content Header | `[data-profile="scope"] [data-profile="content-header"]` |
-| Content & navigation | Content Panel | `[data-profile="scope"] [data-profile="content-panel"]` |
-| Content & navigation | Content Scroll | `[data-profile="scope"] [data-profile="content-scroll"]` |
-| Content & navigation | Content Sort | `[data-profile="scope"] [data-profile="content-sort"]` |
-| Content & navigation | Content Type Filter | `[data-profile="scope"] [data-profile="content-type-filter"]` |
-| Profile shell & header | Hero Content | `[data-profile="scope"] [data-profile="hero-content"]` |
-| Profile shell & header | Hero Frame | `[data-profile="scope"] [data-profile="hero-frame"]` |
-| Profile shell & header | Hero Row | `[data-profile="scope"] [data-profile="hero-row"]` |
-| Profile shell & header | Hero Tint | `[data-profile="scope"] [data-profile="hero-tint"]` |
-| Profile shell & header | Identity | `[data-profile="scope"] [data-profile="identity"]` |
-| Profile shell & header | Identity Card | `[data-profile="scope"] [data-profile="identity-card"]` |
-| Profile shell & header | Identity Col | `[data-profile="scope"] [data-profile="identity-col"]` |
-| About & information | Info Group | `[data-profile="scope"] [data-profile="info-group"]` |
-| Profile shell & header | Level Notch | `[data-profile="scope"] [data-profile="level-notch"]` |
-| Profile shell & header | Level Text | `[data-profile="scope"] [data-profile="level-text"]` |
 | Modals | Modal List | `[data-profile="modal-panel"] [data-profile="modal-list"]` |
-| Modals | Modal Panel | `[data-profile="modal-panel"]` |
 | Modals | Modal Row Follow | `[data-profile="modal-panel"] [data-profile="modal-row-follow"]` |
 | Modals | Modal Search | `[data-profile="modal-panel"] [data-profile="modal-search"]` |
-| Profile shell & header | Name Text | `[data-profile="scope"] [data-profile="name-text"]` |
-| Profile shell & header | Page Tint | `[data-profile="scope"] [data-profile="page-tint"]` |
-| Feed & composer | Post Actions | `[data-profile="scope"] [data-profile="post-actions"]` |
-| Feed & composer | Post Author | `[data-profile="scope"] [data-profile="post-author"]` |
-| Feed & composer | Post Avatar | `[data-profile="scope"] [data-profile="post-avatar"]` |
-| Feed & composer | Post Comment Button | `[data-profile="scope"] [data-profile="post-comment-button"]` |
-| Feed & composer | Post Embed | `[data-profile="scope"] [data-profile="post-embed"]` |
-| Feed & composer | Post Pill | `[data-profile="scope"] [data-profile="post-pill"]` |
-| Profile shell & header | Quote | `[data-profile="scope"] [data-profile="quote"]` |
-| Profile shell & header | Quote Text | `[data-profile="scope"] [data-profile="quote-text"]` |
-| Content & navigation | Search | `[data-profile="scope"] [data-profile="search"]` |
-| Content & navigation | Tab Pane | `[data-profile="scope"] [data-profile="tab-pane"]` |
-| Named targets | data-tab / about | `[data-profile="scope"] [data-tab="about"]` |
-| Named targets | data-tab / bundles | `[data-profile="scope"] [data-tab="bundles"]` |
-| Named targets | data-tab / characters | `[data-profile="scope"] [data-tab="characters"]` |
-| Named targets | data-tab / favorites | `[data-profile="scope"] [data-tab="favorites"]` |
-| Named targets | data-tab / lorebooks | `[data-profile="scope"] [data-tab="lorebooks"]` |
-| Named targets | data-tab / personas | `[data-profile="scope"] [data-tab="personas"]` |
-| Named targets | data-tab / plugins | `[data-profile="scope"] [data-tab="plugins"]` |
-| Named targets | data-tab / prompts | `[data-profile="scope"] [data-tab="prompts"]` |
-| Named targets | data-tab / scenarios | `[data-profile="scope"] [data-tab="scenarios"]` |
-| Named targets | data-btn / attach | `[data-profile="scope"] [data-btn="attach"]` |
-| Named targets | data-btn / bold | `[data-profile="scope"] [data-btn="bold"]` |
-| Named targets | data-btn / bullet-list | `[data-profile="scope"] [data-btn="bullet-list"]` |
-| Named targets | data-btn / center | `[data-profile="scope"] [data-btn="center"]` |
-| Named targets | data-btn / gifs-stickers | `[data-profile="scope"] [data-btn="gifs-stickers"]` |
-| Named targets | data-btn / heading | `[data-profile="scope"] [data-btn="heading"]` |
-| Named targets | data-btn / italic | `[data-profile="scope"] [data-btn="italic"]` |
-| Named targets | data-btn / justify | `[data-profile="scope"] [data-btn="justify"]` |
-| Named targets | data-btn / left-align | `[data-profile="scope"] [data-btn="left-align"]` |
-| Named targets | data-btn / normal | `[data-profile="scope"] [data-btn="normal"]` |
-| Named targets | data-btn / numbered-list | `[data-profile="scope"] [data-btn="numbered-list"]` |
-| Named targets | data-btn / right-align | `[data-profile="scope"] [data-btn="right-align"]` |
-| Named targets | data-btn / text-color | `[data-profile="scope"] [data-btn="text-color"]` |
-| Named targets | data-btn / underline | `[data-profile="scope"] [data-btn="underline"]` |
-| Named targets | data-info / boundaries | `[data-profile="scope"] [data-info="boundaries"]` |
-| Named targets | data-info / preferences | `[data-profile="scope"] [data-info="preferences"]` |
-| Named targets | data-info / relationships | `[data-profile="scope"] [data-info="relationships"]` |
-| Named targets | data-info / roleplay | `[data-profile="scope"] [data-info="roleplay"]` |
-| Named targets | data-info / socials | `[data-profile="scope"] [data-info="socials"]` |
 | Named targets | data-profile-view / about | `[data-profile="scope"][data-profile-view="about"]` |
-| Modals | Followers | `[data-profile="modal-panel"][aria-label="Followers"]` |
-| Modals | Following | `[data-profile="modal-panel"][aria-label="Following"]` |
-| Modals | Send a wave | `[data-profile="modal-panel"][aria-label="Send a wave"]` |
-| Event posts | Level Up | `[data-profile="scope"] [data-profile="post"]:has(img[src^="/img/Level/"].aspect-square)` |
-| Event posts | Relationship / marriage | `[data-profile="scope"] [data-profile="post"]:has(img[src="/img/pixel/heart.webp"].aspect-square)` |
-| Event posts | Glorp badge | `[data-profile="scope"] [data-profile="post"]:has(img[src="/img/Badges/badge_glorp.webp"].aspect-square)` |
-| About & information | About me tab | `[data-profile="scope"] [data-profile="about"] [role="tab"][aria-label="About me"]` |
-| About & information | Roleplay tab | `[data-profile="scope"] [data-profile="about"] [role="tab"][aria-label="Roleplay"]` |
-| About & information | Relationships tab | `[data-profile="scope"] [data-profile="about"] [role="tab"][aria-label="Relationships"]` |
-| About & information | Links & socials tab | `[data-profile="scope"] [data-profile="about"] [role="tab"][aria-label="Links & socials"]` |
-| Feed & composer | Insert | `[data-profile="scope"] [data-profile="composer-toolbar"] button[aria-label="Insert"]` |
-| Feed & composer | Text background | `[data-profile="scope"] [data-profile="composer-toolbar"] button[aria-label="Text background"]` |
-| Feed & composer | Edit as HTML | `[data-profile="scope"] [data-profile="composer-toolbar"] button[aria-label="Edit as HTML"]` |
-| Controls | Post options | `[data-profile="scope"] [data-profile="post-actions"] > button[aria-label="Post options"]` |
-| Controls | Share | `[data-profile="scope"] [data-profile="post"] button[aria-label="Share"]` |
-| Controls | Send wave | `[data-profile="modal-panel"][aria-label="Send a wave"] button[aria-label="Send wave"]` |
+| Modals | Followers panel | `[data-modal=follow] [data-profile=modal-panel][aria-label="Followers"]` |
+| Modals | Following panel | `[data-modal=follow] [data-profile=modal-panel][aria-label="Following"]` |
+| Modals | Wave panel | `[data-modal=wave] [data-profile=modal-panel]` |
+| Event posts | Level Up | `[data-profile="post"]:has(img[src^="/img/Level/"].aspect-square)` |
+| Event posts | Relationship / marriage | `[data-profile="post"]:has(img[src="/img/pixel/heart.webp"].aspect-square)` |
+| Event posts | Glorp badge | `[data-profile="post"]:has(img[src="/img/Badges/badge_glorp.webp"].aspect-square)` |
+| About & information | About me tab | `[data-profile="about"] [role="tab"][aria-label="About me"]` |
+| About & information | Roleplay tab | `[data-profile="about"] [role="tab"][aria-label="Roleplay"]` |
+| About & information | Relationships tab | `[data-profile="about"] [role="tab"][aria-label="Relationships"]` |
+| About & information | Links & socials tab | `[data-profile="about"] [role="tab"][aria-label="Links & socials"]` |
+| Feed & composer | Insert | `[data-profile="composer-toolbar"] button[aria-label="Insert"]` |
+| Feed & composer | Text background | `[data-profile="composer-toolbar"] button[aria-label="Text background"]` |
+| Feed & composer | Edit as HTML | `[data-profile="composer-toolbar"] button[aria-label="Edit as HTML"]` |
+| Controls | Post options | `[data-profile="post-actions"] > button[aria-label="Post options"]` |
+| Controls | Share | `[data-profile="post"] button[aria-label="Share"]` |
+| Controls | Send wave | `[data-modal=wave] button[aria-label="Send wave"]` |
 | Controls | Back to top | `[data-profile="content-panel"] button[aria-label="Back to top"]` |
-| HTML additions | About Row | `[data-profile="scope"] [data-profile="about-row"]` |
-| HTML additions | Actions | `[data-profile="scope"] [data-profile="actions"]` |
-| HTML additions | Actions Right | `[data-profile="scope"] [data-profile="actions-right"]` |
-| HTML additions | Card | `[data-profile="scope"] [data-profile="card"]` |
-| HTML additions | Card Body | `[data-profile="scope"] [data-profile="card-body"]` |
-| HTML additions | Card Cover | `[data-profile="scope"] [data-profile="card-cover"]` |
-| HTML additions | Card Cover Img | `[data-profile="scope"] [data-profile="card-cover-img"]` |
-| HTML additions | Card Footer | `[data-profile="scope"] [data-profile="card-footer"]` |
-| HTML additions | Card Header | `[data-profile="scope"] [data-profile="card-header"]` |
-| HTML additions | Card Lift | `[data-profile="scope"] [data-profile="card-lift"]` |
-| HTML additions | Card Shell | `[data-profile="scope"] [data-profile="card-shell"]` |
-| HTML additions | Card Tags More | `[data-profile="scope"] [data-profile="card-tags-more"]` |
-| HTML additions | Card Tip | `[data-profile="scope"] [data-profile="card-tip"]` |
-| HTML additions | Card Vine | `[data-profile="scope"] [data-profile="card-vine"]` |
-| HTML additions | Content Actions | `[data-profile="scope"] [data-profile="content-actions"]` |
-| HTML additions | Content Chain Frame | `[data-profile="scope"] [data-profile="content-chain-frame"]` |
-| HTML additions | Content Count | `[data-profile="scope"] [data-profile="content-count"]` |
-| HTML additions | Content Title | `[data-profile="scope"] [data-profile="content-title"]` |
-| HTML additions | Count Value | `[data-profile="scope"] [data-profile="count-value"]` |
-| HTML additions | Counts | `[data-profile="scope"] [data-profile="counts"]` |
-| HTML additions | Feed | `[data-profile="scope"] [data-profile="feed"]` |
-| HTML additions | Grid | `[data-profile="scope"] [data-profile="grid"]` |
-| HTML additions | Icon | `[data-profile="scope"] [data-profile="icon"]` |
-| HTML additions | Member Since | `[data-profile="scope"] [data-profile="member-since"]` |
-| HTML additions | Member Since Inner | `[data-profile="scope"] [data-profile="member-since-inner"]` |
-| HTML additions | Member Since Text | `[data-profile="scope"] [data-profile="member-since-text"]` |
-| HTML additions | Meta | `[data-profile="scope"] [data-profile="meta"]` |
-| HTML additions | Page Background | `[data-profile="scope"] [data-profile="page-background"]` |
-| HTML additions | Post Decoration | `[data-profile="scope"] [data-profile="post-decoration"]` |
-| HTML additions | Streak Count | `[data-profile="scope"] [data-profile="streak-count"]` |
-| Named HTML targets | data-btn / text-color-bar | `[data-profile="scope"] [data-btn="text-color-bar"]` |
-| Named HTML targets | data-card / bundles | `[data-profile="scope"] [data-card="bundles"]` |
-| Named HTML targets | data-card / characters | `[data-profile="scope"] [data-card="characters"]` |
-| Named HTML targets | data-card / lorebooks | `[data-profile="scope"] [data-card="lorebooks"]` |
-| Named HTML targets | data-card / personas | `[data-profile="scope"] [data-card="personas"]` |
-| Named HTML targets | data-card / plugins | `[data-profile="scope"] [data-card="plugins"]` |
-| Named HTML targets | data-card / prompts | `[data-profile="scope"] [data-card="prompts"]` |
-| Named HTML targets | data-card / scenarios | `[data-profile="scope"] [data-card="scenarios"]` |
-| Named HTML targets | data-profile-view / content | `[data-profile="scope"][data-profile-view="content"]` |
-| Named HTML targets | data-stat / downloads | `[data-profile="scope"] [data-stat="downloads"]` |
-| Named HTML targets | data-stat / pieces | `[data-profile="scope"] [data-stat="pieces"]` |
-| Named HTML targets | data-stat / views | `[data-profile="scope"] [data-stat="views"]` |
-| Wave & modals | Wish options | `[data-profile="modal-panel"][aria-label="Send a wave"] [role="radiogroup"][aria-label="Wish"]` |
-| Wave & modals | Wish selected | `[data-profile="modal-panel"][aria-label="Send a wave"] button[role="radio"][aria-checked="true"] > span` |
-| Wave & modals | Wish unselected | `[data-profile="modal-panel"][aria-label="Send a wave"] button[role="radio"][aria-checked="false"] > span` |
-| Wave & modals | Wave note | `[data-profile="modal-panel"][aria-label="Send a wave"] section.sketch-note` |
-| Wave & modals | Wave tape | `[data-profile="modal-panel"][aria-label="Send a wave"] img.sketch-note__fastener--tape` |
-| Wave & modals | Wave changing wish | `[data-profile="modal-panel"][aria-label="Send a wave"] [aria-live="polite"]` |
+| Named HTML targets | data-card / bundles | `[data-card="bundles"]` |
+| Wave & modals | Wish options | `[data-modal=wave] [role="radiogroup"][aria-label="Wish"]` |
+| Wave & modals | Wave note | `[data-modal=wave] section.sketch-note` |
+| Wave & modals | Wave tape | `[data-modal=wave] section.sketch-note > img[src="/img/sketch/tape.webp"]` |
 | Wave & modals | Modal footer | `[data-profile="modal-panel"] [data-modal-footer="true"]` |
-| Wave & modals | Modal footer tip | `[data-profile="modal-panel"] [data-modal-footer-tip="true"]` |
-| Wave & modals | Wave close | `[data-profile="modal-panel"][aria-label="Send a wave"] button[aria-label="Close"]` |
-| Content sections | Lorebooks panel | `[data-profile="scope"] [data-profile="content-panel"][data-section="lorebooks"]` |
-| Content sections | Plugins panel | `[data-profile="scope"] [data-profile="content-panel"][data-section="plugins"]` |
-| Content sections | Scenarios panel | `[data-profile="scope"] [data-profile="content-panel"][data-section="scenarios"]` |
-| Content sections | Personas panel | `[data-profile="scope"] [data-profile="content-panel"][data-section="personas"]` |
-| Content sections | Characters panel | `[data-profile="scope"] [data-profile="content-panel"][data-section="characters"]` |
-| Content sections | Prompts panel | `[data-profile="scope"] [data-profile="content-panel"][data-section="prompts"]` |
-| Content sections | Bundles panel | `[data-profile="scope"] [data-profile="content-panel"][data-section="bundles"]` |
-| About & information | About you group | `[data-profile="scope"] [data-profile="info-group"][data-info="about"]` |
-| Additional HTML hooks | Embed Card | `[data-profile="scope"] [data-profile="embed-card"]` |
-| Additional HTML hooks | Embed Title | `[data-profile="scope"] [data-profile="embed-title"]` |
-| Additional HTML hooks | Feed More | `[data-profile="scope"] [data-profile="feed-more"]` |
-| Additional HTML hooks | Media Reveal | `[data-profile="scope"] [data-profile="media-reveal"]` |
+| Wave & modals | Modal footer tip | `[data-modal=wave] [data-modal-footer-tip="true"]` |
+| Wave & modals | Wave close | `[data-modal=wave] button[aria-label="Close"]` |
+| About & information | About you group | `[data-profile="info-group"][data-info="about"]` |
 | Additional HTML hooks | Modal Body | `[data-profile="modal-panel"] [data-profile="modal-body"]` |
 | Additional HTML hooks | Modal Footer | `[data-profile="modal-panel"] [data-profile="modal-footer"]` |
 | Additional HTML hooks | Modal Header | `[data-profile="modal-panel"] [data-profile="modal-header"]` |
 | Additional HTML hooks | Modal Title | `[data-profile="modal-panel"] [data-profile="modal-title"]` |
-| Additional HTML hooks | Post Media | `[data-profile="scope"] [data-profile="post-media"]` |
-| Additional HTML hooks | Post Media Grid | `[data-profile="scope"] [data-profile="post-media-grid"]` |
 | Additional components | Bindery tab | `[data-profile="tabs"] [data-profile="tab"][data-tab="binderies"]` |
 | Additional components | Personal subtab | `[data-profile="about"] [role="tab"][aria-label="Personal"]` |
 | Additional components | Main sections left | `[data-profile="tabs"] button[aria-label="Scroll Profile sections left"]` |
 | Additional components | Main sections right | `[data-profile="tabs"] button[aria-label="Scroll Profile sections right"]` |
-| Additional components | Gallery panel | `[data-profile="content-panel"][data-section="gallery"]` |
 | Additional components | Content dialog | `[data-profile="content-panel"][role="dialog"]` |
 | Additional components | Previous section | `[data-profile="content-panel"] button[aria-label^="Previous section:"]` |
 | Additional components | Next section | `[data-profile="content-panel"] button[aria-label^="Next section:"]` |
@@ -8734,45 +8946,20 @@ These entries extend the existing quick reference with compound, named-control, 
 | Additional components | Popular creations Close | `[role="dialog"][aria-label="Popular creations"] button[aria-label="Close"]` |
 | Additional components | Popular carousel left | `[data-profile="popular-content"] button[aria-label="Scroll popular creations left"]` |
 | Additional components | Popular carousel right | `[data-profile="popular-content"] button[aria-label="Scroll popular creations right"]` |
-| Additional components | Published embed | `[data-profile="post-embed"][data-embed="published"]` |
-| Additional components | Updated embed | `[data-profile="post-embed"][data-embed="updated"]` |
-| Additional components | Featured creator link | `[data-profile="scope"] [data-featured-link="true"]` |
+| Additional components | Featured creator link | `[data-featured-link="true"]` |
 | Additional components | Profile style card | `[data-profile="card"][data-card="profileStyles"]` |
 | Additional components | About expansion button | `button[data-profile="about-more"]` |
-| Additional components | Feed continuation wrapper | `[data-profile="feed-more"]` |
-| Profile actions / Bindery | Bindery panel | `[data-profile="content-panel"][data-section="binderies"]` |
 | Profile actions / Bindery | Profile Follow state | `[data-profile="action-follow"][aria-label="Follow"]` |
 | Profile actions / Bindery | Profile Following state | `[data-profile="action-follow"][aria-label="Following"]` |
-| Profile actions / Bindery | Profile Alerts action | `[data-profile="action-bell"]` |
 | Composer additions | Composer card in feed | `[data-profile="feed-list"] > .surface-post:has(> div > [data-profile="composer-header"])` |
 | Composer additions | Composer placeholder | `[data-profile="composer-editor"][data-placeholder]::before` |
 | Composer additions | Poke Bary control | `.surface-post > .relative:has(> [data-profile="composer-header"]) > button[aria-label="Poke Bary"]` |
-| Composer additions | Cheeky paw image | `[data-profile="scope"] img[src="/img/Icons/feed_bary_cheeky_paw.webp"]` |
-| Composer additions | Privacy label variants | `:is([data-profile="composer-header"], [data-profile="composer-footer"]) button:is([aria-label="Private post, followers only"], [aria-label="Visible to followers only"])` |
+| Composer additions | Peeking Ears and Cheeky Paw | `img:is([src$="/feed_bary_peeking_ears.webp"], [src$="/feed_bary_cheeky_paw.webp"])` |
+| Composer additions | Footer privacy toggle | `[data-profile=composer-footer] button:is(:has(> img[src$="/universes.webp"]), [aria-pressed]:has(> img[src$="/lock.webp"]))` |
 | Composer additions | Notify checkbox track | `[data-profile="composer-footer"] input[type="checkbox"][aria-label="Notify followers"] + div` |
 | Composer additions | Notify checkbox thumb | `[data-profile="composer-footer"] input[type="checkbox"][aria-label="Notify followers"] + div::after` |
-| Toolbar buttons | bold | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="bold"]` |
-| Toolbar buttons | italic | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="italic"]` |
-| Toolbar buttons | underline | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="underline"]` |
-| Toolbar buttons | heading | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="heading"]` |
-| Toolbar buttons | normal | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="normal"]` |
-| Toolbar buttons | bullet-list | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="bullet-list"]` |
-| Toolbar buttons | numbered-list | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="numbered-list"]` |
-| Toolbar buttons | left-align | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="left-align"]` |
-| Toolbar buttons | center | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="center"]` |
-| Toolbar buttons | right-align | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="right-align"]` |
-| Toolbar buttons | justify | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="justify"]` |
-| Toolbar buttons | text-color | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="text-color"]` |
-| Toolbar buttons | attach | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="attach"]` |
-| Toolbar buttons | gifs-stickers | `[data-profile="composer-toolbar"] [data-profile="composer-btn"][data-btn="gifs-stickers"]` |
-| Toolbar buttons | Insert | `[data-profile="composer-toolbar"] button[aria-label="Insert"]` |
-| Toolbar buttons | Text background | `[data-profile="composer-toolbar"] button[aria-label="Text background"]` |
-| Toolbar buttons | Edit as HTML | `[data-profile="composer-toolbar"] button[aria-label="Edit as HTML"]` |
 | Toolbar buttons | Font glyph by captured icon value | `[data-profile="composer-toolbar"] [data-profile="icon"][data-icon="bold"]` |
 | Toolbar buttons | Explicitly pressed control | `[data-profile="composer-toolbar"] button[aria-pressed="true"]` |
-| Post additions | Level Up post | `[data-profile="post"]:has(img[src^="/img/Level/"].aspect-square)` |
-| Post additions | Relationship event post | `[data-profile="post"]:has(img[src="/img/pixel/heart.webp"].aspect-square)` |
-| Post additions | Glorp event post | `[data-profile="post"]:has(img[src="/img/Badges/badge_glorp.webp"].aspect-square)` |
 | Post additions | Share button | `[data-profile="post-engagement"] button[aria-label="Share"]` |
 | Post additions | Reaction number | `[data-profile="post-likes"] > span.tabular-nums` |
 | Post additions | Post options trigger | `[data-profile="post-actions"] button[aria-label="Post options"]` |
@@ -8785,15 +8972,15 @@ These entries extend the existing quick reference with compound, named-control, 
 | Preview additions | Popular shelf card | `[data-profile="popular-content"] > section` |
 | Preview additions | Popular carousel row | `[data-profile="popular-content"] .marketplace-shelf` |
 | Preview additions | See all preview header action | `:is([data-profile="gallery-preview"], [data-profile="popular-content"]) > section > header button.dashboard-action-button` |
-| Experimental dialog additions | Named list-dialog roots | `[data-profile="modal-panel"]:is([aria-label="Followers"], [aria-label="Following"])` |
-| Experimental dialog additions | List-dialog header variants | `[data-profile="modal-panel"]:is([aria-label="Followers"], [aria-label="Following"]) :is([data-profile="modal-header"], .surface-header)` |
-| Experimental dialog additions | List-dialog body | `[data-profile="modal-panel"]:is([aria-label="Followers"], [aria-label="Following"]) [data-profile="modal-body"]` |
-| Experimental dialog additions | List-dialog footer variants | `[data-profile="modal-panel"]:is([aria-label="Followers"], [aria-label="Following"]) :is([data-profile="modal-footer"], .surface-footer, [data-modal-footer="true"])` |
-| Experimental dialog additions | List-row avatar | `[data-profile="modal-panel"]:is([aria-label="Followers"], [aria-label="Following"]) [data-profile="modal-list"] > div > img` |
-| Experimental dialog additions | List-row shared Follow button | `[data-profile="modal-panel"]:is([aria-label="Followers"], [aria-label="Following"]) [data-profile="modal-row-follow"]` |
-| Experimental dialog additions | Wave changing wish | `[data-profile="modal-panel"][aria-label="Send a wave"] section.sketch-note [aria-live="polite"]` |
-| Experimental dialog additions | Selected wish pill | `[data-profile="modal-panel"][aria-label="Send a wave"] [role="radiogroup"][aria-label="Wish"] button[role="radio"][aria-checked="true"] > span` |
-| Experimental dialog additions | Unselected wish pill | `[data-profile="modal-panel"][aria-label="Send a wave"] [role="radiogroup"][aria-label="Wish"] button[role="radio"][aria-checked="false"] > span` |
+| Dialog additions | Shared follow panel | `[data-modal=follow] [data-profile=modal-panel]` |
+| Experimental dialog additions | List-dialog header variants | `[data-modal=follow] :is([data-profile="modal-header"], .surface-header)` |
+| Experimental dialog additions | List-dialog body | `[data-modal=follow] [data-profile="modal-body"]` |
+| Experimental dialog additions | List-dialog footer variants | `[data-modal=follow] :is([data-profile="modal-footer"], .surface-footer, [data-modal-footer="true"])` |
+| Experimental dialog additions | List-row avatar | `[data-modal=follow] [data-profile=modal-list] > * > img` |
+| Experimental dialog additions | Follow dialog row button | `[data-modal=follow] [data-profile=modal-row-follow]` |
+| Experimental dialog additions | Wave changing wish | `[data-modal=wave] section.sketch-note [aria-live="polite"]` |
+| Experimental dialog additions | Selected wish pill | `[data-modal=wave] [role="radiogroup"][aria-label="Wish"] button[role="radio"][aria-checked="true"] > span` |
+| Experimental dialog additions | Unselected wish pill | `[data-modal=wave] [role="radiogroup"][aria-label="Wish"] button[role="radio"][aria-checked="false"] > span` |
 | Experimental dialog additions | Dialog-only scroll | `[data-profile="content-panel"][role="dialog"] [data-profile="content-scroll"]` |
 | Experimental dialog additions | Dialog Back to top | `[data-profile="content-panel"][role="dialog"] .back-to-top-button button` |
 | Experimental dialog additions | Dialog Okay signature | `[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"] button.dashboard-action-button:has(img[src="/img/pixel/check.webp"])` |
@@ -8824,24 +9011,27 @@ These entries extend the existing quick reference with compound, named-control, 
 | Rich-text additions | Paw divider wrapper | `[data-profile="post-body"] .rich-text-content [data-decoration="paws"]` |
 | Post additions | Published private indicator, both labels | `[data-profile="post-header"] span:is([aria-label="Private post, followers only"], [aria-label="Visible to followers only"])` |
 | Rich-text additions | Published paw artwork wrapper | `[data-profile="post-body"] .rich-text-content .editor-divider-paws[data-profile="post-decoration"][data-decoration="paws"]` |
-| Main navigation | Featured tab | `[data-profile="scope"] [data-profile="tabs"] [data-profile="tab"][data-tab="featured"]` |
-| Main navigation | Featured selected | `[data-profile="scope"] [data-profile="tabs"] [data-profile="tab"][data-tab="featured"][aria-selected="true"]` |
-| Main navigation | Featured star | `[data-profile="scope"] [data-profile="tabs"] [data-profile="tab"][data-tab="featured"] img[src="/img/pixel/star.webp"]` |
-| Main navigation | Featured counter | `[data-profile="scope"] [data-profile="tabs"] [data-profile="tab"][data-tab="featured"] [data-profile="tab-count"]` |
+| Main navigation | Featured tab | `[data-profile="tabs"] [data-profile="tab"][data-tab="featured"]` |
+| Main navigation | Featured selected | `[data-profile="tabs"] [data-profile="tab"][data-tab="featured"][aria-selected="true"]` |
+| Main navigation | Featured star | `[data-profile="tabs"] [data-profile="tab"][data-tab="featured"] img[src="/img/pixel/star.webp"]` |
+| Main navigation | Featured counter | `[data-profile="tabs"] [data-profile="tab"][data-tab="featured"] [data-profile="tab-count"]` |
 
 ### Current Mobile and Rail Selectors
 
 | Component | Selector | Notes |
 | --- | --- | --- |
 | Profile portal scope | `[data-profile="scope"][data-profile-portal="true"]` | Separate scope wrapper in current complete captures. |
-| Gallery folders | `[data-section="gallery"] [role="group"][aria-label="Folders"]` | Horizontal scrolling strip. |
-| Named folder | `[data-folder-chip="true"] > button` | Scope to Gallery. |
-| Selected named folder | `[data-folder-chip="true"] > button:has(> img[src="/img/pixel/folder_open.webp"])` | Captured artwork signature; not an All selection hook. |
+| Gallery folders | `[data-section=gallery] [aria-label="Folders"]` | Horizontal scrolling strip. |
+| Named folder | `[data-section=gallery] [aria-label="Folders"] [data-folder-chip=true] > button` | Named folder button. |
+| Selected named folder | `[data-section=gallery] [aria-label="Folders"] [data-folder-chip=true] > button:has(img[src$="/folder_open.webp"])` | Open-folder artwork in the captured selected state. |
 | New folder | `[data-profile="modal-panel"][role="dialog"][aria-label="New folder"]` | Color swatches and privacy both use aria-pressed. |
 | Post/comments sheet | `[data-profile="modal-panel"]:has(> [data-profile="modal-body"] > [data-profile="post"])` | Comments are siblings of the post. |
 | Comment preview | `[data-post-comment-composer="true"]` | Inert preview opens a separate editor. |
 | Featured rail | `[data-profile="featured-rail"]` | Creator cards, scroll viewport, and arrow controls. |
-| About editor modal | `[data-profile="modal"][data-modal="about"]` | Toolbar class and named textbox; no composer-editor hook. |
+| About editor modal | `[data-modal=about]` | Toolbar class and named textbox; no composer-editor hook. |
+| Followers and Following | `[data-modal=follow]` | Both lists share this wrapper. Use the descendant `[data-profile=modal-panel]` for the card, and add the panel label to style one list. |
+| Send a Wave | `[data-modal=wave]` | Scope controls or artwork to this dialog. |
+| Mobile Profile Details | `[data-modal=details]` | Scope the details panel to this dialog. |
 
 ### Native Artwork Paths and Reuse
 
@@ -8901,7 +9091,7 @@ For an image row, place its component scope before `img[src="EXACT_PATH"]`, unle
 | --- | --- | --- | --- |
 | `/img/Icons/feed_action_heart.webp` | Like-button artwork | `[data-profile="post-like"]` | Image |
 | `/img/Icons/feed_action_share.webp` | Share foreground artwork | `[data-profile="post-engagement"] button[aria-label="Share"]` | Image |
-| `/img/Icons/feed_bary_cheeky_paw.webp` | Cheeky paw; parent still unconfirmed | `[data-profile="scope"] img` | Image |
+| `/img/Icons/feed_bary_cheeky_paw.webp` | Cheeky paw; parent still unconfirmed | `img[src$="/feed_bary_cheeky_paw.webp"]` | Image |
 | `/img/Icons/feed_bary_peeking_ears.webp` | Poke Bary above composer | `button[aria-label="Poke Bary"] > img` | Image |
 | `/img/Icons/feed_filter_posts.webp` | Comment-button artwork | `[data-profile="post-comment-button"]` | Image |
 | `/img/Icons/feed_filter_updates.webp` | Updated embed corner artwork | `[data-profile="post-embed"][data-embed="updated"] [data-profile="embed-card"] > img` | Image |
@@ -9005,8 +9195,8 @@ For an image row, place its component scope before `img[src="EXACT_PATH"]`, unle
 
 | Native path | Visible role | Component scope | Representation |
 | --- | --- | --- | --- |
-| `/img/Animation/animation_bary_wink1.webp` | Wave animation frame | `[data-profile="modal-panel"][aria-label="Send a wave"]` | Image; optional mask replacement is separate |
-| `/img/Animation/animation_bary_wink2.webp` | Wave animation frame | `[data-profile="modal-panel"][aria-label="Send a wave"]` | Image; optional mask replacement is separate |
+| `/img/Animation/animation_bary_wink1.webp` | Wave animation frame | `[data-modal=wave]` | Image; optional mask replacement is separate |
+| `/img/Animation/animation_bary_wink2.webp` | Wave animation frame | `[data-modal=wave]` | Image; optional mask replacement is separate |
 | `/img/Banner/profile-bary-study.webp` | Native default hero background | `[data-profile="hero"] direct background layer` | Inline CSS background; no dedicated layer hook established |
 | `/img/Icons/btn_pixel_plate.webp` | Native button backing plate; use the exact variant | `Named button > img[src="/img/Icons/btn_pixel_plate.webp"]` | Image |
 | `/img/Icons/btn_pixel_plate_24.webp` | Native button backing plate; use the exact variant | `Named button > img[src="/img/Icons/btn_pixel_plate_24.webp"]` | Image |
