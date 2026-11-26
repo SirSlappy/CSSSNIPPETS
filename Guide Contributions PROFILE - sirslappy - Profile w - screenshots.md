@@ -8471,23 +8471,23 @@ Use `[data-profile="content-panel"][role="dialog"]` directly, without requiring 
 ![Section Dialog Surfaces](./images/profile/header-section-dialog-surfaces.png)
 
 ```css
-[data-profile="content-panel"][role="dialog"] {
+[data-profile="content-panel"] {
   --sd-bg: #193446;
   --sd-edge: #91cfed;
   --sd-text: #e2f4ff;
-  background: var(--sd-bg) !important;
-  border: 1px solid var(--sd-edge) !important;
-  color: var(--sd-text) !important;
+  background: var(--sd-bg) ;
+  border: 1px solid var(--sd-edge) ;
+  color: var(--sd-text) ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="content-header"] {
-  background: #49365e !important;
-  border-bottom: 1px solid #bd9bea !important;
+[data-profile="content-panel"] [data-profile="content-header"] {
+  background: #49365e ;
+  border-bottom: 1px solid #bd9bea ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="content-title"] {
-  color: #e0c7ff !important;
+[data-profile="content-panel"] [data-profile="content-title"] {
+  color: #e0c7ff ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="content-body"] {
-  background: var(--sd-bg) !important;
+[data-profile="content-panel"] [data-profile="content-body"] {
+  background: var(--sd-bg) ;
 }
 ```
 
@@ -8498,30 +8498,30 @@ Use `[data-profile="content-panel"][role="dialog"]` directly, without requiring 
 ![Section Dialog Navigation and Close Buttons](./images/profile/header-section-dialog-navigation-and-close-buttons.png)
 
 ```css
-[data-profile="content-panel"][role="dialog"] button:is(
+[data-profile="content-panel"] button:is(
   [aria-label^="Previous section:"],
   [aria-label^="Next section:"],
   [aria-label="Close"]
 ) {
-  background: #24483e !important;
-  border: 1px solid #8fd8bb !important;
-  color: #b8ffe0 !important;
+  background: #24483e ;
+  border: 1px solid #8fd8bb ;
+  color: #b8ffe0 ;
 }
-[data-profile="content-panel"][role="dialog"] button[aria-label^="Previous section:"]
+[data-profile="content-panel"] button[aria-label^="Previous section:"]
 img[src$="/arrow-left-v2.webp"] {
-  filter: sepia(1) saturate(2) hue-rotate(95deg) !important;
+  filter: sepia(1) saturate(2) hue-rotate(95deg) ;
 }
-[data-profile="content-panel"][role="dialog"] button[aria-label^="Next section:"]
+[data-profile="content-panel"] button[aria-label^="Next section:"]
 img[src$="/arrow-right-v2.webp"] {
-  filter: sepia(1) saturate(2) hue-rotate(155deg) !important;
+  filter: sepia(1) saturate(2) hue-rotate(155deg) ;
 }
-[data-profile="content-panel"][role="dialog"] button:is(
+[data-profile="content-panel"] button:is(
   [aria-label^="Previous section:"],
   [aria-label^="Next section:"],
   [aria-label="Close"]
 ):enabled:hover {
-  background: #306052 !important;
-  color: #ffd580 !important;
+  background: #306052 ;
+  color: #ffd580 ;
 }
 ```
 
@@ -8530,16 +8530,16 @@ img[src$="/arrow-right-v2.webp"] {
 **Header versus body action placement**
 
 ```css
-[data-profile="content-panel"][role="dialog"] [data-profile="content-actions"] {
-  gap: 8px !important;
+[data-profile="content-panel"] [data-profile="content-actions"] {
+  gap: 8px ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="content-header"]
+[data-profile="content-panel"] [data-profile="content-header"]
 [data-profile="content-actions"] {
-  background: #49365e !important;
+  background: #49365e ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="content-body"]
+[data-profile="content-panel"] [data-profile="content-body"]
 [data-profile="content-actions"] {
-  background: #122b39 !important;
+  background: #122b39 ;
 }
 ```
 
@@ -8550,42 +8550,42 @@ img[src$="/arrow-right-v2.webp"] {
 ![Section Dialog Search and Sort](./images/profile/header-section-dialog-search-and-sort.png)
 
 ```css
-[data-profile="content-panel"][role="dialog"] [data-profile="search"] .header-search {
-  background: #122b39 !important;
-  border: 1px solid var(--sd-edge) !important;
-  border-radius: 10px !important;
+[data-profile="content-panel"] [data-profile="search"] .header-search {
+  background: #122b39 ;
+  border: 1px solid var(--sd-edge) ;
+  border-radius: 10px ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="search"] .header-search-input {
-  background: transparent !important;
-  color: var(--sd-text) !important;
+[data-profile="content-panel"] [data-profile="search"] .header-search-input {
+  background: transparent ;
+  color: var(--sd-text) ;
   caret-color: #ffd580;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="search"] .header-search-input::placeholder {
-  color: var(--sd-edge) !important;
-  opacity: 1 !important;
+[data-profile="content-panel"] [data-profile="search"] .header-search-input::placeholder {
+  color: var(--sd-edge) ;
+  opacity: 1 ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="search"] .fa-search {
-  color: #ffd580 !important;
+[data-profile="content-panel"] [data-profile="search"] .fa-search {
+  color: #ffd580 ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="content-type-filter"]
+[data-profile="content-panel"] [data-profile="content-type-filter"]
 button[aria-label="Filter favorites by type"],
-[data-profile="content-panel"][role="dialog"] [data-profile="content-sort"]
+[data-profile="content-panel"] [data-profile="content-sort"]
 button[aria-label="Sort items"] {
-  background: #24483e !important;
-  border: 1px solid #8fd8bb !important;
-  color: #b8ffe0 !important;
+  background: #24483e ;
+  border: 1px solid #8fd8bb ;
+  color: #b8ffe0 ;
 }
-[data-profile="content-panel"][role="dialog"] :is(
+[data-profile="content-panel"] :is(
   button[aria-label="Filter favorites by type"],
   button[aria-label="Sort items"]
 ) > span {
-  color: #b8ffe0 !important;
+  color: #b8ffe0 ;
 }
-[data-profile="content-panel"][role="dialog"] :is(
+[data-profile="content-panel"] :is(
   button[aria-label="Filter favorites by type"],
   button[aria-label="Sort items"]
 ) > img {
-  filter: sepia(1) saturate(2) hue-rotate(95deg) !important;
+  filter: sepia(1) saturate(2) hue-rotate(95deg) ;
 }
 ```
 
@@ -8594,9 +8594,8 @@ button[aria-label="Sort items"] {
 **Scroll area**
 
 ```css
-[data-profile="content-panel"][role="dialog"] [data-profile="content-scroll"] {
-  background: #122b39 !important;
-  scrollbar-color: #91cfed #122b39;
+[data-profile="content-panel"] [data-profile="content-scroll"] {
+  background: #122b39;
 }
 ```
 
@@ -8607,41 +8606,41 @@ button[aria-label="Sort items"] {
 ![Section Dialog Footer and Okay Button](./images/profile/footer-section-dialog-footer-and-okay-button.png)
 
 ```css
-[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"] {
-  background: #122b39 !important;
-  border-top: 1px solid #416b80 !important;
-  color: var(--sd-text) !important;
+[data-profile="content-panel"] [data-profile="content-footer"] {
+  background: #122b39 ;
+  border-top: 1px solid #416b80 ;
+  color: var(--sd-text) ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"]
+[data-profile="content-panel"] [data-profile="content-footer"]
 [data-modal-footer-tip] {
-  color: #91cfed !important;
+  color: #91cfed ;
 }
-[data-profile="content-panel"][role="dialog"] .back-to-top-button button {
-  background: #24483e !important;
-  border: 1px solid #8fd8bb !important;
-  border-radius: 50% !important;
+[data-profile="content-panel"] .back-to-top-button button {
+  background: #24483e ;
+  border: 1px solid #8fd8bb ;
+  border-radius: 50% ;
 }
-[data-profile="content-panel"][role="dialog"] .back-to-top-button
+[data-profile="content-panel"] .back-to-top-button
 img[src="/img/sketch/arrow_up.webp"] {
-  filter: sepia(1) saturate(2) hue-rotate(95deg) !important;
+  filter: sepia(1) saturate(2) hue-rotate(95deg) ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"]
+[data-profile="content-panel"] [data-profile="content-footer"]
 button.dashboard-action-button:has(img[src="/img/pixel/check.webp"]) {
-  border: 1px solid #8fd8bb !important;
-  border-radius: 10px !important;
+  border: 1px solid #8fd8bb ;
+  border-radius: 10px ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"]
+[data-profile="content-panel"] [data-profile="content-footer"]
 button.dashboard-action-button:has(img[src="/img/pixel/check.webp"])
 > img[src="/img/Icons/btn_pixel_plate_24.webp"] {
-  filter: sepia(1) saturate(2) hue-rotate(95deg) !important;
+  filter: sepia(1) saturate(2) hue-rotate(95deg) ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"]
+[data-profile="content-panel"] [data-profile="content-footer"]
 button.dashboard-action-button:has(img[src="/img/pixel/check.webp"]) > span {
-  color: #b8ffe0 !important;
+  color: #b8ffe0 ;
 }
-[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"]
+[data-profile="content-panel"] [data-profile="content-footer"]
 button.dashboard-action-button img[src="/img/pixel/check.webp"] {
-  filter: drop-shadow(0 0 3px #8fd8bb) !important;
+  filter: drop-shadow(0 0 3px #8fd8bb) ;
 }
 ```
 
