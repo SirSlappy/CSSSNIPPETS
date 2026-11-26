@@ -63,6 +63,7 @@
   - [Featured Creator Links](#featured-creator-links)
   - [Level Up, Relationship, and Glorp Events](#level-up-relationship-and-glorp-events)
   - [Published and Updated Content Embeds](#published-and-updated-content-embeds)
+  - [Bary Is Dead Embed](#bary-is-dead-embed)
   - [Post Media, Reveal Wrappers, and Native Artwork](#post-media-reveal-wrappers-and-native-artwork)
   - [Published Polls, Results, and Tape](#published-polls-results-and-tape)
 - [Rich Text and Dividers](#rich-text-and-dividers)
@@ -95,6 +96,12 @@
   - [Followers and Following Close Button](#followers-and-following-close-button)
   - [Send a Wave](#send-a-wave)
   - [Section Dialogs](#section-dialogs)
+- [Common Fixes](#common-fixes)
+  - [Raise Avatar Controls](#raise-avatar-controls)
+  - [Fix Editor Toolbox Color Flood](#fix-editor-toolbox-color-flood)
+  - [About Me “View All”](#about-me-view-all)
+  - [Scrolling on Content Cards](#scrolling-on-content-cards)
+  - [Compact Content View — Banner on the Left or Right](#compact-content-view--banner-on-the-left-or-right)
 - [Profile Selector Quick Reference](#profile-selector-quick-reference)
   - [Additional Component and State Selectors](#additional-component-and-state-selectors)
   - [Current Mobile and Rail Selectors](#current-mobile-and-rail-selectors)
@@ -5639,6 +5646,48 @@ These shared hooks style both Published and Updated embeds.
 
 Use these as a shared base. Earlier selectors containing `[data-embed="published"]` or `[data-embed="updated"]` are more specific and take priority for overlapping properties.
 
+#### Bary Is Dead Embed
+
+The Bary embed uses `[data-embed=bary]`. Its card surface is the direct child `div`. The title and detail text use the captured inner structure, and the acorn button has an accessible label that starts with `Give an acorn`.
+
+```css
+/* Card surface and accent edge. */
+[data-embed=bary] > div {
+  background: #193446 ;
+  border: 1px solid #91cfed ;
+  border-inline-start: 3px solid #bd9bea ;
+}
+
+/* Title and detail text. */
+[data-embed=bary] > div > div > div > p {
+  color: #e0c7ff ;
+}
+
+[data-embed=bary] > div > div > div > div {
+  color: #b9e6ff ;
+}
+
+/* Acorn button. */
+[data-embed=bary] button[aria-label^="Give an acorn"] {
+  background: #49365e ;
+  border-color: #bd9bea ;
+  color: #e0c7ff ;
+}
+
+/* Empty acorn artwork, when rendered. The native filename is spelled "emtpy". */
+[data-embed=bary] img[src$="/icon_acon_emtpy.webp"] {
+  filter: grayscale(1) brightness(1.2);
+}
+
+/* Filled acorn. */
+[data-embed=bary] img[src$="/icon_acon.png"] {
+  filter: sepia(1) saturate(2) hue-rotate(220deg);
+}
+```
+
+**Customization.** Edit the accent edge, text colors, and acorn button independently. The `data-embed=bary` qualifier limits these rules to the Bary embed.
+
+
 ### Post Media, Reveal Wrappers, and Native Artwork
 
 **Post-Media Container and Grid**
@@ -8540,6 +8589,347 @@ button.dashboard-action-button img[src="/img/pixel/check.webp"] {
 ```
 
 **Customization:** Back to top can appear floating in the body or in the footer; the dialog-root selector accommodates both without moving it or forcing it visible. Okay is identified by the footer action button containing its native checkmark, not by invented aria-label text. Its plate, label, and checkmark stay separate.
+
+---
+
+## Common Fixes
+
+### Raise Avatar Controls
+
+A decorative avatar frame can cover the **Change Avatar** and **Remove Avatar** controls. Even the transparent parts of the frame can intercept clicks. Make the artwork click-through and raise the native action buttons above it.
+
+```css
+/* Let clicks pass through the decorative avatar frame. */
+[data-profile=avatar-wrap]::after {
+  pointer-events: none;
+}
+
+/* Keep the native avatar actions above the frame. */
+[data-profile=avatar-actions] {
+  z-index: 5;
+}
+```
+
+Add `pointer-events: none` to your existing frame rule. If the artwork uses `::before`, use that pseudo-element in place of `::after`. Set the action group’s `z-index` higher than the frame’s. The native action group is already positioned, so you can raise its stacking level without moving the buttons.
+
+Preview on your own editable profile. Click the avatar to check that the image picker opens, then check that the remove control appears above the frame.
+
+
+### Fix Editor Toolbox Color Flood
+
+If the **Text Color** indicator starts showing your theme color instead of the color you picked, check for a toolbar rule that paints every button and its child spans. LoreBary uses a separate span with an inline background to display the selected color.
+
+#### Reproduce the problem
+
+Temporarily add this to your Profile CSS, open **Write a Post**, and select green from **Text Color**.
+
+```css
+/* Deliberately too broad. */
+[data-profile=composer-toolbar] button,
+[data-profile=composer-toolbar] button > span {
+  background: #c026d3 !important;
+}
+```
+
+The toolbar turns magenta, and the bar under the Text Color icon turns magenta too. The `button > span` selector matches the color indicator and overrides the green background LoreBary set on it. The broad `button` selector can also paint swatch buttons if they render inside the toolbar.
+
+#### Fix the selector
+
+**Replace the entire demo rule** with this one.
+
+```css
+/* Paint the toolbar controls and skip buttons with inline backgrounds. */
+[data-profile=composer-toolbar]
+button:is(
+  [data-profile=composer-btn],
+  [aria-label="Insert"],
+  [aria-label="Text background"],
+  [aria-label="Edit as HTML"]
+):not([style*="background"]) {
+  background: #c026d3 !important;
+}
+```
+
+This rule targets the toolbar buttons themselves. The indicator span can show its own color, and swatch buttons with inline backgrounds keep their individual colors.
+
+#### Check the result
+
+Select green again. The **Text Color button** should stay magenta, and its **indicator bar** should show green. If the bar still shows magenta, look for another rule that sets a `background` or `background-color` on toolbar button spans or on `[data-btn=text-color-bar]`.
+
+### About Me “View All”
+
+Style the **View All** button if you want visitors to expand the bio themselves. To show the full bio by default, remove its height limit and hide the button.
+
+#### Style the View All button
+
+```css
+[data-profile=about-more] {
+  background: #49365e;
+  border: 1px solid #bd9bea;
+  color: #e0c7ff;
+}
+
+[data-profile=about-more]:focus-visible {
+  outline: 2px solid #ffd580;
+  outline-offset: 2px;
+}
+
+/* Font icon. */
+[data-profile=about-more] i {
+  color: #ffd580;
+}
+
+/* Image icon. */
+[data-profile=about-more] img {
+  filter: sepia(1) saturate(2) hue-rotate(220deg);
+}
+```
+
+The button’s `color` sets the label color. Use the icon rule that matches what your button renders.
+
+#### Show the full bio and hide View All
+
+```css
+/* Show the full About Me bio. */
+[data-profile=about-bio] {
+  max-height: none;
+  overflow: visible;
+}
+
+/* Hide View All once the full bio is visible. */
+[data-profile=about-more] {
+  display: none;
+}
+```
+
+Use both rules together. The first removes the clipping from the bio. The second hides the button. Try it with a bio long enough to show **View All** before applying the CSS, then check that the last line is visible.
+
+### Scrolling on Content Cards
+
+On full Profile content pages like **Favorites**, LoreBary gives the outer Profile container a viewport-based height and scrolls the cards inside an inner panel. To make the whole content view scroll together, give the outer container the scrollbar and let the inner wrappers grow with the card grid.
+
+#### Move scrolling to the outer Profile container
+
+```css
+@media (min-width: 768px) {
+  /* Give the outer Profile container the scrollbar. */
+  [data-profile=scope][data-profile-view=content] {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Let the wrappers along the path to the card grid grow. */
+  [data-profile-view=content] [data-profile=body],
+  [data-profile-view=content]
+  [data-profile=body-inner]:has([data-profile=content-scroll]),
+  [data-profile-view=content]
+  [data-profile=body-inner] :has([data-profile=content-scroll]),
+  [data-profile-view=content]
+  [data-profile=body-inner] [data-profile=content-scroll] {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    flex: none;
+    overflow: visible;
+  }
+
+  /* Hide the fades that belonged to the inner scroller. */
+  [data-profile-view=content]
+  :is([data-profile=content-fade-top], [data-profile=content-fade-bottom]) {
+    display: none;
+  }
+}
+```
+
+Keep LoreBary’s native height on the outer Profile container. That height gives its `overflow-y: auto` rule a boundary to scroll within. The inner wrappers use `height: auto` so the full card grid can extend past that boundary.
+
+Test on a full content page with enough cards to scroll. At **768px and above**, scrolling over the cards should move the whole content view, including its header and footer. Below that width, the native inner scroller remains in use.
+
+For a side-banner layout, see [Compact Content View — Banner on the Left or Right](#compact-content-view--banner-on-the-left-or-right).
+
+#### Optional compact header and spacing
+
+Add this separately to tighten the spacing around the content-page controls and cards. These rules apply at all widths.
+
+```css
+[data-profile-view=content] [data-profile=action-bar] {
+  padding-block: 4px;
+}
+
+[data-profile-view=content] [data-profile=tabs] {
+  margin-block: 0 4px;
+}
+
+[data-profile-view=content] [data-profile=body-inner] {
+  padding-block: 0 4px;
+  gap: 6px;
+}
+
+[data-profile-view=content] [data-profile=content-panel] {
+  padding: 8px;
+}
+
+[data-profile-view=content] [data-profile=content-body] {
+  padding: 4px;
+}
+```
+
+### Compact Content View — Banner on the Left or Right
+
+This Scene Queen layout turns the banner into a full-height side panel on Profile content pages such as **Favorites**. The avatar and identity sit at the bottom of the banner, and the native navigation tabs sit directly above the content cards.
+
+To move the scrollbar to the outer profile container, see [Scrolling on Content Cards](#scrolling-on-content-cards).
+
+#### Banner on the Left
+
+Paste this block into your Profile CSS. Keep `[data-profile=scope][data-profile-view=content]` together in the selectors. The two-column layout applies to full content views at all widths.
+
+```css
+/* Content-page grid. */
+[data-profile=scope][data-profile-view=content] {
+  display: grid;
+  grid-template-columns: minmax(0, clamp(200px, 19vw, 240px)) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: .75rem;
+  padding: .75rem;
+  box-sizing: border-box;
+}
+
+[data-profile=scope][data-profile-view=content] :is([data-profile=hero-frame], [data-profile=hero]) {
+  display: contents;
+}
+
+/* Banner artwork spans the left column. */
+[data-profile=scope][data-profile-view=content] [data-profile=hero]::before,
+[data-profile=scope][data-profile-view=content] [data-profile=hero] > :is([data-profile=hero-tint], div[style*="background-image"]) {
+  grid-area: 1 / 1 / -1 / 2;
+  position: relative;
+  inset: auto;
+  min-width: 0;
+  border-radius: .75rem;
+  z-index: 1;
+}
+
+[data-profile=scope][data-profile-view=content] [data-profile=hero]::before {
+  content: "";
+  background: inherit;
+  border: inherit;
+}
+
+[data-profile=scope][data-profile-view=content] [data-profile=hero] > [data-profile=hero-tint] {
+  background: linear-gradient(transparent 35%, rgba(14, 13, 23, .96) 100%);
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+/* Identity at the bottom of the banner. */
+[data-profile=scope][data-profile-view=content] [data-profile=hero-content] {
+  grid-area: 1 / 1 / -1 / 2;
+  align-self: end;
+  position: relative;
+  min-width: 0;
+  padding: .875rem;
+  background: linear-gradient(transparent, rgba(14, 13, 23, .88) 38%);
+  border-radius: 0 0 .75rem .75rem;
+  z-index: 2;
+}
+
+[data-profile=scope][data-profile-view=content] [data-profile=hero-row] {
+  flex-direction: column;
+  gap: .625rem;
+  padding: 0;
+}
+
+[data-profile=scope][data-profile-view=content] [data-profile=identity-card] {
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+
+[data-profile=scope][data-profile-view=content] :is([data-profile=identity], [data-profile=badges]) {
+  justify-content: center;
+}
+
+[data-profile=scope][data-profile-view=content] [data-profile=display-name] {
+  font-size: 1.125rem !important;
+  overflow-wrap: anywhere;
+}
+
+/* Scene Queen badges. */
+[data-profile=scope][data-profile-view=content] [data-profile=hero-content]::before,
+[data-profile=scope][data-profile-view=content] [data-profile=hero-content]::after {
+  display: table;
+  position: static;
+  grid-area: auto;
+  width: auto;
+  aspect-ratio: auto;
+  translate: none;
+  margin: 0 auto;
+  border: 1px solid #fd74b7;
+  border-radius: .375rem;
+  padding: .25rem .5rem;
+  font: 700 .625rem/1 system-ui, sans-serif;
+  letter-spacing: .075em;
+}
+
+/* Position the native level and navigation strips. */
+[data-profile=scope][data-profile-view=content] [data-profile=hero] > :is([data-profile=level-notch], [data-profile=tab-notch]) {
+  position: relative;
+  inset: auto;
+  translate: none;
+  transform: none;
+  margin: 0;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+[data-profile=scope][data-profile-view=content] [data-profile=level-notch] {
+  grid-area: 1 / 1 / -1 / 2;
+  place-self: start center;
+}
+
+/* Navigation above the cards. */
+[data-profile=scope][data-profile-view=content] [data-profile=tab-notch] {
+  grid-area: 1 / 2;
+  height: auto;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  border-radius: .5rem;
+}
+
+[data-profile=scope][data-profile-view=content] > [data-profile=body] {
+  grid-area: 2 / 2;
+  min-width: 0;
+  min-height: 0;
+}
+
+[data-profile=scope][data-profile-view=content] [data-profile=body-inner] {
+  padding: 0;
+}
+```
+
+#### Banner on the Right
+
+Swap the column widths in the first rule:
+
+```css
+grid-template-columns: minmax(0, 1fr) minmax(0, clamp(200px, 19vw, 240px));
+```
+
+Then update the existing `grid-area` declarations:
+
+| Element | Left-banner version | Right-banner version |
+| --- | --- | --- |
+| Banner artwork, identity overlay, and level notch | `1 / 1 / -1 / 2` | `1 / 2 / -1 / 3` |
+| Navigation tabs (`tab-notch`) | `1 / 2` | `1 / 1` |
+| Content body | `2 / 2` | `2 / 1` |
+
+The artwork, identity overlay, and level notch each have their own rule. Change all three together so they share the same column. The tabs and cards move to the opposite column, with the tabs still above the cards.
+
+#### Adjust the banner width
+
+Edit `clamp(200px, 19vw, 240px)` to change the banner’s minimum, preferred, and maximum width. The `minmax(0, 1fr)` column gives the tabs and cards the rest of the available space.
 
 ---
 
