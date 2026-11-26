@@ -93,6 +93,7 @@
   - [Mobile Comment Composer Preview](#mobile-comment-composer-preview)
   - [Mobile About Me Editor](#mobile-about-me-editor)
   - [Mobile Profile Details](#mobile-profile-details)
+  - [Desktop Artwork on Mobile](#desktop-artwork-on-mobile)
   - [Followers and Following Dialogs](#followers-and-following-dialogs)
   - [Followers and Following Close Button](#followers-and-following-close-button)
   - [Send a Wave](#send-a-wave)
@@ -7949,6 +7950,71 @@ The details panel has its own `data-modal=details` wrapper. Apply the same palet
   color: #e0c7ff;
 }
 ```
+## Desktop Artwork on Mobile
+
+### Restore Sleeping Bary in Followers and Following
+
+The mobile dialogs can show the same sleeping Bary artwork as desktop. Paste this into **Profile CSS**. It draws Bary once in the lower-right corner and lets taps pass through to the list.
+
+```css
+@media (max-width: 767px) {
+  [data-profile=modal-panel]:is([aria-label=Followers], [aria-label=Following]) {
+    position: relative;
+  }
+
+  [data-profile=modal-panel]:is([aria-label=Followers], [aria-label=Following])
+  img[src="/img/sketch/bary_pencil.webp"] {
+    display: none;
+  }
+
+  [data-profile=modal-panel]:is([aria-label=Followers], [aria-label=Following])::after {
+    content: "";
+    position: absolute;
+    right: 12px;
+    bottom: 42px;
+    width: min(48%, 210px);
+    height: 180px;
+    background: url("/img/sketch/bary_pencil.webp") right bottom / contain no-repeat;
+    opacity: .32;
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+```
+
+Adjust `right` and `bottom` to move Bary, or change `opacity` to make the sketch more or less visible.
+
+### Optional Extra — Bary Ears Above Write a Post
+
+Mobile doesn’t render the native **Poke Bary** button. This snippet brings back the ears as decoration above **Write a Post**. The cheeky-paw animation belongs to the desktop button.
+
+```css
+@media (max-width: 780px) {
+  .surface-post:has([data-profile=composer-header]) {
+    margin-block-start: 3rem;
+    overflow: visible;
+  }
+
+  [data-profile=composer-header] {
+    position: relative;
+  }
+
+  [data-profile=composer-header]::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 5rem;
+    height: 3rem;
+    transform: translateX(-50%);
+    background: url("/img/Icons/feed_bary_peeking_ears.webp")
+      center bottom / contain no-repeat;
+    pointer-events: none;
+  }
+}
+```
+
+If you make the ears taller, increase `margin-block-start` on the composer card to give them room above the header.
 
 ### Followers and Following Dialogs
 
