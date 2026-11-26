@@ -2887,6 +2887,8 @@ The full-section rules above include the heading artwork, count, grid gaps, and 
 
 Style the strip and folder controls without changing horizontal scrolling.
 
+![Gallery Folder Toolbar](./images/profile/header-gallery-folder-toolbar.png)
+
 **Coverage:** Surface styling tested; added icon recolors pending review.
 
 ```css
@@ -2941,6 +2943,8 @@ img:is([src$="/folder_all.webp"], [src$="/folder.webp"], [src$="/folder_open.web
 
 Identify the selected named folder through its recorded open-folder artwork.
 
+![Selected Gallery Folder](./images/profile/header-gallery-selected-folder.png)
+
 **Coverage:** Surface styling tested; added icon recolors pending review.
 
 ```css
@@ -2971,6 +2975,8 @@ Identify the selected named folder through its recorded open-folder artwork.
 ### Empty Gallery Folder
 
 Style the empty-state wrapper, illustration, and its two messages.
+
+![Empty Gallery Folder](./images/profile/gallery-empty-folder.png)
 
 **Coverage:** Surface styling tested; added icon recolors pending review.
 
@@ -3006,6 +3012,8 @@ div:has(> img[src$="/photo_frame.webp"]) > p:nth-of-type(2) {
 ### Gallery Action Controls
 
 Cover the two Upload trigger placements, Select, and thumbnail options.
+
+![Empty Gallery Folder Upload Button](./images/profile/input-gallery-empty-folder-upload-button.png)
 
 **Coverage:** Surface styling tested; added icon recolors pending review.
 
@@ -5370,6 +5378,8 @@ The options wrapper is `post-actions`. Its button is labeled “Post options” 
 
 Captured featured-author links have `data-featured-link="true"`. Use that marker alongside `post-author`, rather than targeting a username or profile URL.
 
+![Favorite Creators Shelf](./images/profile/favorite-creators-shelf.png)
+
 ```css
 /* Featured post-author name: solid gold instead of native gradient text. */
 [data-profile="post-author"][data-featured-link="true"] {
@@ -5598,6 +5608,8 @@ Style the two embed variants and their shared card/title structure, using each n
 
 The exact wrapper is `[data-profile="post-embed"][data-embed="published"]`. This identifies the embed type without matching a title, username, or cover image.
 
+![Published Content Embed](./images/profile/message-embed-published-content.png)
+
 ```css
 /* Published embed-card surface. */
 [data-embed="published"] [data-profile="embed-card"] {
@@ -5643,6 +5655,8 @@ Published embeds use `data-embed="published"`; Updated embeds use `data-embed="u
 **Updated-Content Embeds**
 
 The exact wrapper is `[data-profile="post-embed"][data-embed="updated"]`. This identifies the embed type without matching a title, username, or cover image.
+
+![Updated Content Embed](./images/profile/message-embed-updated-content.png)
 
 ```css
 /* Updated embed-card surface. */
@@ -5716,6 +5730,8 @@ Use these as a shared base. Earlier selectors containing `[data-embed="published
 #### Bary Is Dead Embed
 
 The Bary embed uses `[data-embed=bary]`. Its card surface is the direct child `div`. The title and detail text use the captured inner structure, and the acorn button has an accessible label that starts with `Give an acorn`.
+
+![Bary Is Dead Embed](./images/profile/message-embed-bary-is-dead.png)
 
 ```css
 /* Card surface and accent edge. */
@@ -8740,6 +8756,8 @@ Preview on your own editable profile. Click the avatar to check that the image p
 ### Fix Editor Toolbox Color Flood
 
 If the **Text Color** indicator starts showing your theme color instead of the color you picked, check for a toolbar rule that paints every button and its child spans. LoreBary uses a separate span with an inline background to display the selected color.
+
+![Editor Toolbox Color Flood](./images/profile/input-editor-toolbox-color-flood.png)
 
 #### Reproduce the problem
 
