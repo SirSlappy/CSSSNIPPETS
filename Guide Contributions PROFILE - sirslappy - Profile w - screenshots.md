@@ -110,7 +110,71 @@
   - [Native Artwork Paths and Reuse](#native-artwork-paths-and-reuse)
 ---
 
+# Part II — Profile Themes
+
+Profile themes use `.profile-theme-scope` and `[data-profile="..."]`. Keep every profile rule inside the profile scope so it does not recolor LoreBary navigation, dialogs, or Laboratory chats.
+
 ## Profile Theme Structure and Palette
+
+### Core component map
+
+| Selector | Component |
+| --- | --- |
+| `[data-profile="scope"]` | Root of the themed profile |
+| `[data-profile="hero"]` | Banner and identity area |
+| `[data-profile="avatar-wrap"]` | Positioning anchor for a decorative avatar frame |
+| `[data-profile="avatar"]` | Clipped avatar circle or shape |
+| `[data-profile="avatar-img"]` | Actual portrait image |
+| `[data-profile="tabs"]` / `[data-profile="tab"]` | Main profile navigation |
+| `[data-profile="about"]` | About Me area and its icon tabs |
+| `[data-profile="composer-slot"]` | Write a Post placement area |
+| `[data-profile="gallery-preview"]` | Gallery preview panel |
+| `[data-profile="popular-content"]` | Popular Creations panel and carousel |
+| `[data-profile="feed-list"]` | Profile post feed |
+
+### Reusable color variables
+
+Change this small palette first. The component snippets below reuse these values.
+
+```css
+.profile-theme-scope[data-profile="scope"] {
+  --theme-bg: #171512;
+  --theme-panel: #2c241c;
+  --theme-panel-2: #3b2e21;
+  --theme-text: #fff1cf;
+  --theme-muted: #c9b58f;
+  --theme-edge: #a77b3f;
+  --theme-accent: #d7ad63;
+  --theme-shadow: 0 8px 24px rgba(0, 0, 0, .45);
+
+  color: var(--theme-text) !important;
+  background-color: var(--theme-bg) !important;
+}
+```
+
+### Safe hover and keyboard focus
+
+Use `:hover` for pointers and `:focus-visible` for keyboard navigation. Do not remove the focus outline without providing a visible replacement.
+
+```css
+@media (hover: hover) {
+  .profile-theme-scope .theme-button:hover {
+    color: #ffffff !important;
+    background: #765034 !important;
+    border-color: #f0cc83 !important;
+    transform: translateY(-1px);
+  }
+}
+
+.profile-theme-scope .theme-button:focus-visible {
+  outline: 2px solid #fff1a8 !important;
+  outline-offset: 2px;
+}
+
+.profile-theme-scope .theme-button:active {
+  transform: translateY(1px);
+}
+```
 
 ### Additional Banner and Identity Targets
 
@@ -587,7 +651,303 @@ The root also carries `data-profile-view`, which LoreBary updates when you navig
 
 Keep these attributes together with **no space**: they describe the same root element. A space before another selector targets something inside it.
 
+## Profile Background and Layout
+
+### Background Size, Position, and Tint
+
+Adjust the size, position, repetition, and readability tint of artwork selected in the native Profile settings.
+
+**Page Background: Size, Position, and Repetition**
+
+Use `[data-profile="page-background"]` to style the page’s background artwork.
+
+These examples adjust the background selected in LoreBary’s native settings. They do not assign an uploaded image URL. Future background layout examples should likewise omit uploaded-image background declarations.
+
+**Full-image test**
+
+`cover` fills the background area while keeping the image’s proportions. Some artwork may be cropped.
+
+```css
+/* Background image: repeat a 240px-wide tile. */
+[data-profile="page-background"] {
+  background-size: 240px auto !important;
+  background-position: left top !important;
+  background-repeat: repeat ;
+}
+```
+
+**Seeing no change is normal:** If the same image is already centered and filling the area, this test can look identical. Try `contain` or `240px auto` to make the sizing change easier to see.
+
+**Change the image size**
+
+Replace the `background-size` value in the test.
+
+| Value | Effect |
+| --- | --- |
+| `cover` | Fills the area; may crop the image |
+| `contain` | Fits the entire image; may leave uncovered space |
+| `600px auto` | Sets the image width to 600px and preserves its proportions |
+| `50% auto` | Sets the image width to half the background area |
+
+**Change the image position**
+
+Replace the `background-position` value. Position controls where the artwork sits and which part remains visible when cropped.
+
+| Value | Position |
+| --- | --- |
+| `center center` | Middle |
+| `center top` | Top middle |
+| `left center` | Left middle |
+| `right bottom` | Bottom right |
+| `65% 30%` | Custom horizontal and vertical alignment |
+
+A position change may be subtle when the image already fits the area closely.
+
+**Repeating-image test**
+
+Replace the full-image block with this one. A smaller image size makes more copies visible.
+
+```css
+/* Background image: repeat a 240px-wide tile. */
+[data-profile="page-background"] {
+  background-size: 240px auto !important;
+  background-position: left top !important;
+  background-repeat: repeat !important;
+}
+```
+
+| Value | Repetition |
+| --- | --- |
+| `no-repeat` | One image |
+| `repeat` | Across and down |
+| `repeat-x` | Across only |
+| `repeat-y` | Down only |
+
+The image repeats in this test; whether its edges join seamlessly depends on the artwork.
+
+**Customization:** Use one test block at a time. Change `background-size`, `background-position`, and `background-repeat` directly. Remove the test block to return to your previous styling.
+
+**Page Tint Without Fading Text and Controls**
+
+The **page tint** sits over the background artwork. Target this layer to change the tint while keeping text and controls at full opacity.
+
+```css
+/* Page tint: translucent purple over the background. */
+[data-profile="page-tint"] {
+  background: rgba(65, 25, 90, 0.45) !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+```
+
+- `65, 25, 90` sets the tint’s RGB color.
+- `0.45` sets its strength: `0` is transparent; `1` is solid.
+- `pointer-events: none` lets clicks pass through the tint.
+
+Try these backgrounds in the same rule:
+
+| Value | Effect |
+| --- | --- |
+| `rgba(0, 0, 0, 0.25)` | Light darkening |
+| `rgba(0, 0, 0, 0.65)` | Strong darkening |
+| `rgba(90, 25, 55, 0.4)` | Rose tint |
+| `transparent` | Removes the tint |
+
+**Keep opacity off the profile root:** Applying `opacity` to `[data-profile="scope"]` fades everything inside it, including text and buttons. Adjust the tint’s background transparency instead.
+
+### Scrollable Screen Assets
+
+Use the Profile’s page-tint layer for foreground artwork that follows visitors as they scroll. This example puts matching artwork in the upper corners and repeats a decorative strip along the bottom. Clicks and taps pass through to the profile controls.
+
+Paste this block into **Profile CSS** and replace the two image URLs. If you installed the earlier Scrollable Screen Assets example, replace that whole block with this one.
+
+```css
+[data-profile=page-tint] {
+  --screen-corner: url("/api/images/YOUR_CORNER_IMAGE_ID");
+  --screen-border: url("/api/images/YOUR_BORDER_IMAGE_ID");
+  --screen-top: 75px;
+  --screen-corner-width: 200px;
+  --screen-border-height: 30px;
+
+  /* Start below the header and let the artwork extend past the strip. */
+  position: sticky !important;
+  inset: auto !important;
+  top: var(--screen-top) !important;
+  margin-top: -120svh !important;
+  width: 100% !important;
+  height: 120px !important;
+  overflow: visible !important;
+  background: transparent !important;
+  transform: none !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  z-index: 80 !important;
+}
+
+/* Both layers reach from the header clearance to the visible bottom edge. */
+[data-profile=page-tint]::before,
+[data-profile=page-tint]::after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(100dvh - var(--screen-top));
+  pointer-events: none;
+  animation: none;
+}
+
+/* Upper-left corner and a repeating strip along the bottom. */
+[data-profile=page-tint]::before {
+  background:
+    var(--screen-corner) left top / var(--screen-corner-width) auto no-repeat,
+    var(--screen-border) left bottom / auto var(--screen-border-height) repeat-x;
+}
+
+/* Mirror the corner artwork on the right. */
+[data-profile=page-tint]::after {
+  background: var(--screen-corner) left top / var(--screen-corner-width) auto no-repeat;
+  transform: scaleX(-1);
+}
+
+@media (max-width: 780px) {
+  [data-profile=page-tint] {
+    --screen-top: 12px;
+    --screen-corner-width: 76px;
+    --screen-border-height: 20px;
+  }
+}
+```
+
+Adjust `--screen-top` if the upper corners overlap your header. The decoration height accounts for that same offset, so the bottom strip still reaches the visible bottom edge. For bottom artwork only, set `--screen-corner: none;`.
+
+### Body and Grid Spacing
+
+Change outer body padding and the gaps between inner-grid sections without changing spacing inside their cards.
+
+**Body and Inner-Body Spacing**
+
+The **body** wraps the area below the profile header. The **inner body** is the grid holding its main sections.
+
+| Selector | Targets |
+| --- | --- |
+| `[data-profile="body"]` | Outer body wrapper |
+| `[data-profile="body-inner"]` | Inner layout grid |
+
+**Outer body spacing**
+
+Add space between the body’s edges and the layout inside it.
+
+```css
+/* Body: space inside the outer wrapper. */
+[data-profile="body"] {
+  padding: 12px ;
+}
+```
+
+**Inner layout spacing**
+
+Adjust the grid’s inner padding and the space between its direct sections.
+
+```css
+/* Inner body: space around and between grid sections. */
+[data-profile="body-inner"] {
+  padding: 16px ;
+  column-gap: 24px ;
+  row-gap: 24px ;
+}
+```
+
+| Property | Changes |
+| --- | --- |
+| `padding` | Space inside the selected container |
+| `column-gap` | Space between grid columns |
+| `row-gap` | Space between grid rows |
+
+The two containers are nested, so their padding **adds together**. Set either container’s padding to `0` if you want only the other to provide that space.
+
+For different vertical and horizontal padding:
+
+```css
+/* Inner body: 12px top/bottom, 24px left/right. */
+[data-profile="body-inner"] {
+  padding: 12px 24px ;
+}
+```
+
+**Gap note:** These rules space the grid’s direct sections. They do not change spacing inside individual cards.
+
 ## Fonts and Typography
+
+Use a readable body font and reserve decorative fonts for names, headings, and selected labels. Always include fallback fonts because remote fonts can fail to load or may be blocked by the editor.
+
+### Safe system-font setup
+
+This method needs no external font file and works offline.
+
+```css
+.profile-theme-scope[data-profile="scope"] {
+  --profile-font-body: Georgia, "Times New Roman", serif;
+  --profile-font-title: "Trebuchet MS", Arial, sans-serif;
+  font-family: var(--profile-font-body) !important;
+}
+
+.profile-theme-scope [data-profile="display-name"],
+.profile-theme-scope [data-profile="display-name"] *,
+.profile-theme-scope [data-profile="composer-header"] h3,
+.profile-theme-scope section:has([data-profile="about-card"])
+  > header :is(h2, span),
+.profile-theme-scope [data-profile="gallery-preview"] h2,
+.profile-theme-scope [data-profile="popular-content"] h2 {
+  font-family: var(--profile-font-title) !important;
+  letter-spacing: .08em;
+}
+
+.profile-theme-scope [data-profile="tab"],
+.profile-theme-scope [data-profile="about-card"],
+.profile-theme-scope [data-profile="composer-editor"] {
+  font-family: var(--profile-font-body) !important;
+}
+```
+
+### Laboratory font variables
+
+Laboratory already exposes useful font variables. Set them on the Laboratory scope instead of repeating `font-family` on every message element.
+
+```css
+.lab-theme-scope {
+  --lab-font-family: Georgia, "Times New Roman", serif;
+  --lab-char-name-font: "Trebuchet MS", Arial, sans-serif;
+  --lab-persona-name-font: "Trebuchet MS", Arial, sans-serif;
+}
+```
+
+### Optional web font
+
+Remote imports work only when the theme editor and the font host permit them. An `@import` rule must sit at the very top of the stylesheet, before normal CSS rules. Keep the fallback stack even when the import works.
+
+```css
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lexend:wght@400;600&display=swap");
+
+.profile-theme-scope[data-profile="scope"] {
+  --profile-font-body: Lexend, Arial, sans-serif;
+  --profile-font-title: Cinzel, Georgia, serif;
+}
+```
+
+If `@import` is rejected by the safety checker, use system fonts or embed a properly licensed WOFF2 file with `@font-face` and a Base64 data URL. Do not remove the fallback fonts.
+
+### Useful typography properties
+
+| Property | Purpose |
+| --- | --- |
+| `font-family` | Selects the font and fallbacks |
+| `font-size` | Changes text size |
+| `font-weight` | Controls regular, semibold, or bold text |
+| `font-style` | Adds or removes italics |
+| `letter-spacing` | Opens or tightens heading letters |
+| `line-height` | Improves paragraph readability |
+| `text-transform` | Uppercase, lowercase, or normal case |
+| `text-shadow` | Separates text from textured backgrounds |
 
 ### Display Name, Username, and Quote Treatments
 
@@ -724,6 +1084,103 @@ Use the existing font setup for body and title fonts. For component colors, a ch
 Target nested text only when you intend to replace its author-selected color. Keep optional nested paragraph/span overrides separate from a component’s base surface styling.
 
 ## Profile Avatar Frame
+
+The most reliable profile frame is a transparent PNG or WebP attached to the outer avatar wrapper. Keep the portrait, the decorative frame, and the action buttons on separate layers.
+
+| Before: portrait without the decorative frame | After: transparent frame aligned to the portrait |
+| --- | --- |
+| <img src="./images/profile/avatar-frame-before.png" alt="Profile avatar before adding the decorative frame"> | <img src="./images/profile/avatar-frame-after.png" alt="Profile avatar after adding the decorative frame"> |
+
+### Centered decorative frame
+
+```css
+.profile-theme-scope [data-profile="avatar-wrap"] {
+  position: relative;
+  overflow: visible !important;
+  isolation: isolate;
+}
+
+.profile-theme-scope [data-profile="avatar"] {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: 2px solid #d1b781 !important;
+  background: #2e261d !important;
+}
+
+.profile-theme-scope [data-profile="avatar-wrap"]::after {
+  content: "";
+  position: absolute;
+  inset: -5%;
+  z-index: 3;
+  pointer-events: none;
+  background: url("YOUR-TRANSPARENT-FRAME.png") center / contain no-repeat;
+}
+
+.profile-theme-scope [data-profile="avatar-actions"] {
+  position: relative;
+  z-index: 5;
+}
+```
+
+`pointer-events: none` is important: the transparent rectangle around the artwork must not block avatar or remove-button clicks.
+
+### Fit the portrait inside the frame opening
+
+Use the same inset for the portrait and its click overlay. Absolute positioning is more reliable than compensating with margins.
+
+```css
+.profile-theme-scope [data-profile="avatar"]
+  > [data-profile="avatar-img"] {
+  position: absolute !important;
+  inset: 14% !important;
+  width: 72% !important;
+  height: 72% !important;
+  margin: 0 !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+}
+
+.profile-theme-scope [data-profile="avatar"] > div.absolute {
+  inset: 14% !important;
+}
+```
+
+### Asymmetrical frame artwork
+
+Use this pattern when flowers, horns, a lantern, a skull, or another ornament extends farther on one side. Align the visible opening, not the full transparent image bounds.
+
+```css
+.profile-theme-scope [data-profile="avatar-wrap"]::after {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  left: -33%;
+  top: -39%;
+  z-index: 3;
+  pointer-events: none;
+  background: url("ASYMMETRICAL-FRAME.png") center / 100% 100% no-repeat;
+}
+```
+
+### Mobile avatar alignment
+
+```css
+@media (max-width: 767px) {
+  .profile-theme-scope [data-profile="avatar-wrap"]::after {
+    inset: -5%;
+  }
+
+  .profile-theme-scope [data-profile="avatar"]
+    > [data-profile="avatar-img"],
+  .profile-theme-scope [data-profile="avatar"] > div.absolute {
+    inset: 14% !important;
+  }
+}
+```
+
+If the artwork is asymmetrical, give its mobile rule its own `width`, `height`, `left`, and `top` values instead of reusing `inset`.
 
 ### Change-Avatar Overlay and Upload Artwork
 
@@ -969,6 +1426,130 @@ This leaves profile identity badges and artwork in post bodies visible. Remove t
 
 ## Stickers and Decorative Images
 
+The cleanest CSS-only sticker is a transparent PNG or WebP placed in a pseudo-element. Attach it to the nearest stable component, make that component `position: relative`, and keep the sticker click-through.
+
+<img src="./images/profile/responsive-desktop-example.png" alt="Profile example with decorative character artwork and themed panels">
+
+### Reusable sticker variable
+
+```css
+.profile-theme-scope[data-profile="scope"] {
+  --profile-sticker: url("YOUR-TRANSPARENT-STICKER.png");
+}
+```
+
+### Sticker above the About Me panel
+
+```css
+.profile-theme-scope section:has([data-profile="about-card"]) {
+  position: relative;
+  overflow: visible !important;
+  isolation: isolate;
+}
+
+.profile-theme-scope
+  section:has([data-profile="about-card"])::after {
+  content: "";
+  position: absolute;
+  top: -54px;
+  right: 18px;
+  width: clamp(74px, 8vw, 108px);
+  aspect-ratio: 1 / 1;
+  z-index: 20;
+  pointer-events: none;
+  background: var(--profile-sticker) center / contain no-repeat;
+  transform: rotate(8deg);
+  filter: drop-shadow(0 7px 6px rgba(0, 0, 0, .55));
+}
+```
+
+### Sticker in the center of the profile body
+
+```css
+.profile-theme-scope [data-profile="body-inner"] {
+  position: relative;
+  overflow: visible !important;
+}
+
+.profile-theme-scope [data-profile="body-inner"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 330px;
+  width: 340px;
+  aspect-ratio: 4 / 3;
+  z-index: 60;
+  pointer-events: none;
+  transform: translateX(-50%);
+  background: var(--profile-sticker) center / contain no-repeat;
+  filter: drop-shadow(0 12px 14px rgba(0, 0, 0, .66));
+}
+```
+
+### How to move the sticker
+
+| Change | Property |
+| --- | --- |
+| Move down | Increase `top` |
+| Move up | Decrease `top` or use a negative value |
+| Move right | Increase `left`, or decrease `right` |
+| Move left | Decrease `left`, or increase `right` |
+| Resize | Change `width`; keep `height: auto` or an `aspect-ratio` |
+| Tilt | Change `rotate(...)` inside `transform` |
+| Place above other layers | Increase `z-index` on the sticker and its positioned parent |
+
+Do not set `left` and `right` together unless you intentionally want the browser to stretch the box. When centering with `left: 50%`, keep `translateX(-50%)` in the same `transform` declaration as any rotation.
+
+### Mobile sticker rule
+
+Large desktop stickers often overlap the composer on mobile. Reposition or hide them deliberately.
+
+```css
+@media (max-width: 767px) {
+  .profile-theme-scope
+    section:has([data-profile="about-card"])::after {
+    top: -32px;
+    right: 8px;
+    width: 70px;
+    transform: rotate(5deg);
+  }
+
+  .profile-theme-scope [data-profile="body-inner"]::after {
+    display: none;
+  }
+}
+```
+
+One element provides only one `::before` and one `::after`. If both are already used for borders or particles, anchor the sticker to another stable container instead of overwriting the existing decoration.
+
+### Laboratory sticker equivalent
+
+The same positioning system works in Laboratory. Only the anchor changes.
+
+```css
+.lab-theme-scope {
+  --lab-sticker: url("YOUR-TRANSPARENT-STICKER.png");
+}
+
+.lab-theme-scope [data-lab="header"] {
+  position: relative;
+  overflow: visible !important;
+}
+
+.lab-theme-scope [data-lab="header"]::after {
+  content: "";
+  position: absolute;
+  top: -28px;
+  right: 18px;
+  width: 84px;
+  aspect-ratio: 1 / 1;
+  z-index: 20;
+  pointer-events: none;
+  background: var(--lab-sticker) center / contain no-repeat;
+  transform: rotate(6deg);
+}
+```
+
 ### Native Decorations and Layer Choice
 
 The sticker examples already explain anchoring, positioning, and click-through layers. Native Bary images, chain backgrounds, and card vines are separate targets: use their component lessons rather than replacing the sticker’s positioning rules.
@@ -976,6 +1557,67 @@ The sticker examples already explain anchoring, positioning, and click-through l
 A filter on an image does not recolor a separate masked pseudo-element. If the same component already has a decorative replacement, edit that layer or select a different available anchor before adding another decoration. Keep user portraits and gallery images outside native-artwork filters.
 
 ## Main Profile Tabs and About Tabs
+
+The main profile navigation and the five About Me icon tabs are separate components. Style them independently.
+
+<img src="./images/profile/profile-tabs-example.png" alt="Example of fully styled profile navigation tabs">
+
+### Main profile tabs, selected state, and counts
+
+```css
+.profile-theme-scope [data-profile="tab"] {
+  min-height: 36px;
+  padding: 7px 12px !important;
+  margin: 0 2px;
+  color: #eadcc7 !important;
+  background: linear-gradient(#3f3328, #2c241d) !important;
+  border: 1px solid rgba(205, 164, 95, .45) !important;
+  border-radius: 7px !important;
+}
+
+@media (hover: hover) {
+  .profile-theme-scope [data-profile="tab"]:hover {
+    background: #594634 !important;
+    border-color: #d9b978 !important;
+  }
+}
+
+.profile-theme-scope
+  [data-profile="tab"][aria-selected="true"] {
+  color: #fff4d2 !important;
+  background: linear-gradient(#7c8766, #535f4d) !important;
+  border-color: #d8c49d !important;
+}
+
+.profile-theme-scope [data-profile="tab-count"] {
+  color: #fff4d2 !important;
+  background: #6d5e4b !important;
+}
+```
+
+### About Me icon tabs
+
+```css
+.profile-theme-scope [data-profile="about"] [role="tab"] {
+  margin-left: 0 !important;
+  color: #f0e5d0 !important;
+  background: linear-gradient(#4b3c2c, #33291f) !important;
+  border: 1px solid rgba(213, 168, 93, .55) !important;
+  border-radius: 8px 8px 0 0 !important;
+}
+
+/* Hide only the paper plate, not the visible tab icons. */
+.profile-theme-scope [data-profile="about"]
+  [role="tab"] img[src*="paper-tab.webp"] {
+  opacity: 0 !important;
+}
+
+.profile-theme-scope [data-profile="about"]
+  [role="tab"][aria-selected="true"] {
+  background: #6c7656 !important;
+  border-color: #ebcd8c !important;
+}
+```
 
 ### Individual Main Tabs and Their Artwork
 
@@ -1191,6 +1833,112 @@ Use these alternatives instead of the styling rules when you want to remove the 
 Keep either hiding rule on its own to remove only that chain.
 
 ## Moving and Framing a Status Block
+
+There are two different cases: moving the complete native About Me card, or styling only a custom status block inside your About content.
+
+### Move and frame the complete native About Me card
+
+Margins keep the card in the normal page flow and are the safest way to move it.
+
+```css
+.profile-theme-scope section:has([data-profile="about-card"]) {
+  position: relative;
+  margin-top: 18px;
+  margin-left: 24px;
+  width: calc(100% - 24px);
+  padding: 8px;
+  border: 1px solid var(--theme-edge) !important;
+  border-radius: 16px !important;
+  background: rgba(23, 21, 18, .72) !important;
+  box-shadow: var(--theme-shadow) !important;
+}
+
+.profile-theme-scope [data-profile="about-card"] {
+  overflow: hidden;
+  border: 1px solid rgba(215, 173, 99, .55) !important;
+  border-radius: 12px !important;
+  background: var(--theme-panel) !important;
+}
+```
+
+For a small visual adjustment that should not change document flow, use `transform`. Remember that the original layout space remains where it was.
+
+```css
+.profile-theme-scope [data-profile="about-card"] {
+  transform: translate(18px, -10px);
+}
+```
+
+### Create a separate custom status box
+
+If the About editor accepts custom HTML, give the status its own class. CSS cannot reliably select an element only because its visible text says “STATUS”.
+
+```html
+<section class="lb-profile-status">
+  <h3 class="lb-profile-status__title">STATUS</h3>
+  <p><strong>Currently working on</strong><br>Updating plugins</p>
+  <p><strong>Coming next</strong><br>N/A</p>
+  <p><strong>Energy level</strong><br>Tired</p>
+</section>
+```
+
+```css
+.profile-theme-scope .lb-profile-status {
+  box-sizing: border-box;
+  width: min(100%, 360px);
+  margin: 22px auto;
+  padding: 18px 20px;
+  color: var(--theme-text);
+  background:
+    linear-gradient(145deg, rgba(59, 46, 33, .97), rgba(31, 25, 20, .97));
+  border: 1px solid var(--theme-edge);
+  border-left: 4px solid var(--theme-accent);
+  border-radius: 14px;
+  box-shadow: var(--theme-shadow);
+}
+
+.profile-theme-scope .lb-profile-status__title {
+  margin: 0 0 12px;
+  color: var(--theme-accent);
+  font-family: var(--profile-font-title, Georgia, serif);
+  letter-spacing: .12em;
+}
+
+.profile-theme-scope .lb-profile-status p {
+  margin: 10px 0;
+  line-height: 1.45;
+}
+```
+
+### Move only the custom status box
+
+```css
+@media (min-width: 1024px) {
+  .profile-theme-scope .lb-profile-status {
+    position: relative;
+    left: 28px;
+    top: -14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .profile-theme-scope section:has([data-profile="about-card"]) {
+    margin-left: 0;
+    width: 100%;
+    padding: 5px;
+  }
+
+  .profile-theme-scope [data-profile="about-card"],
+  .profile-theme-scope .lb-profile-status {
+    left: auto;
+    top: auto;
+    width: 100%;
+    transform: none;
+  }
+}
+```
+
+If the status is a single image rather than HTML, apply the frame to its wrapper and use `object-fit: contain` on the image so it remains readable instead of being cropped.
 
 ### About Header, Biography, and Overview Details
 
@@ -1945,7 +2693,425 @@ This selects the observed About-card action structure. Keep it distinct from the
 - Keep the generated `_r_ue_-panel` ID out of reusable selectors.
 - Editor-rich-text rules currently scoped only to composer-editor do not cover this About textbox. Extend them explicitly when documenting About editing; do not assume every editor shares the published post-decoration hooks.
 
+## Profile Actions
+
+### Letter, Wave, Follow, and Alerts
+
+Style the action row, button surfaces, text, and native artwork. Follow/Following uses the captured accessible labels.
+
+**Action-Bar Wrappers**
+
+The action bar contains two groups: Letter and Wave on one side, and Follow/Following with Alerts on the other.
+
+| Selector | Targets |
+| --- | --- |
+| `[data-profile="action-bar"]` | Whole action bar |
+| `[data-profile="actions"]` | Letter and Wave group |
+| `[data-profile="actions-right"]` | Follow/Following and available Alerts group |
+
+**Whole action bar**
+
+![Action Bar Wrapper](./images/profile/header-action-bar-wrapper.png)
+
+```css
+/* Action bar: purple surface around both groups. */
+[data-profile="action-bar"] {
+  background: #251c35 ;
+  border: 1px solid #bd9bea ;
+  border-radius: 12px ;
+  padding: 6px ;
+  gap: 8px ;
+}
+```
+
+**Letter and Wave group**
+
+The captured inner wrappers use `display: contents`, which gives them no visible box. Changing them to `inline-flex` lets their backgrounds, borders, and padding appear.
+
+![Letter and Wave Button Group](./images/profile/header-letter-and-wave-button-group.png)
+
+```css
+/* Letter and Wave wrapper: rose group surface. */
+[data-profile="action-bar"]
+[data-profile="actions"] {
+  display: inline-flex ;
+  flex-wrap: wrap ;
+  align-items: center ;
+  gap: 6px ;
+  background: #562b43 ;
+  border: 1px solid #ed91b7 ;
+  border-radius: 8px ;
+  padding: 6px ;
+}
+```
+
+**Follow and Alerts group**
+
+![Follow and Alerts Button Group](./images/profile/header-follow-and-alerts-button-group.png)
+
+```css
+/* Follow and Alerts wrapper: green group surface. */
+[data-profile="actions-right"] {
+  display: inline-flex ;
+  flex-wrap: wrap ;
+  align-items: center ;
+  gap: 6px ;
+  margin-left: auto ;
+  background: #24483e ;
+  border: 1px solid #8fd8bb ;
+  border-radius: 8px ;
+  padding: 6px ;
+}
+```
+
+**Customization:** The action bar’s `gap` separates the groups; each inner wrapper’s `gap` separates its buttons. `margin-left: auto` pushes the right group toward the available right edge. Grouping the wrappers can change how the buttons wrap when space is limited.
+
+These rules style the wrappers, leaving button surfaces, text, and icons for their individual examples. A wrapper can only show the actions LoreBary currently renders.
+
+**Letter Button and Letterbox Icon**
+
+Style the Letter button’s surface, label, and image icon independently.
+
+**Button surface**
+
+![Letter Button Surface](./images/profile/header-letter-button-surface.png)
+
+```css
+/* Letter button: rose surface and pink border. */
+[data-profile="action-letter"] {
+  background: #562b43 ;
+  border: 1px solid #ed91b7 ;
+  border-radius: 10px ;
+  padding: 6px 10px ;
+  box-shadow: 0 2px 6px rgba(18, 11, 32, 0.4) ;
+}
+
+/* Letter button: brighter surface on hover. */
+[data-profile="action-letter"]:hover {
+  background: #713953 ;
+}
+```
+
+**Letter label**
+
+The captured label is the button’s second direct child span; the first holds its icon.
+
+![Letter Button Text](./images/profile/header-letter-button-text.png)
+
+```css
+/* Letter label only. */
+[data-profile="action-letter"]
+> span:nth-child(2) {
+  color: #ffe9f2 ;
+  font-weight: 600 ;
+}
+```
+
+**Letterbox icon**
+
+![Letter Button Artwork](./images/profile/header-letter-button-artwork.png)
+
+```css
+/* Letterbox image only: pink recolor. */
+[data-profile="action-letter"]
+img[src="/img/pixel/letterbox.webp"] {
+  filter: brightness(0) saturate(100%) invert(75%) sepia(24%)
+    saturate(850%) hue-rotate(290deg) brightness(101%) contrast(91%) ;
+}
+```
+
+**Customization:** Change the surface background and border separately from the label color. Adjust `border-radius` for rounding and `padding` for button spacing. The image filter creates an approximate pink silhouette; use `filter: none` to restore the original artwork.
+
+The label selector follows the supplied child order; it may need updating if LoreBary changes that structure. The example applies when the Letter action is present.
+
+**Wave Button and Wave Icon**
+
+Style the Wave button’s surface, label, and image icon independently.
+
+**Button surface**
+
+```css
+/* Wave button: green surface and mint border. */
+[data-profile="action-wave"] {
+  background: #24483e ;
+  border: 1px solid #8fd8bb ;
+  border-radius: 10px ;
+  padding: 6px 10px ;
+  box-shadow: 0 2px 6px rgba(18, 11, 32, 0.4) ;
+}
+
+/* Wave button: brighter surface on hover. */
+[data-profile="action-wave"]:hover {
+  background: #306052 ;
+}
+```
+
+**Wave label**
+
+The captured label is the button’s second direct child span; the first holds its icon.
+
+```css
+/* Wave label only. */
+[data-profile="action-wave"]
+> span:nth-child(2) {
+  color: #e5fff3 ;
+  font-weight: 600 ;
+}
+```
+
+**Wave icon**
+
+```css
+/* Wave image only: mint recolor. */
+[data-profile="action-wave"]
+img[src="/img/pixel/wave.webp"] {
+  filter: brightness(0) saturate(100%) invert(84%) sepia(20%)
+    saturate(650%) hue-rotate(100deg) brightness(96%) contrast(90%) ;
+}
+```
+
+**Customization:** Change the surface background and border separately from the label color. Adjust `border-radius` for rounding and `padding` for button spacing. The image filter creates an approximate mint silhouette; use `filter: none` to restore the original artwork.
+
+They style the Wave button, not the window it opens. The label selector follows the supplied child order. The example applies when the Wave action is present.
+
+**Follow and Following Button States**
+
+Both states use the same `action-follow` button. Its `aria-label` changes from `Follow` to `Following`, and its image changes from a heart to a check.
+
+| Selector | Targets |
+| --- | --- |
+| `[data-profile="action-follow"][aria-label="Follow"]` | Follow state |
+| `[data-profile="action-follow"][aria-label="Following"]` | Following state |
+
+**Follow state**
+
+![Follow Button](./images/profile/header-follow-button.png)
+
+```css
+/* Follow surface: rose background and pink border. */
+
+[data-profile="action-follow"][aria-label="Follow"] {
+  background: #562b43 ;
+  border: 1px solid #ed91b7 ;
+  border-radius: 10px ;
+  padding: 6px 10px ;
+  box-shadow: 0 2px 6px rgba(18, 11, 32, 0.4) ;
+}
+
+/* Follow surface on hover. */
+
+[data-profile="action-follow"][aria-label="Follow"]:hover {
+  background: #713953 ;
+}
+
+/* Follow label only. */
+
+[data-profile="action-follow"][aria-label="Follow"]
+> span:nth-child(2) {
+  color: #ffe9f2 ;
+  font-weight: 600 ;
+}
+
+/* Follow heart icon only: pink recolor. */
+
+[data-profile="action-follow"][aria-label="Follow"]
+img[src="/img/pixel/heart.webp"] {
+  filter: brightness(0) saturate(100%) invert(75%) sepia(24%)
+    saturate(850%) hue-rotate(290deg) brightness(101%) contrast(91%) ;
+}
+```
+
+**Following state**
+
+![Following Button State](./images/profile/header-following-button-state.png)
+
+```css
+/* Following surface: green background and mint border. */
+
+[data-profile="action-follow"][aria-label="Following"] {
+  background: #24483e ;
+  border: 1px solid #8fd8bb ;
+  border-radius: 10px ;
+  padding: 6px 10px ;
+  box-shadow: 0 2px 6px rgba(18, 11, 32, 0.4) ;
+}
+
+/* Following surface on hover. */
+
+[data-profile="action-follow"][aria-label="Following"]:hover {
+  background: #306052 ;
+}
+
+/* Following label only. */
+
+[data-profile="action-follow"][aria-label="Following"]
+> span:nth-child(2) {
+  color: #e5fff3 ;
+  font-weight: 600 ;
+}
+
+/* Following check icon only: mint recolor. */
+
+[data-profile="action-follow"][aria-label="Following"]
+img[src="/img/pixel/check.webp"] {
+  filter: brightness(0) saturate(100%) invert(84%) sepia(20%)
+    saturate(650%) hue-rotate(100deg) brightness(96%) contrast(90%) ;
+}
+```
+
+**Customization:** Change each state’s background, border, label color, and icon filter independently. Adjust `border-radius` and `padding` for shape and spacing. Use `filter: none` to restore an icon’s original artwork.
+
+Use both blocks together. LoreBary controls the follow state and heart-to-check change; the CSS styles whichever state is present. Keep `data-profile` and `aria-label` together without a space because they describe the same button.
+
+The label is the second direct child span in the supplied buttons.
+
+**Alerts Button and Bell Icon**
+
+The Alerts action uses `action-bell`. In the supplied HTML, its label reads “Alerts too?” and its accessible label is “Get a notification when they post.”
+
+**Button surface**
+
+![Alerts Button and Bell Artwork](./images/profile/header-alerts-button-and-bell-artwork.png)
+
+```css
+/* Alerts button: purple surface and lavender border. */
+[data-profile="action-bell"] {
+  background: #49365e ;
+  border: 1px solid #bd9bea ;
+  border-radius: 10px ;
+  padding: 6px 10px ;
+  box-shadow: 0 2px 6px rgba(18, 11, 32, 0.4) ;
+}
+
+/* Alerts button: brighter surface on hover. */
+[data-profile="action-bell"]:hover {
+  background: #604778 ;
+}
+```
+
+**Alerts label**
+
+```css
+/* Alerts label only. */
+[data-profile="action-bell"]
+> span:nth-child(2) {
+  color: #f0e3ff ;
+  font-weight: 600 ;
+}
+```
+
+The label is the second direct child span in the supplied button; the first holds its icon.
+
+**Bell icon**
+
+```css
+/* Bell image only: pink recolor. */
+[data-profile="action-bell"]
+img[src="/img/pixel/bell.webp"] {
+  filter: brightness(0) saturate(100%) invert(75%) sepia(24%)
+    saturate(850%) hue-rotate(290deg) brightness(101%) contrast(91%) ;
+}
+```
+
+**Customization:** Change the surface, label, and icon independently. Adjust `border-radius` for rounding and `padding` for spacing. Use `filter: none` to restore the bell’s original artwork.
+
+**Available state:** The Alerts button disappears after activation in the observed behavior. These rules style it while present; there is no captured visible activated state to style. CSS does not bring back an absent button.
+
+This example follows the supplied button structure and has not been previewed in the current test.
+
 ## Write a Post
+
+The composer is not one box. It contains a card shell, header, option buttons, body, formatting toolbar, editor, placeholder, footer, switch, and Post button. Style each layer explicitly.
+
+<img src="./images/profile/write-a-post-example.png" alt="Example of a themed Write a Post composer">
+
+### Component map
+
+| Selector | Component |
+| --- | --- |
+| `[data-profile="composer-slot"] > .surface-post` | Outer composer card |
+| `[data-profile="composer-header"]` | WRITE A POST title row and top controls |
+| `[data-profile="composer-header"] button` | Public and Notify followers buttons |
+| `[data-profile="composer-body"]` | Avatar and editor area |
+| `[data-profile="composer-toolbar"]` | Formatting toolbar |
+| `[data-profile="composer-toolbar"] button` | Bold, italic, underline, attachment, emoji, and more |
+| `[data-profile="composer-editor"]` | Editable text field |
+| `[data-placeholder]::before` | Placeholder text |
+| `[data-profile="composer-footer"]` | Terms, switch, and Post button area |
+
+### Card shell and header
+
+```css
+.profile-theme-scope [data-profile="composer-slot"]
+  > .surface-post {
+  overflow: hidden;
+  color: var(--theme-text) !important;
+  background: var(--theme-panel) !important;
+  border: 1px solid var(--theme-edge) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--theme-shadow) !important;
+}
+
+.profile-theme-scope [data-profile="composer-header"] {
+  color: #fff1cf !important;
+  background: linear-gradient(100deg, #5b3a24, #38251a) !important;
+  border-bottom: 1px solid rgba(213, 168, 93, .65) !important;
+  border-radius: 11px 11px 0 0 !important;
+}
+
+.profile-theme-scope [data-profile="composer-header"] h3 {
+  color: inherit !important;
+  letter-spacing: .08em;
+}
+
+.profile-theme-scope [data-profile="composer-header"] button {
+  color: #fff1cf !important;
+  background: #30291f !important;
+  border: 1px solid rgba(213, 168, 93, .55) !important;
+}
+```
+
+### Body, toolbar, editor, and placeholder
+
+```css
+.profile-theme-scope [data-profile="composer-body"] {
+  background: #c7ddeb !important;
+  padding: 12px !important;
+}
+
+.profile-theme-scope [data-profile="composer-toolbar"] {
+  color: #f6ead2 !important;
+  background: #3b3026 !important;
+  border-color: rgba(213, 168, 93, .55) !important;
+}
+
+.profile-theme-scope [data-profile="composer-toolbar"] button {
+  color: #f6ead2 !important;
+  background: #564331 !important;
+  border: 1px solid rgba(235, 205, 140, .55) !important;
+}
+
+.profile-theme-scope [data-profile="composer-toolbar"]
+  button[aria-pressed="true"] {
+  color: #ffffff !important;
+  background: #7c8766 !important;
+  border-color: #f0d99f !important;
+}
+
+.profile-theme-scope [data-profile="composer-editor"] {
+  min-height: 150px;
+  color: #2b231d !important;
+  background: #fff8e9 !important;
+  border-color: rgba(137, 101, 48, .55) !important;
+  caret-color: #6f3138;
+}
+
+.profile-theme-scope [data-profile="composer-editor"]
+  [data-placeholder]::before {
+  color: #7e746c !important;
+  opacity: 1 !important;
+}
+```
 
 ### Additional Composer Placement, Artwork, and Placeholder Targets
 
@@ -2174,7 +3340,107 @@ The supplied toolbar exposes aria-pressed on Bold, Italic, Underline, Heading, B
 
 An absent attribute does not equal false. These selectors style attributes; they do not set a formatting state. `aria-expanded` describes a popup’s open state and is separate from aria-pressed. The supplied toolbar capture shows false values, so true-state rules are conditional examples.
 
+**Text Color and Text Background**
+
+Style the two toolbar buttons and their shared palette surface separately. Text Color has a named composer hook; Text background uses its exact aria-label. The popup is a direct child of the wrapper containing both controls.
+
+```css
+/* Color-control button surfaces. */
+[data-profile="composer-toolbar"]
+:is(button[data-profile="composer-btn"][data-btn="text-color"],
+    button[aria-label="Text background"]) {
+  background: #49365e !important;
+  border-color: #bd9bea !important;
+  color: #f0e3ff !important;
+}
+
+/* Font and highlighter glyphs, including themes with explicit icon colors. */
+[data-profile="composer-toolbar"]
+:is(button[data-profile="composer-btn"][data-btn="text-color"],
+    button[aria-label="Text background"]) > [data-profile="icon"] {
+  color: #f0e3ff !important;
+}
+
+/* Popup surface: anchored to the wrapper containing both color controls. */
+[data-profile="composer-toolbar"]
+div:has(> div > button[data-btn="text-color"]):has(
+  > div > button[aria-label="Text background"]
+) > div:has(> label > input[type="color"][aria-label="Pick a custom color"]) {
+  background: #241c30 !important;
+  border-color: #bd9bea !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px #100b1dcc !important;
+}
+
+/* Popup title and Remove background action. */
+[data-profile="composer-toolbar"]
+div:has(> div > button[data-btn="text-color"]):has(
+  > div > button[aria-label="Text background"]
+) > div:has(> label > input[type="color"][aria-label="Pick a custom color"])
+> :is(p, button) {
+  color: #f0e3ff !important;
+}
+
+/* Custom-color row and label. */
+[data-profile="composer-toolbar"]
+div:has(> div > button[data-btn="text-color"]):has(
+  > div > button[aria-label="Text background"]
+) > div > label:has(> input[type="color"][aria-label="Pick a custom color"]) {
+  background: #382a47 !important;
+  border-color: #bd9bea !important;
+}
+
+[data-profile="composer-toolbar"]
+div:has(> div > button[data-btn="text-color"]):has(
+  > div > button[aria-label="Text background"]
+) > div > label:has(> input[type="color"][aria-label="Pick a custom color"]) > span {
+  color: #f0e3ff !important;
+}
+
+/* Swatch borders: preserve each swatch's actual color and selection ring. */
+[data-profile="composer-toolbar"]
+div:has(> div > button[data-btn="text-color"]):has(
+  > div > button[aria-label="Text background"]
+) > div:has(> label > input[type="color"][aria-label="Pick a custom color"])
+> div > button[title] {
+  border-color: #bd9bea !important;
+}
+```
+
+**Customization:** Change the button, popup, text, and custom-color row independently. Place these rules after the shared toolbar and font-icon rules. Keep the color indicator, swatch backgrounds, selected-swatch ring, and custom input's color wheel intact: they communicate the chosen colors. The direct popup button is Remove background in the background palette; the text-color palette has no equivalent action.
+
+These selectors style the page's palette and custom-color input. The browser's native color-picker window keeps its own appearance. Popup positioning and native color-selection behavior remain unchanged.
+
 ### Privacy Labels and Both Notify Followers Layouts
+
+**Footer switch: base treatment**
+```css
+.profile-theme-scope [data-profile="composer-footer"] {
+  color: var(--theme-muted) !important;
+}
+
+.profile-theme-scope [data-profile="composer-footer"]
+  input[type="checkbox"] + div {
+  background: #665744 !important;
+  border-color: #a78f6a !important;
+}
+
+.profile-theme-scope [data-profile="composer-footer"]
+  input[type="checkbox"] + div::after {
+  background: #fff3d3 !important;
+}
+
+.profile-theme-scope [data-profile="composer-footer"]
+  input[type="checkbox"]:checked + div {
+  background: #71805c !important;
+}
+```
+
+Keep editor text and placeholder contrast high. Decorative textures should never make typed text difficult to read.
+
+
+
+Style privacy separately from notification state. Notify supports both its header button and footer checkbox representation.
 
 Style privacy separately from notification state. Notify supports both its header button and footer checkbox representation.
 **Privacy Controls**
@@ -2449,6 +3715,38 @@ The other supplied selector targets [data-profile="customize"] > button[aria-lab
 
 The path is confirmed by the supplied stylesheet reference; its exact HTML placement and visual outcome remain to be checked.
 
+#### Optional Extra — Bary Ears Above Write a Post
+
+Mobile doesn’t render the native **Poke Bary** button. This snippet brings back the ears as decoration above **Write a Post**. The cheeky-paw animation belongs to the desktop button.
+
+```css
+@media (max-width: 780px) {
+  .surface-post:has([data-profile=composer-header]) {
+    margin-block-start: 3rem;
+    overflow: visible;
+  }
+
+  [data-profile=composer-header] {
+    position: relative;
+  }
+
+  [data-profile=composer-header]::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 5rem;
+    height: 3rem;
+    transform: translateX(-50%);
+    background: url("/img/Icons/feed_bary_peeking_ears.webp")
+      center bottom / contain no-repeat;
+    pointer-events: none;
+  }
+}
+```
+
+If you make the ears taller, increase `margin-block-start` on the composer card to give them room above the header.
+
 ### Poll Composer, Answers, End Date, and Submission
 
 Style the nested poll card, its fields, answer controls, end-date switch, and date caption. Keep submission targeting on the outer composer.
@@ -2717,9 +4015,66 @@ The added snippet does not include the checkbox or its ancestors. It confirms th
 
 They do not convert timezones or set a deadline. The state and visual outcome still need checking; markup alone is not a styling demonstration.
 
-## SEE ALL and Gallery
+## SEE ALL and Popular Creations Buttons
 
-### Gallery Preview and Full Gallery
+These controls contain raster image plates and icons. Style the button image and the label separately.
+
+| SEE ALL button | Popular Creations carousel arrow |
+| --- | --- |
+| <img src="./images/profile/see-all-example.png" alt="Themed SEE ALL button"> | <img src="./images/profile/carousel-arrow-example.png" alt="Themed Popular Creations carousel arrow"> |
+
+### SEE ALL plate and label
+
+```css
+.profile-theme-scope [data-profile="gallery-preview"]
+  .dashboard-action-button img[src*="btn_pixel_plate"],
+.profile-theme-scope [data-profile="popular-content"]
+  .dashboard-action-button img[src*="btn_pixel_plate"] {
+  filter: sepia(.92) saturate(1.75) hue-rotate(346deg)
+          brightness(.86) contrast(1.28)
+          drop-shadow(0 2px 2px rgba(0, 0, 0, .5)) !important;
+}
+
+.profile-theme-scope [data-profile="gallery-preview"]
+  .dashboard-action-button span,
+.profile-theme-scope [data-profile="popular-content"]
+  .dashboard-action-button span {
+  color: #fff1cf !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .88) !important;
+}
+```
+
+### Popular Creations scroll arrows
+
+```css
+.profile-theme-scope
+  button[aria-label^="Scroll popular creations"] {
+  background: #5b3a24 !important;
+  border: 1px solid #d5a85d !important;
+  box-shadow: inset 0 1px rgba(255, 241, 200, .35),
+              0 2px 5px rgba(0, 0, 0, .5) !important;
+}
+
+.profile-theme-scope
+  button[aria-label^="Scroll popular creations"] img {
+  filter: sepia(1) saturate(1.8) hue-rotate(345deg)
+          brightness(1.35) contrast(1.1) !important;
+}
+
+@media (hover: hover) {
+  .profile-theme-scope
+    button[aria-label^="Scroll popular creations"]:hover {
+    background: #765034 !important;
+    border-color: #f0cc83 !important;
+  }
+}
+```
+
+The `^=` operator matches both arrow labels because both begin with the same phrase.
+
+---
+
+## Gallery Preview and Full Gallery
 
 Style the preview and full Gallery separately, including their grids and image wrappers.
 
@@ -3054,599 +4409,6 @@ button[aria-label="Upload images"] img[src$="/expression-upload.webp"] {
 ```
 
 **Customization:** Gallery Upload itself is excluded: only its existing trigger buttons are styled.  Opened menus and multi-select mode require separate captures.
-
-## Comment, Share, and Like Buttons
-
-The existing engagement example supplies button surfaces, raster recolors, and the pressed Like state. Add these targets when the number, Share backing, or foreground icon should differ from that shared treatment.
-
-```css
-/* Existing reaction number only. */
-[data-profile="post-likes"] > span.tabular-nums {
-  color: var(--theme-accent, #d7ad63) ;
-  font-weight: 700 ;
-}
-
-```
-
-![Comment Count and Artwork](./images/profile/footer-comment-count-and-artwork.png)
-
-```css
-/* Existing comment count. */
-[data-profile="post-comment-count"] {
-  color:#d7ad63 ;
-}
-
-```
-
-![Share Button Plate and Artwork](./images/profile/footer-share-button-plate-and-artwork.png)
-
-```css
-/* Share foreground artwork, separately from its backing plate. */
-[data-profile="post-engagement"]
-button[aria-label="Share"] img[src="/img/Icons/feed_action_share.webp"] {
-  filter: sepia(1) saturate(2) hue-rotate(95deg) ;
-}
-
-[data-profile="post-engagement"]
-button[aria-label="Share"] img[src="/img/Icons/btn_pixel_plate_24.webp"] {
-  filter: sepia(1) saturate(2) hue-rotate(220deg) ;
-}
-```
-
-Use the exact backing filename present in the button. btn_pixel_plate.webp and btn_pixel_plate_24.webp are distinct paths. Keep the foreground image and label above the backing. The rules style existing numbers; they do not change reaction totals.
-
-An expanded control uses aria-expanded; a pressed toggle uses aria-pressed. Match only the state actually present on the control. Missing aria-pressed is not false.
-
-## Profile Background and Layout
-
-### Background Size, Position, and Tint
-
-Adjust the size, position, repetition, and readability tint of artwork selected in the native Profile settings.
-
-**Page Background: Size, Position, and Repetition**
-
-Use `[data-profile="page-background"]` to style the page’s background artwork.
-
-These examples adjust the background selected in LoreBary’s native settings. They do not assign an uploaded image URL. Future background layout examples should likewise omit uploaded-image background declarations.
-
-**Full-image test**
-
-`cover` fills the background area while keeping the image’s proportions. Some artwork may be cropped.
-
-```css
-/* Background image: repeat a 240px-wide tile. */
-[data-profile="page-background"] {
-  background-size: 240px auto !important;
-  background-position: left top !important;
-  background-repeat: repeat ;
-}
-```
-
-**Seeing no change is normal:** If the same image is already centered and filling the area, this test can look identical. Try `contain` or `240px auto` to make the sizing change easier to see.
-
-**Change the image size**
-
-Replace the `background-size` value in the test.
-
-| Value | Effect |
-| --- | --- |
-| `cover` | Fills the area; may crop the image |
-| `contain` | Fits the entire image; may leave uncovered space |
-| `600px auto` | Sets the image width to 600px and preserves its proportions |
-| `50% auto` | Sets the image width to half the background area |
-
-**Change the image position**
-
-Replace the `background-position` value. Position controls where the artwork sits and which part remains visible when cropped.
-
-| Value | Position |
-| --- | --- |
-| `center center` | Middle |
-| `center top` | Top middle |
-| `left center` | Left middle |
-| `right bottom` | Bottom right |
-| `65% 30%` | Custom horizontal and vertical alignment |
-
-A position change may be subtle when the image already fits the area closely.
-
-**Repeating-image test**
-
-Replace the full-image block with this one. A smaller image size makes more copies visible.
-
-```css
-/* Background image: repeat a 240px-wide tile. */
-[data-profile="page-background"] {
-  background-size: 240px auto !important;
-  background-position: left top !important;
-  background-repeat: repeat !important;
-}
-```
-
-| Value | Repetition |
-| --- | --- |
-| `no-repeat` | One image |
-| `repeat` | Across and down |
-| `repeat-x` | Across only |
-| `repeat-y` | Down only |
-
-The image repeats in this test; whether its edges join seamlessly depends on the artwork.
-
-**Customization:** Use one test block at a time. Change `background-size`, `background-position`, and `background-repeat` directly. Remove the test block to return to your previous styling.
-
-**Page Tint Without Fading Text and Controls**
-
-The **page tint** sits over the background artwork. Target this layer to change the tint while keeping text and controls at full opacity.
-
-```css
-/* Page tint: translucent purple over the background. */
-[data-profile="page-tint"] {
-  background: rgba(65, 25, 90, 0.45) !important;
-  opacity: 1 !important;
-  pointer-events: none !important;
-}
-```
-
-- `65, 25, 90` sets the tint’s RGB color.
-- `0.45` sets its strength: `0` is transparent; `1` is solid.
-- `pointer-events: none` lets clicks pass through the tint.
-
-Try these backgrounds in the same rule:
-
-| Value | Effect |
-| --- | --- |
-| `rgba(0, 0, 0, 0.25)` | Light darkening |
-| `rgba(0, 0, 0, 0.65)` | Strong darkening |
-| `rgba(90, 25, 55, 0.4)` | Rose tint |
-| `transparent` | Removes the tint |
-
-**Keep opacity off the profile root:** Applying `opacity` to `[data-profile="scope"]` fades everything inside it, including text and buttons. Adjust the tint’s background transparency instead.
-
-### Body and Grid Spacing
-
-Change outer body padding and the gaps between inner-grid sections without changing spacing inside their cards.
-
-**Body and Inner-Body Spacing**
-
-The **body** wraps the area below the profile header. The **inner body** is the grid holding its main sections.
-
-| Selector | Targets |
-| --- | --- |
-| `[data-profile="body"]` | Outer body wrapper |
-| `[data-profile="body-inner"]` | Inner layout grid |
-
-**Outer body spacing**
-
-Add space between the body’s edges and the layout inside it.
-
-```css
-/* Body: space inside the outer wrapper. */
-[data-profile="body"] {
-  padding: 12px ;
-}
-```
-
-**Inner layout spacing**
-
-Adjust the grid’s inner padding and the space between its direct sections.
-
-```css
-/* Inner body: space around and between grid sections. */
-[data-profile="body-inner"] {
-  padding: 16px ;
-  column-gap: 24px ;
-  row-gap: 24px ;
-}
-```
-
-| Property | Changes |
-| --- | --- |
-| `padding` | Space inside the selected container |
-| `column-gap` | Space between grid columns |
-| `row-gap` | Space between grid rows |
-
-The two containers are nested, so their padding **adds together**. Set either container’s padding to `0` if you want only the other to provide that space.
-
-For different vertical and horizontal padding:
-
-```css
-/* Inner body: 12px top/bottom, 24px left/right. */
-[data-profile="body-inner"] {
-  padding: 12px 24px ;
-}
-```
-
-**Gap note:** These rules space the grid’s direct sections. They do not change spacing inside individual cards.
-
-## Scrollable Screen Assets
-
-Use the Profile’s page-tint layer for foreground artwork that follows visitors as they scroll. This example puts matching artwork in the upper corners and repeats a decorative strip along the bottom. Clicks and taps pass through to the profile controls.
-
-Paste this block into **Profile CSS** and replace the two image URLs. If you installed the earlier Scrollable Screen Assets example, replace that whole block with this one.
-
-```css
-[data-profile=page-tint] {
-  --screen-corner: url("/api/images/YOUR_CORNER_IMAGE_ID");
-  --screen-border: url("/api/images/YOUR_BORDER_IMAGE_ID");
-  --screen-top: 75px;
-  --screen-corner-width: 200px;
-  --screen-border-height: 30px;
-
-  /* Start below the header and let the artwork extend past the strip. */
-  position: sticky !important;
-  inset: auto !important;
-  top: var(--screen-top) !important;
-  margin-top: -120svh !important;
-  width: 100% !important;
-  height: 120px !important;
-  overflow: visible !important;
-  background: transparent !important;
-  transform: none !important;
-  opacity: 1 !important;
-  pointer-events: none !important;
-  z-index: 80 !important;
-}
-
-/* Both layers reach from the header clearance to the visible bottom edge. */
-[data-profile=page-tint]::before,
-[data-profile=page-tint]::after {
-  content: "";
-  display: block;
-  position: absolute;
-  inset: 0 0 auto;
-  height: calc(100dvh - var(--screen-top));
-  pointer-events: none;
-  animation: none;
-}
-
-/* Upper-left corner and a repeating strip along the bottom. */
-[data-profile=page-tint]::before {
-  background:
-    var(--screen-corner) left top / var(--screen-corner-width) auto no-repeat,
-    var(--screen-border) left bottom / auto var(--screen-border-height) repeat-x;
-}
-
-/* Mirror the corner artwork on the right. */
-[data-profile=page-tint]::after {
-  background: var(--screen-corner) left top / var(--screen-corner-width) auto no-repeat;
-  transform: scaleX(-1);
-}
-
-@media (max-width: 780px) {
-  [data-profile=page-tint] {
-    --screen-top: 12px;
-    --screen-corner-width: 76px;
-    --screen-border-height: 20px;
-  }
-}
-```
-
-Adjust `--screen-top` if the upper corners overlap your header. The decoration height accounts for that same offset, so the bottom strip still reaches the visible bottom edge. For bottom artwork only, set `--screen-corner: none;`.
-
-## Profile Actions
-
-### Letter, Wave, Follow, and Alerts
-
-Style the action row, button surfaces, text, and native artwork. Follow/Following uses the captured accessible labels.
-
-**Action-Bar Wrappers**
-
-The action bar contains two groups: Letter and Wave on one side, and Follow/Following with Alerts on the other.
-
-| Selector | Targets |
-| --- | --- |
-| `[data-profile="action-bar"]` | Whole action bar |
-| `[data-profile="actions"]` | Letter and Wave group |
-| `[data-profile="actions-right"]` | Follow/Following and available Alerts group |
-
-**Whole action bar**
-
-![Action Bar Wrapper](./images/profile/header-action-bar-wrapper.png)
-
-```css
-/* Action bar: purple surface around both groups. */
-[data-profile="action-bar"] {
-  background: #251c35 ;
-  border: 1px solid #bd9bea ;
-  border-radius: 12px ;
-  padding: 6px ;
-  gap: 8px ;
-}
-```
-
-**Letter and Wave group**
-
-The captured inner wrappers use `display: contents`, which gives them no visible box. Changing them to `inline-flex` lets their backgrounds, borders, and padding appear.
-
-![Letter and Wave Button Group](./images/profile/header-letter-and-wave-button-group.png)
-
-```css
-/* Letter and Wave wrapper: rose group surface. */
-[data-profile="action-bar"]
-[data-profile="actions"] {
-  display: inline-flex ;
-  flex-wrap: wrap ;
-  align-items: center ;
-  gap: 6px ;
-  background: #562b43 ;
-  border: 1px solid #ed91b7 ;
-  border-radius: 8px ;
-  padding: 6px ;
-}
-```
-
-**Follow and Alerts group**
-
-![Follow and Alerts Button Group](./images/profile/header-follow-and-alerts-button-group.png)
-
-```css
-/* Follow and Alerts wrapper: green group surface. */
-[data-profile="actions-right"] {
-  display: inline-flex ;
-  flex-wrap: wrap ;
-  align-items: center ;
-  gap: 6px ;
-  margin-left: auto ;
-  background: #24483e ;
-  border: 1px solid #8fd8bb ;
-  border-radius: 8px ;
-  padding: 6px ;
-}
-```
-
-**Customization:** The action bar’s `gap` separates the groups; each inner wrapper’s `gap` separates its buttons. `margin-left: auto` pushes the right group toward the available right edge. Grouping the wrappers can change how the buttons wrap when space is limited.
-
-These rules style the wrappers, leaving button surfaces, text, and icons for their individual examples. A wrapper can only show the actions LoreBary currently renders.
-
-**Letter Button and Letterbox Icon**
-
-Style the Letter button’s surface, label, and image icon independently.
-
-**Button surface**
-
-![Letter Button Surface](./images/profile/header-letter-button-surface.png)
-
-```css
-/* Letter button: rose surface and pink border. */
-[data-profile="action-letter"] {
-  background: #562b43 ;
-  border: 1px solid #ed91b7 ;
-  border-radius: 10px ;
-  padding: 6px 10px ;
-  box-shadow: 0 2px 6px rgba(18, 11, 32, 0.4) ;
-}
-
-/* Letter button: brighter surface on hover. */
-[data-profile="action-letter"]:hover {
-  background: #713953 ;
-}
-```
-
-**Letter label**
-
-The captured label is the button’s second direct child span; the first holds its icon.
-
-![Letter Button Text](./images/profile/header-letter-button-text.png)
-
-```css
-/* Letter label only. */
-[data-profile="action-letter"]
-> span:nth-child(2) {
-  color: #ffe9f2 ;
-  font-weight: 600 ;
-}
-```
-
-**Letterbox icon**
-
-![Letter Button Artwork](./images/profile/header-letter-button-artwork.png)
-
-```css
-/* Letterbox image only: pink recolor. */
-[data-profile="action-letter"]
-img[src="/img/pixel/letterbox.webp"] {
-  filter: brightness(0) saturate(100%) invert(75%) sepia(24%)
-    saturate(850%) hue-rotate(290deg) brightness(101%) contrast(91%) ;
-}
-```
-
-**Customization:** Change the surface background and border separately from the label color. Adjust `border-radius` for rounding and `padding` for button spacing. The image filter creates an approximate pink silhouette; use `filter: none` to restore the original artwork.
-
-The label selector follows the supplied child order; it may need updating if LoreBary changes that structure. The example applies when the Letter action is present.
-
-**Wave Button and Wave Icon**
-
-Style the Wave button’s surface, label, and image icon independently.
-
-**Button surface**
-
-```css
-/* Wave button: green surface and mint border. */
-[data-profile="action-wave"] {
-  background: #24483e ;
-  border: 1px solid #8fd8bb ;
-  border-radius: 10px ;
-  padding: 6px 10px ;
-  box-shadow: 0 2px 6px rgba(18, 11, 32, 0.4) ;
-}
-
-/* Wave button: brighter surface on hover. */
-[data-profile="action-wave"]:hover {
-  background: #306052 ;
-}
-```
-
-**Wave label**
-
-The captured label is the button’s second direct child span; the first holds its icon.
-
-```css
-/* Wave label only. */
-[data-profile="action-wave"]
-> span:nth-child(2) {
-  color: #e5fff3 ;
-  font-weight: 600 ;
-}
-```
-
-**Wave icon**
-
-```css
-/* Wave image only: mint recolor. */
-[data-profile="action-wave"]
-img[src="/img/pixel/wave.webp"] {
-  filter: brightness(0) saturate(100%) invert(84%) sepia(20%)
-    saturate(650%) hue-rotate(100deg) brightness(96%) contrast(90%) ;
-}
-```
-
-**Customization:** Change the surface background and border separately from the label color. Adjust `border-radius` for rounding and `padding` for button spacing. The image filter creates an approximate mint silhouette; use `filter: none` to restore the original artwork.
-
-They style the Wave button, not the window it opens. The label selector follows the supplied child order. The example applies when the Wave action is present.
-
-**Follow and Following Button States**
-
-Both states use the same `action-follow` button. Its `aria-label` changes from `Follow` to `Following`, and its image changes from a heart to a check.
-
-| Selector | Targets |
-| --- | --- |
-| `[data-profile="action-follow"][aria-label="Follow"]` | Follow state |
-| `[data-profile="action-follow"][aria-label="Following"]` | Following state |
-
-**Follow state**
-
-![Follow Button](./images/profile/header-follow-button.png)
-
-```css
-/* Follow surface: rose background and pink border. */
-
-[data-profile="action-follow"][aria-label="Follow"] {
-  background: #562b43 ;
-  border: 1px solid #ed91b7 ;
-  border-radius: 10px ;
-  padding: 6px 10px ;
-  box-shadow: 0 2px 6px rgba(18, 11, 32, 0.4) ;
-}
-
-/* Follow surface on hover. */
-
-[data-profile="action-follow"][aria-label="Follow"]:hover {
-  background: #713953 ;
-}
-
-/* Follow label only. */
-
-[data-profile="action-follow"][aria-label="Follow"]
-> span:nth-child(2) {
-  color: #ffe9f2 ;
-  font-weight: 600 ;
-}
-
-/* Follow heart icon only: pink recolor. */
-
-[data-profile="action-follow"][aria-label="Follow"]
-img[src="/img/pixel/heart.webp"] {
-  filter: brightness(0) saturate(100%) invert(75%) sepia(24%)
-    saturate(850%) hue-rotate(290deg) brightness(101%) contrast(91%) ;
-}
-```
-
-**Following state**
-
-![Following Button State](./images/profile/header-following-button-state.png)
-
-```css
-/* Following surface: green background and mint border. */
-
-[data-profile="action-follow"][aria-label="Following"] {
-  background: #24483e ;
-  border: 1px solid #8fd8bb ;
-  border-radius: 10px ;
-  padding: 6px 10px ;
-  box-shadow: 0 2px 6px rgba(18, 11, 32, 0.4) ;
-}
-
-/* Following surface on hover. */
-
-[data-profile="action-follow"][aria-label="Following"]:hover {
-  background: #306052 ;
-}
-
-/* Following label only. */
-
-[data-profile="action-follow"][aria-label="Following"]
-> span:nth-child(2) {
-  color: #e5fff3 ;
-  font-weight: 600 ;
-}
-
-/* Following check icon only: mint recolor. */
-
-[data-profile="action-follow"][aria-label="Following"]
-img[src="/img/pixel/check.webp"] {
-  filter: brightness(0) saturate(100%) invert(84%) sepia(20%)
-    saturate(650%) hue-rotate(100deg) brightness(96%) contrast(90%) ;
-}
-```
-
-**Customization:** Change each state’s background, border, label color, and icon filter independently. Adjust `border-radius` and `padding` for shape and spacing. Use `filter: none` to restore an icon’s original artwork.
-
-Use both blocks together. LoreBary controls the follow state and heart-to-check change; the CSS styles whichever state is present. Keep `data-profile` and `aria-label` together without a space because they describe the same button.
-
-The label is the second direct child span in the supplied buttons.
-
-**Alerts Button and Bell Icon**
-
-The Alerts action uses `action-bell`. In the supplied HTML, its label reads “Alerts too?” and its accessible label is “Get a notification when they post.”
-
-**Button surface**
-
-![Alerts Button and Bell Artwork](./images/profile/header-alerts-button-and-bell-artwork.png)
-
-```css
-/* Alerts button: purple surface and lavender border. */
-[data-profile="action-bell"] {
-  background: #49365e ;
-  border: 1px solid #bd9bea ;
-  border-radius: 10px ;
-  padding: 6px 10px ;
-  box-shadow: 0 2px 6px rgba(18, 11, 32, 0.4) ;
-}
-
-/* Alerts button: brighter surface on hover. */
-[data-profile="action-bell"]:hover {
-  background: #604778 ;
-}
-```
-
-**Alerts label**
-
-```css
-/* Alerts label only. */
-[data-profile="action-bell"]
-> span:nth-child(2) {
-  color: #f0e3ff ;
-  font-weight: 600 ;
-}
-```
-
-The label is the second direct child span in the supplied button; the first holds its icon.
-
-**Bell icon**
-
-```css
-/* Bell image only: pink recolor. */
-[data-profile="action-bell"]
-img[src="/img/pixel/bell.webp"] {
-  filter: brightness(0) saturate(100%) invert(75%) sepia(24%)
-    saturate(850%) hue-rotate(290deg) brightness(101%) contrast(91%) ;
-}
-```
-
-**Customization:** Change the surface, label, and icon independently. Adjust `border-radius` for rounding and `padding` for spacing. Use `filter: none` to restore the bell’s original artwork.
-
-**Available state:** The Alerts button disappears after activation in the observed behavior. These rules style it while present; there is no captured visible activated state to style. CSS does not bring back an absent button.
-
-This example follows the supplied button structure and has not been previewed in the current test.
 
 ## Content Sections
 
@@ -4396,7 +5158,128 @@ Favorites contains multiple card types, so its section and card-type values ofte
 
 **Remember:** `data-tab` selects a navigation button, `data-section` identifies a content section or grid, and `data-card` identifies a card type.
 
-### Featured Creator Rail
+### Featured Content and Favorite Creators
+
+Style the Featured content panel, its Favorite Creators shelf, and the creator cards inside the rail. These are separate from the Featured navigation button.
+
+| Layer | Captured selector / structure |
+| --- | --- |
+| Outer Featured panel | `[data-profile="content-panel"][data-section="featured"]` |
+| Active pane | `[data-profile="tab-pane"][data-pane="featured"]` |
+| Featured wrapper | `[data-profile="featured"]` |
+| Favorite Creators shelf | `[data-profile="featured-section"][data-section="creators"]` |
+| Shelf heading | `[data-profile="featured-title"]` |
+| Creator count | Shelf direct header → direct span; no dedicated count hook captured |
+| Creator rail | `[data-profile="featured-rail"]` |
+| Clickable creator card | `a[data-profile="creator-card"]` |
+| Native frame | Direct frame image inside the card’s outer span |
+| Frame tint | Separate `span[aria-hidden="true"]` with an inline mask |
+| Avatar and text row | Last child span inside that outer span |
+
+
+**Featured panel, header, and search**
+
+Use both content-panel and data-section="featured" on the outer root. The nested Favorite Creators shelf has its own data-section="creators" value.
+
+```css
+/* FEATURED CONTENT AND FAVORITE CREATORS */
+
+/* Featured content panel; separate from its navigation tab. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] {
+  background: #193446 !important;
+  border: 1px solid #91cfed !important;
+  border-radius: 16px !important;
+}
+
+/* Outer Featured header only. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] > [data-profile="content-header"] {
+  background: #49365e !important;
+  border-bottom: 1px solid #bd9bea !important;
+}
+
+/* Featured title. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] > [data-profile="content-header"] [data-profile="content-title"] {
+  color: #f0e3ff !important;
+}
+
+/* Native star in the outer header. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] > [data-profile="content-header"] img[src="/img/pixel/star.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(220deg) !important;
+}
+
+/* Section search surface. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="search"] .header-search {
+  background: #122b39 !important;
+  border: 1px solid #91cfed !important;
+}
+
+/* Search text and caret. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="search"] .header-search-input {
+  background: transparent !important;
+  color: #e2f4ff !important;
+  caret-color: #8fd8bb !important;
+}
+
+/* Search placeholder. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="search"] .header-search-input::placeholder {
+  color: #91cfed !important;
+  opacity: 1 !important;
+}
+
+/* Search font icon. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="search"] .fa-search {
+  color: #8fd8bb !important;
+}
+
+/* Search focus edge. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="search"] .header-search:focus-within {
+  border-color: #8fd8bb !important;
+}
+
+/* Outer body and existing scroll area. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] > [data-profile="content-body"],
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="content-scroll"] {
+  background: #122b39 !important;
+}
+```
+
+**Customization:** Change the panel, header, title, star artwork, search field, and scroll surfaces independently. The example uses a blue panel with a purple header.
+
+**Favorite Creators shelf and count**
+
+The shelf uses featured-section, its heading uses featured-title, and the count is the header’s direct span.
+
+```css
+/* Favorite Creators shelf surface. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="featured-section"][data-section="creators"] {
+  background: #193446 !important;
+  border-color: #91cfed !important;
+}
+
+/* Shelf header only. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="featured-section"][data-section="creators"] > header.surface-header {
+  background: #24483e !important;
+  border-bottom: 1px solid #8fd8bb !important;
+}
+
+/* Favorite Creators heading. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="featured-section"][data-section="creators"] > header > [data-profile="featured-title"] {
+  color: #b8ffe0 !important;
+}
+
+/* Existing creator count; no dedicated count hook was supplied. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="featured-section"][data-section="creators"] > header > span {
+  background: #122b39 !important;
+  border-color: #8fd8bb !important;
+  color: #ffd580 !important;
+}
+```
+
+**Customization:** Change the shelf surface, green header, heading text, and gold count independently.
+
+**Creator rail, frames, and avatar borders**
+
+![Favorite Creators Shelf](./images/profile/favorite-creators-shelf.png)
 
 Style card layers, named navigation controls and edge fade.
 
@@ -4441,6 +5324,50 @@ Style card layers, named navigation controls and edge fade.
 ```
 
 **Customization:** Cards retain their 3:1 ratio, clamped width, and shrink-0 behavior. Preserve arrow transforms and conditional visibility. Edge controls extend beyond the viewport; do not clip their parent. The card layer selectors follow the supplied direct-child structure.
+
+**Creator names and status text**
+
+Name and status spans have explicit text colors. Target those spans separately from the clickable card’s inherited color.
+
+```css
+/* Creator name; explicitly colored nested text. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="featured-section"][data-section="creators"] [data-profile="creator-card"] > span > span:last-child > span > span[translate="no"] {
+  color: #b8ffe0 !important;
+}
+
+/* Creator status text. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="featured-section"][data-section="creators"] [data-profile="creator-card"] > span > span:last-child > span > span:last-child {
+  color: #b9e6ff !important;
+}
+
+/* Hovered creator name; navigation behavior is native. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] [data-profile="featured-section"][data-section="creators"] [data-profile="creator-card"]:hover > span > span:last-child > span > span[translate="no"] {
+  color: #ffffff !important;
+}
+```
+
+**Customization:** Change the mint name, blue-white status text, and hovered name independently. These rules apply across creators without matching usernames or avatar URLs.
+
+**Featured footer**
+
+The footer belongs to the outer Featured panel, below its content area.
+
+```css
+/* Outer section footer. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] > [data-profile="content-footer"] {
+  background: #24483e !important;
+  border-top: 1px solid #8fd8bb !important;
+}
+
+/* Footer text has its own native color. */
+[data-profile="scope"] [data-profile="content-panel"][data-section="featured"] > [data-profile="content-footer"] > span {
+  color: #b8ffe0 !important;
+}
+```
+
+**Customization:** Change the footer surface, top edge, and caption separately.
+
+---
 
 ## Content Cards
 
@@ -5378,8 +6305,6 @@ The options wrapper is `post-actions`. Its button is labeled “Post options” 
 
 Captured featured-author links have `data-featured-link="true"`. Use that marker alongside `post-author`, rather than targeting a username or profile URL.
 
-![Favorite Creators Shelf](./images/profile/favorite-creators-shelf.png)
-
 ```css
 /* Featured post-author name: solid gold instead of native gradient text. */
 [data-profile="post-author"][data-featured-link="true"] {
@@ -6050,6 +6975,108 @@ Do not infer the poll ended from one selected answer or a particular timestamp. 
 
 HTML matching is confirmed for these supplied structures; visual styling still requires checking.
 
+## Comment, Share, and Like Buttons
+
+```css
+.profile-theme-scope [data-profile="post-like"],
+.profile-theme-scope [data-profile="post-likes"],
+.profile-theme-scope [data-profile="post-engagement"]
+  button[aria-label="Comments"],
+.profile-theme-scope [data-profile="post-engagement"]
+  button[aria-label="Share"] {
+  color: #fff1cf !important;
+  background: linear-gradient(#5a432f, #3a2b20) !important;
+  border: 1px solid #bd9457 !important;
+  border-radius: 8px !important;
+}
+
+.profile-theme-scope [data-profile="post-engagement"]
+  img[src*="feed_action_"],
+.profile-theme-scope [data-profile="post-engagement"]
+  img[src*="feed_filter_"] {
+  filter: sepia(1) saturate(1.4) hue-rotate(345deg)
+          brightness(1.35) !important;
+}
+
+.profile-theme-scope [data-profile="post-like"][aria-pressed="true"] {
+  color: #ffffff !important;
+  background: #71805c !important;
+  border-color: #f0d99f !important;
+}
+```
+
+### Reaction Counts and Share Artwork
+
+The existing engagement example supplies button surfaces, raster recolors, and the pressed Like state. Add these targets when the number, Share backing, or foreground icon should differ from that shared treatment.
+
+```css
+/* Existing reaction number only. */
+[data-profile="post-likes"] > span.tabular-nums {
+  color: var(--theme-accent, #d7ad63) ;
+  font-weight: 700 ;
+}
+
+```
+
+![Comment Count and Artwork](./images/profile/footer-comment-count-and-artwork.png)
+
+```css
+/* Existing comment count. */
+[data-profile="post-comment-count"] {
+  color:#d7ad63 ;
+}
+
+```
+
+![Share Button Plate and Artwork](./images/profile/footer-share-button-plate-and-artwork.png)
+
+```css
+/* Share foreground artwork, separately from its backing plate. */
+[data-profile="post-engagement"]
+button[aria-label="Share"] img[src="/img/Icons/feed_action_share.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(95deg) ;
+}
+
+[data-profile="post-engagement"]
+button[aria-label="Share"] img[src="/img/Icons/btn_pixel_plate_24.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(220deg) ;
+}
+```
+
+Use the exact backing filename present in the button. btn_pixel_plate.webp and btn_pixel_plate_24.webp are distinct paths. Keep the foreground image and label above the backing. The rules style existing numbers; they do not change reaction totals.
+
+An expanded control uses aria-expanded; a pressed toggle uses aria-pressed. Match only the state actually present on the control. Missing aria-pressed is not false.
+
+### Recoloring raster UI icons
+
+CSS `color` does not recolor the pixels of a PNG or WebP. Use a scoped `filter` on known UI assets instead.
+
+```css
+/* Good: only pixel icons inside the main profile tabs. */
+.profile-theme-scope [data-profile="tab"]
+  img[src*="/img/pixel/"] {
+  filter: grayscale(1) sepia(.5) saturate(.6)
+          brightness(1.9) contrast(.8) !important;
+}
+
+/* Avoid: this would also recolor portraits and gallery covers. */
+/* .profile-theme-scope img { filter: sepia(1); } */
+```
+
+Useful starting points:
+
+| Target | Filter |
+| --- | --- |
+| Warm gold | `sepia(1) saturate(1.8) hue-rotate(345deg) brightness(1.35) contrast(1.1)` |
+| Cream | `grayscale(1) sepia(.5) saturate(.6) brightness(1.9) contrast(.8)` |
+| Muted moss | `sepia(.8) saturate(.8) hue-rotate(55deg) brightness(.85) contrast(1.15)` |
+| Burgundy | `sepia(1) saturate(2.2) hue-rotate(305deg) brightness(.72) contrast(1.25)` |
+| Moon blue | `grayscale(.3) sepia(.4) saturate(1.7) hue-rotate(165deg) brightness(1.05)` |
+
+Filter functions run from left to right. The same filter can look different on a blue plate and a gray icon.
+
+---
+
 ## Rich Text and Dividers
 
 ### Rich-Text Scope and Text Colors
@@ -6433,6 +7460,12 @@ hr.editor-divider.editor-divider-dotted {
 The supplied native CSS now establishes that div.editor-divider-paws draws `/img/pixel/paw.webp` as a repeated background. It is not an img or a mask. Native dimensions are height:16px and width:112px, with background-size:16px 16px, background-repeat:space, margin:14px auto, image-rendering:pixelated, and opacity:.75.
 
 The example filters only this dedicated divider, preserving paw size, repetition, and native pixel rendering. It does not filter its post parent or user artwork. Set opacity back to .75 for native softness; filter:none restores original artwork colors. The filter changes the rendered divider artwork; adjust its hue and opacity to suit your palette.
+
+**Table overflow: additional evidence**
+
+The supplied long-table example still has no dedicated table-only scroll wrapper. A long unbroken number appears in a td. The preview’s ancestor clips content and sets max-height:240px; post-more links to View all.
+
+Opening a full post does not by itself establish horizontal table scrolling. Keep table layout changes separate from the overall post clipping.
 
 ---
 
@@ -7405,7 +8438,6 @@ Paste this complete block after your regular **Profile CSS**. If you already hav
 Start with both doors closed. Open the left door and check that you can interact with the exposed half while the right half stays covered. Then open the right door and close the left. The covers span the full profile, including the banner, and scroll with the page.
 
 ---
-
 ## Profile Dialogs and Mobile Panels
 
 The selector map identifies the native overlay, card, and controls. Some mobile dialogs render in a separate `[data-profile=scope][data-profile-portal=true]` wrapper. Keep any variables a dialog needs on its own root so the recipe also works when it renders outside the main profile.
@@ -7966,72 +8998,6 @@ The details panel has its own `data-modal=details` wrapper. Apply the same palet
   color: #e0c7ff;
 }
 ```
-## Desktop Artwork on Mobile
-
-### Restore Sleeping Bary in Followers and Following
-
-The mobile dialogs can show the same sleeping Bary artwork as desktop. Paste this into **Profile CSS**. It draws Bary once in the lower-right corner and lets taps pass through to the list.
-
-```css
-@media (max-width: 767px) {
-  [data-profile=modal-panel]:is([aria-label=Followers], [aria-label=Following]) {
-    position: relative;
-  }
-
-  [data-profile=modal-panel]:is([aria-label=Followers], [aria-label=Following])
-  img[src="/img/sketch/bary_pencil.webp"] {
-    display: none;
-  }
-
-  [data-profile=modal-panel]:is([aria-label=Followers], [aria-label=Following])::after {
-    content: "";
-    position: absolute;
-    right: 12px;
-    bottom: 42px;
-    width: min(48%, 210px);
-    height: 180px;
-    background: url("/img/sketch/bary_pencil.webp") right bottom / contain no-repeat;
-    opacity: .32;
-    z-index: 1;
-    pointer-events: none;
-  }
-}
-```
-
-Adjust `right` and `bottom` to move Bary, or change `opacity` to make the sketch more or less visible.
-
-### Optional Extra — Bary Ears Above Write a Post
-
-Mobile doesn’t render the native **Poke Bary** button. This snippet brings back the ears as decoration above **Write a Post**. The cheeky-paw animation belongs to the desktop button.
-
-```css
-@media (max-width: 780px) {
-  .surface-post:has([data-profile=composer-header]) {
-    margin-block-start: 3rem;
-    overflow: visible;
-  }
-
-  [data-profile=composer-header] {
-    position: relative;
-  }
-
-  [data-profile=composer-header]::before {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    width: 5rem;
-    height: 3rem;
-    transform: translateX(-50%);
-    background: url("/img/Icons/feed_bary_peeking_ears.webp")
-      center bottom / contain no-repeat;
-    pointer-events: none;
-  }
-}
-```
-
-If you make the ears taller, increase `margin-block-start` on the composer card to give them room above the header.
-
 ### Followers and Following Dialogs
 
 **Followers and Following: Headers, Titles, Bodies, Search, Lists, and Footers**
@@ -8260,6 +9226,38 @@ The shared `modal-row-follow` rule applies to both labels. Standard CSS cannot s
 Do not invent aria-pressed, data-following, or state-class selectors for these buttons. :hover, :focus-visible, and :disabled describe interaction states, not whether a person is currently followed.
 
 The panel label `aria-label="Following"` identifies the Following list. Follow and Following row buttons share the `modal-row-follow` hook.
+
+#### Restore Sleeping Bary in Followers and Following
+
+The mobile dialogs can show the same sleeping Bary artwork as desktop. Paste this into **Profile CSS**. It draws Bary once in the lower-right corner and lets taps pass through to the list.
+
+```css
+@media (max-width: 767px) {
+  [data-profile=modal-panel]:is([aria-label=Followers], [aria-label=Following]) {
+    position: relative;
+  }
+
+  [data-profile=modal-panel]:is([aria-label=Followers], [aria-label=Following])
+  img[src="/img/sketch/bary_pencil.webp"] {
+    display: none;
+  }
+
+  [data-profile=modal-panel]:is([aria-label=Followers], [aria-label=Following])::after {
+    content: "";
+    position: absolute;
+    right: 12px;
+    bottom: 42px;
+    width: min(48%, 210px);
+    height: 180px;
+    background: url("/img/sketch/bary_pencil.webp") right bottom / contain no-repeat;
+    opacity: .32;
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+```
+
+Adjust `right` and `bottom` to move Bary, or change `opacity` to make the sketch more or less visible.
 
 ### Followers and Following Close Button
 
@@ -8730,6 +9728,77 @@ button.dashboard-action-button img[src="/img/pixel/check.webp"] {
 
 ---
 
+## Mobile Profile Repairs
+
+Start with the desktop component and override only what becomes too wide, clipped, or misaligned below the breakpoint.
+
+### Responsive result example
+
+**Desktop**
+
+<img src="./images/profile/responsive-desktop-example.png" alt="Completed profile theme on desktop">
+
+**Mobile**
+
+<img src="./images/profile/responsive-mobile-example.png" alt="The same profile theme adapted for mobile" width="390">
+
+```css
+@media (max-width: 767px) {
+  .profile-theme-scope [data-profile="tabs"] {
+    display: flex !important;
+    overflow-x: auto;
+    gap: 4px;
+    scrollbar-width: none;
+  }
+
+  .profile-theme-scope [data-profile="tab"] {
+    flex: 0 0 auto;
+    min-width: 52px;
+    padding: 6px 8px !important;
+    font-size: 10px !important;
+  }
+
+  .profile-theme-scope [data-profile="composer-header"] {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 9px !important;
+  }
+
+  .profile-theme-scope [data-profile="composer-body"] {
+    padding: 9px !important;
+  }
+
+  .profile-theme-scope [data-profile="composer-editor"] {
+    min-height: 140px;
+  }
+
+  .profile-theme-scope [data-profile="about"] [role="tablist"] {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 3px;
+  }
+
+  .profile-theme-scope [data-profile="about"] [role="tab"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+}
+```
+
+Mobile failure checklist:
+
+- A fixed pixel width is wider than the viewport.
+- A flex row cannot wrap.
+- A decorative pseudo-element creates horizontal overflow.
+- The frame was scaled but the portrait inset was not.
+- A desktop margin still pushes the avatar or composer sideways.
+- Text is present but has insufficient contrast on the mobile background.
+- The browser window looks narrow, but the real viewport is still wider than `767px`.
+
+---
+
 ## Common Fixes
 
 ### Raise Avatar Controls
@@ -9076,6 +10145,76 @@ Edit `clamp(200px, 19vw, 240px)` to change the banner’s minimum, preferred, an
 ## Profile Selector Quick Reference
 
 Start with the native selector for the element you want to style. Add a parent or state qualifier when the same selector appears in multiple places or when a rule is meant for one view. For example, use `[data-modal=wave]` for the Wave dialog and `[data-modal=wave] [data-profile=modal-panel]` for its card.
+
+### Identity and navigation
+
+| Selector | Use |
+| --- | --- |
+| `[data-profile="hero"]` | Banner and identity block |
+| `[data-profile="avatar-wrap"]` | Decorative avatar-frame anchor |
+| `[data-profile="avatar"]` | Avatar crop, border, and shadow |
+| `[data-profile="avatar-img"]` | Portrait size and `object-fit` |
+| `[data-profile="avatar-actions"]` | Avatar action controls and stacking layer |
+| `[data-profile="avatar-remove"]` | Remove-avatar control |
+| `[data-profile="level"]` / `[data-profile="level-icon"]` | Level label and icon |
+| `[data-profile="streak"]` / `[data-profile="streak-icon"]` | Streak counter and icon |
+| `[data-profile="member-since-icon"]` | Calendar icon |
+| `[data-profile="count-followers"]` | Followers button |
+| `[data-profile="count-following"]` | Following button |
+| `[data-profile="tabs"]` / `[data-profile="tab"]` | Main navigation |
+| `[data-profile="tab-notch"]` | Decorative tab notch |
+| `[data-profile="tab-count"]` | Number shown on a tab |
+
+### Content, composer, and actions
+
+| Selector | Use |
+| --- | --- |
+| `[data-profile="about"]` | About Me section root |
+| `[data-profile="about-card"]` | Native About Me content card |
+| `[data-profile="body-inner"]` | Main body positioning anchor for large stickers |
+| `[data-profile="about-edit"]` | Edit About Me button |
+| `[data-profile="about-more"]` | Show more button |
+| `[data-profile="additional-info"]` | Role, availability, gender, and relationship information |
+| `[data-profile="gallery-preview"]` | Gallery preview shell |
+| `[data-profile="gallery-grid"]` | Gallery image grid |
+| `[data-profile="popular-content"]` | Popular Creations shell and carousel |
+| `[data-profile="feed-list"]` | Post feed container |
+| `[data-profile="post"]` | One post card |
+| `[data-profile="post-header"]` | Post author and metadata row |
+| `[data-profile="post-body"]` | Main post content |
+| `[data-profile="post-engagement"]` | Like, comment, and share row |
+| `[data-profile="post-like"]` / `[data-profile="post-likes"]` | Like controls and reactions |
+| `[data-profile="post-comment-count"]` | Comment count text |
+| `[data-profile="composer-slot"]` | Write a Post placement area |
+| `[data-profile="composer-header"]` | Composer title and options row |
+| `[data-profile="composer-body"]` | Composer avatar and editor body |
+| `[data-profile="composer-toolbar"]` | Formatting controls |
+| `[data-profile="composer-editor"]` | Editable text field |
+| `[data-profile="composer-footer"]` | Terms, switch, and Post action area |
+
+### Useful attribute patterns
+
+| Pattern | Use |
+| --- | --- |
+| `[aria-selected="true"]` | Currently selected tab |
+| `[aria-pressed="true"]` | Pressed toolbar or like button |
+| `button[aria-label="Comments"]` | Comment action |
+| `button[aria-label="Share"]` | Share action |
+| `button[aria-label^="Scroll popular creations"]` | Both Popular Creations arrows |
+| `img[src*="btn_pixel_plate"]` | Pixel plate behind dashboard buttons |
+| `img[src*="pixel_arrow.webp"]` | Pixel arrow image |
+| `img[src*="paper-tab.webp"]` | Paper plate behind About icons |
+| `input[type="checkbox"] + div` | Visual track after a custom checkbox |
+| `[data-placeholder]::before` | Editor placeholder pseudo-element |
+
+Attribute matching operators:
+
+```css
+[attr="exact value"]   /* exact match */
+[attr^="starts with"]  /* begins with */
+[attr$="ends with"]    /* ends with */
+[attr*="contains"]     /* contains text */
+```
 
 ### Native Profile Selectors
 
@@ -9761,3 +10900,6 @@ Dynamic /api/ covers, user uploads, profile/row avatars, and the native default-
 Excluded menu-content artwork is not imported into this reference. The catalogue’s lab-bookmark path is held out because its intended in-scope component is not mapped here. Exact tag and badge paths are listed as recorded; they do not establish every state or placement as tested.
 
 Supplied individual Level filenames remain deferred for the later Level inventory. The event tutorial continues to use the recorded /img/Level/ prefix plus aspect-square without treating that prefix as a complete filename catalogue.
+
+---
+
