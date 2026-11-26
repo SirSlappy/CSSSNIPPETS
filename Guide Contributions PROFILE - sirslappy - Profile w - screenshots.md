@@ -80,6 +80,21 @@
   - [Clickable CSS Button — LIVE / OFFLINE](https://github.com/Caddel001/LoreBary-Theme-Snippets/blob/main/LoreBary%20CSS%20Quick%20Guide.md#clickable-css-button--live--offline)
   - [Palette Toggle](https://github.com/Caddel001/LoreBary-Theme-Snippets/blob/main/LoreBary%20CSS%20Quick%20Guide.md#palette-toggle)
   - [Dollhouse Doors — Reveal Half the Profile](https://github.com/Caddel001/LoreBary-Theme-Snippets/blob/main/LoreBary%20CSS%20Quick%20Guide.md#dollhouse-doors--reveal-half-the-profile)
+- [Profile Dialogs and Mobile Panels](#profile-dialogs-and-mobile-panels)
+  - [Shared Dialog Selectors](#shared-dialog-selectors)
+  - [Mobile Gallery Panel](#mobile-gallery-panel)
+  - [New Folder Dialog](#new-folder-dialog)
+  - [Folder Color and Privacy Choices](#folder-color-and-privacy-choices)
+  - [Mobile Post and Comments Sheet](#mobile-post-and-comments-sheet)
+  - [Comment Reactions and Reply Controls](#comment-reactions-and-reply-controls)
+  - [Comment Rows, Replies, and List States](#comment-rows-replies-and-list-states)
+  - [Mobile Comment Composer Preview](#mobile-comment-composer-preview)
+  - [Mobile About Me Editor](#mobile-about-me-editor)
+  - [Mobile Profile Details](#mobile-profile-details)
+  - [Followers and Following Dialogs](#followers-and-following-dialogs)
+  - [Followers and Following Close Button](#followers-and-following-close-button)
+  - [Send a Wave](#send-a-wave)
+  - [Section Dialogs](#section-dialogs)
 - [Profile Selector Quick Reference](#profile-selector-quick-reference)
   - [Additional Component and State Selectors](#additional-component-and-state-selectors)
   - [Current Mobile and Rail Selectors](#current-mobile-and-rail-selectors)
@@ -7268,21 +7283,6 @@ Start with both doors closed. Open the left door and check that you can interact
 
 ---
 
-- [Profile Dialogs and Mobile Panels](#profile-dialogs-and-mobile-panels)
-  - [Shared Dialog Selectors](#shared-dialog-selectors)
-  - [Mobile Gallery Panel](#mobile-gallery-panel)
-  - [New Folder Dialog](#new-folder-dialog)
-  - [Folder Color and Privacy Choices](#folder-color-and-privacy-choices)
-  - [Mobile Post and Comments Sheet](#mobile-post-and-comments-sheet)
-  - [Comment Reactions and Reply Controls](#comment-reactions-and-reply-controls)
-  - [Comment Rows, Replies, and List States](#comment-rows-replies-and-list-states)
-  - [Mobile Comment Composer Preview](#mobile-comment-composer-preview)
-  - [Mobile About Me Editor](#mobile-about-me-editor)
-  - [Mobile Profile Details](#mobile-profile-details)
-  - [Followers and Following Dialogs](#followers-and-following-dialogs)
-  - [Followers and Following Close Button](#followers-and-following-close-button)
-  - [Send a Wave](#send-a-wave)
-  - [Section Dialogs](#section-dialogs)
 ## Profile Dialogs and Mobile Panels
 
 The selector map identifies the native overlay, card, and controls. Some mobile dialogs render in a separate `[data-profile=scope][data-profile-portal=true]` wrapper. Keep any variables a dialog needs on its own root so the recipe also works when it renders outside the main profile.
