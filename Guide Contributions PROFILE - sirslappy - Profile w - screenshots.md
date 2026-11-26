@@ -7268,6 +7268,1281 @@ Start with both doors closed. Open the left door and check that you can interact
 
 ---
 
+- [Profile Dialogs and Mobile Panels](#profile-dialogs-and-mobile-panels)
+  - [Shared Dialog Selectors](#shared-dialog-selectors)
+  - [Mobile Gallery Panel](#mobile-gallery-panel)
+  - [New Folder Dialog](#new-folder-dialog)
+  - [Folder Color and Privacy Choices](#folder-color-and-privacy-choices)
+  - [Mobile Post and Comments Sheet](#mobile-post-and-comments-sheet)
+  - [Comment Reactions and Reply Controls](#comment-reactions-and-reply-controls)
+  - [Comment Rows, Replies, and List States](#comment-rows-replies-and-list-states)
+  - [Mobile Comment Composer Preview](#mobile-comment-composer-preview)
+  - [Mobile About Me Editor](#mobile-about-me-editor)
+  - [Mobile Profile Details](#mobile-profile-details)
+  - [Followers and Following Dialogs](#followers-and-following-dialogs)
+  - [Followers and Following Close Button](#followers-and-following-close-button)
+  - [Send a Wave](#send-a-wave)
+  - [Section Dialogs](#section-dialogs)
+## Profile Dialogs and Mobile Panels
+
+The selector map identifies the native overlay, card, and controls. Some mobile dialogs render in a separate `[data-profile=scope][data-profile-portal=true]` wrapper. Keep any variables a dialog needs on its own root so the recipe also works when it renders outside the main profile.
+
+The examples retain the original styling values and screenshots. Review the revised selectors in the matching dialog and test states such as keyboard focus, selection, and disabled controls separately. Popular Creations still needs a current dialog capture.
+
+### Shared Dialog Selectors
+
+| Part | Native selector |
+| --- | --- |
+| Full-screen overlay | `[data-profile=modal]` |
+| Backdrop | `[data-profile=modal-backdrop]` |
+| Dialog card | `[data-profile=modal-panel]` |
+| Header and title | `[data-profile=modal-header]`, `[data-profile=modal-title]` |
+| Body and footer | `[data-profile=modal-body]`, `[data-profile=modal-footer]` |
+| Followers and Following | `[data-profile=modal][data-modal=follow]` |
+| About Me editor | `[data-profile=modal][data-modal=about]` |
+| Mobile profile details | `[data-profile=modal][data-modal=details]` |
+| Send a Wave | `[data-profile=modal][data-modal=wave]` |
+| Gallery dialog | `[data-profile=content-panel][data-section=gallery][role=dialog]` |
+
+Scope shared hooks to the dialog you want to style. For example, this tints the backdrop behind **Send a Wave** if the backdrop is nested inside the wave wrapper.
+
+```css
+[data-profile=modal][data-modal=wave] [data-profile=modal-backdrop] {
+  background-color: rgb(25 52 70 / 65%);
+}
+```
+
+### Mobile Gallery Panel
+
+Distinguish the Gallery dialog’s main surfaces.
+
+```css
+[data-profile="content-panel"][data-section="gallery"][role="dialog"] {
+  background: #193446 !important;
+  border: 1px solid #91cfed !important;
+}
+
+[data-profile="content-panel"][data-section="gallery"][role="dialog"] [data-profile="content-header"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="content-panel"][data-section="gallery"][role="dialog"] [data-profile="content-title"] {
+  color: #e0c7ff !important;
+}
+
+[data-profile="content-panel"][data-section="gallery"][role="dialog"] [data-profile="content-body"] {
+  background: #193446 !important;
+}
+
+[data-profile="content-panel"][data-section="gallery"][role="dialog"] [data-profile="content-scroll"] {
+  background: #122b39 !important;
+}
+
+[data-profile="content-panel"][data-section="gallery"][role="dialog"] [data-profile="content-footer"] {
+  background: #49365e !important;
+  border-top: 1px solid #bd9bea !important;
+}
+
+[data-profile="content-panel"][data-section="gallery"][role="dialog"] button[aria-label="Close"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="content-panel"][data-section="gallery"][role="dialog"] [data-profile="content-header"] img[src="/img/pixel/lab-gallery.webp"] {
+  filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(155deg) brightness(1.15) !important;
+}
+
+[data-profile="content-panel"][data-section="gallery"][role="dialog"] button:is([aria-label^="Previous section:"],[aria-label^="Next section:"]) img:is([src="/img/pixel/arrow-left-v2.webp"],[src="/img/pixel/arrow-right-v2.webp"]) {
+  filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(155deg) brightness(1.15) !important;
+}
+
+[data-profile="content-panel"][data-section="gallery"][role="dialog"] [data-profile="content-footer"] img:is([src="/img/Icons/btn_pixel_plate_24.webp"],[src="/img/pixel/check.webp"],[src="/img/sketch/arrow_up.webp"]) {
+  filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(155deg) brightness(1.15) !important;
+}
+
+[data-profile="content-panel"][data-section="gallery"][role="dialog"] :is(i[data-profile="icon"],button[aria-label="Close"] > i) {
+  color: #b9e6ff !important;
+}
+```
+
+**Customization.** The Gallery dialog uses the `content-panel` hook. Keep `[role=dialog]` here to reserve these surfaces for the dialog. Use the Gallery folder and action recipes for controls shared with the full Gallery page.
+
+**Gallery grid, action area, and scroll fades**
+
+| Part | Selector inside the Gallery dialog |
+| --- | --- |
+| Grid | `[data-profile=gallery-grid]` |
+| Actions wrapper | `[data-profile=gallery-actions]` |
+| Scroll surface | `[data-profile=content-scroll]` |
+| Top and bottom fade layers | `[data-profile=content-fade-top]`, `[data-profile=content-fade-bottom]` |
+
+Use the grid hook for Gallery tiles and the actions hook for the toolbar wrapper when it is present. Use [Gallery Action Controls](#gallery-action-controls) for individual triggers. The fade hooks apply where LoreBary renders the two edge layers.
+
+```css
+[data-profile=content-panel][data-section=gallery][role=dialog]
+[data-profile=content-fade-top] {
+  background: linear-gradient(to bottom, #122b39, transparent);
+}
+
+[data-profile=content-panel][data-section=gallery][role=dialog]
+[data-profile=content-fade-bottom] {
+  background: linear-gradient(to top, #122b39, transparent);
+}
+```
+
+### New Folder Dialog
+
+Style the form shell, its three cards, name field, and footer. The **New folder** label identifies this panel in the available capture.
+
+```css
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] {
+  background: #193446 !important;
+  border: 1px solid #91cfed !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] > [data-profile="modal-header"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] [data-profile="modal-title"] {
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] > [data-profile="modal-body"] {
+  background: #122b39 !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] [data-profile="modal-body"] > form > .surface-post {
+  background: #193446 !important;
+  border: 1px solid #91cfed !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] [data-profile="modal-body"] > form > .surface-post > div > .surface-header {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] input[aria-label="Folder name"] {
+  background: #122b39 !important;
+  border-color: #91cfed !important;
+  color: #e2f4ff !important;
+  caret-color: #ffd580;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] input[aria-label="Folder name"]::placeholder {
+  color: #91cfed !important;
+  opacity: 1 !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] > [data-profile="modal-footer"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] [data-profile="modal-footer"] button[type="submit"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] button[aria-label="Close"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] > [data-profile="modal-header"] img[src="/img/pixel/folder.webp"] {
+  filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(155deg) brightness(1.15) !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] form .surface-header img:is([src="/img/pixel/pencil.webp"],[src="/img/pixel/highlighter.webp"],[src="/img/pixel/eye.webp"]) {
+  filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(155deg) brightness(1.15) !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] > [data-profile="modal-footer"] img:is([src="/img/Icons/btn_pixel_plate_24.webp"],[src="/img/pixel/check.webp"]) {
+  filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(155deg) brightness(1.15) !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] :is(i[data-profile="icon"],button[aria-label="Close"] > i) {
+  color: #b9e6ff !important;
+}
+```
+
+**Customization:** The submit button is outside the form and linked through its form attribute. Do not target generated IDs. This capture does not establish an outer Profile wrapper, so the named root is used directly.
+
+### Folder Color and Privacy Choices
+
+Show selected states separately while preserving the actual color choices.
+
+```css
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] button:is([aria-label="Blue"],[aria-label="Purple"],[aria-label="Pink"],[aria-label="Rose"],[aria-label="Amber"],[aria-label="Emerald"],[aria-label="Teal"],[aria-label="Cyan"],[aria-label="Indigo"],[aria-label="Slate"])[aria-pressed="true"] {
+  outline: 2px solid #ffd580 !important;
+  outline-offset: 2px;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] button:is([aria-label="Blue"],[aria-label="Purple"],[aria-label="Pink"],[aria-label="Rose"],[aria-label="Amber"],[aria-label="Emerald"],[aria-label="Teal"],[aria-label="Cyan"],[aria-label="Indigo"],[aria-label="Slate"]):focus-visible {
+  outline: 2px solid #ffd580 !important;
+  outline-offset: 2px;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] [data-profile="modal-body"] button:has(> span > img:is([src="/img/pixel/lock.webp"],[src="/img/pixel/rel_friends.webp"],[src="/img/pixel/globe.webp"])) {
+  border-bottom: 1px solid #416b80 !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] [data-profile="modal-body"] button:has(> span > img:is([src="/img/pixel/lock.webp"],[src="/img/pixel/rel_friends.webp"],[src="/img/pixel/globe.webp"]))[aria-pressed="true"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] [data-profile="modal-body"] button:has(> span > img:is([src="/img/pixel/lock.webp"],[src="/img/pixel/rel_friends.webp"],[src="/img/pixel/globe.webp"]))[aria-pressed="true"] > span.flex > span {
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] [data-profile="modal-body"] button:has(> span > img:is([src="/img/pixel/lock.webp"],[src="/img/pixel/rel_friends.webp"],[src="/img/pixel/globe.webp"])):focus-visible {
+  outline: 2px solid #ffd580 !important;
+  outline-offset: 2px;
+}
+
+[data-profile="modal-panel"][role="dialog"][aria-label="New folder"] [data-profile="modal-body"] button img:is([src="/img/pixel/lock.webp"],[src="/img/pixel/rel_friends.webp"],[src="/img/pixel/globe.webp"]) {
+  filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(155deg) brightness(1.15) !important;
+}
+```
+
+**Customization:** Both groups use aria-pressed. A generic selected-button background would repaint swatches. Color names identify swatches; native image paths identify privacy controls. These are native button states, not invented radio attributes.
+
+### Mobile Post and Comments Sheet
+
+Separate the post/comments sheet shell from the post and comment-row surfaces. The panel's body contains the post, which identifies the sheet in the available capture.
+
+```css
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) {
+  background: #193446 !important;
+  border: 1px solid #91cfed !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) > [data-profile="modal-header"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="modal-title"] {
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) > [data-profile="modal-body"] {
+  background: #122b39 !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) > [data-profile="modal-body"] > [data-profile="post"] {
+  background: #193446 !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="comment"] {
+  background: #193446 !important;
+  border: 1px solid #91cfed !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="comment-avatar"] {
+  border-color: #91cfed !important;
+  --tw-ring-color: #bd9bea;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="comment-time"] {
+  color: #91cfed !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) > [data-profile="modal-footer"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) button[aria-label="Close"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) > [data-profile="modal-header"] img[src="/img/Icons/feed_filter_posts.webp"] {
+  filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(155deg) brightness(1.15) !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) :is(i[data-profile="icon"],button[aria-label="Close"] > i) {
+  color: #b9e6ff !important;
+}
+```
+
+**Customization:** Comments are siblings of the post within modal-body, not descendants of post. The supplied capture has a portal Profile wrapper. Structural root matching avoids hard-coded usernames.
+
+### Comment Reactions and Reply Controls
+
+Reach the reused post-like/post-likes hooks within comments.
+
+```css
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="comment"] [data-profile="post-like"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="comment"] [data-profile="post-like"][aria-pressed="true"] {
+  background: #24483e !important;
+  border-color: #8fd8bb !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="comment"] [data-profile="post-likes"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="comment"] [data-profile="post-likes"] > span[aria-hidden="true"] > span[title] {
+  background: #49365e !important;
+  --tw-ring-color: #193446;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="comment"] [data-profile="comment-reply-btn"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="comment"] button[aria-label="Comment options"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="comment"] :is([data-profile="post-like"],[data-profile="post-likes"],[data-profile="comment-reply-btn"]):focus-visible {
+  outline: 2px solid #ffd580 !important;
+  outline-offset: 2px;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-profile="comment"] :is(i[data-profile="icon"],button[aria-label="Close"] > i) {
+  color: #b9e6ff !important;
+}
+```
+
+**Customization:** Keep emoji fonts and native --rx sizing. No filter is applied to emoji or entire buttons. Reaction-picker and reaction-list dialogs are outside this lesson.
+
+### Comment Rows, Replies, and List States
+
+Use these native hooks inside the post/comments sheet when the corresponding row, reply, or state is present.
+
+| Part | Native selector |
+| --- | --- |
+| Comment row and author | `[data-profile=comment-row]`, `[data-profile=comment-author]` |
+| Comment avatar and time | `[data-profile=comment-avatar]`, `[data-profile=comment-time]` |
+| Sign-in prompt and deleted comment | `[data-profile=comment-locked]`, `[data-profile=comment-deleted]` |
+| Load more comments | `[data-profile=comment-more]` |
+| Reply and reply header | `[data-profile=reply]`, `[data-profile=reply-header]` |
+| Reply author, time, and avatar | `[data-profile=reply-author]`, `[data-profile=reply-time]`, `[data-profile=reply-avatar]` |
+| Deleted reply | `[data-profile=reply-deleted]` |
+
+This example gives author names, reply dates, and comment-list messages separate colors.
+
+```css
+[data-profile=modal-panel][role=dialog]:has(> [data-profile=modal-body] > [data-profile=post])
+:is([data-profile=comment-author], [data-profile=reply-author]) {
+  color: #e0c7ff;
+}
+
+[data-profile=modal-panel][role=dialog]:has(> [data-profile=modal-body] > [data-profile=post])
+:is([data-profile=comment-time], [data-profile=reply-time]) {
+  color: #b9e6ff;
+}
+
+[data-profile=modal-panel][role=dialog]:has(> [data-profile=modal-body] > [data-profile=post])
+:is([data-profile=comment-locked], [data-profile=comment-deleted], [data-profile=reply-deleted]) {
+  color: #91cfed;
+}
+
+[data-profile=modal-panel][role=dialog]:has(> [data-profile=modal-body] > [data-profile=post])
+[data-profile=comment-more] {
+  color: #ffd580;
+}
+```
+
+The active composer has a separate `[data-profile=comment-submit]` hook. This example styles its text when the actual submit control is rendered, including in placements outside the post sheet.
+
+```css
+[data-profile=comment-submit] {
+  color: #e0c7ff;
+}
+```
+
+### Mobile Comment Composer Preview
+
+Style the footer preview without interfering with its opening overlay.
+
+```css
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-post-comment-composer="true"] [data-profile="comment-editor"] {
+  background: #122b39 !important;
+  border-color: #91cfed !important;
+  color: #e2f4ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-post-comment-composer="true"] [data-profile="comment-editor"][data-placeholder]::before {
+  color: #91cfed !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-post-comment-composer="true"] [data-profile="comment-toolbar"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-post-comment-composer="true"] [data-profile="comment-toolbar"] button {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-post-comment-composer="true"] [data-profile="comment-toolbar"] [data-profile="icon"] {
+  color: #e0c7ff !important;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-post-comment-composer="true"] button[aria-haspopup="dialog"]:focus-visible {
+  outline: 2px solid #ffd580 !important;
+  outline-offset: 2px;
+}
+
+[data-profile="modal-panel"][role="dialog"]:has(> [data-profile="modal-body"] > [data-profile="post"]) [data-post-comment-composer="true"] .back-to-top-button img[src="/img/sketch/arrow_up.webp"] {
+  filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(155deg) brightness(1.15) !important;
+}
+```
+
+**Customization:** The captured preview is inert and aria-hidden, with an overlaid button that opens another dialog. Do not remove inert, aria-hidden, the overlay, or its hit area. Styling this preview does not establish coverage of the active editor.
+
+### Mobile About Me Editor
+
+Style the editor shell and tools while preserving the authored biography.
+
+```css
+[data-profile=modal][data-modal=about] [data-profile="modal-panel"] {
+  background: #193446 !important;
+  border: 1px solid #91cfed !important;
+}
+
+[data-profile=modal][data-modal=about] [data-profile="modal-header"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile=modal][data-modal=about] [data-profile="modal-title"] {
+  color: #e0c7ff !important;
+}
+
+[data-profile=modal][data-modal=about] [data-profile="modal-body"] {
+  background: #122b39 !important;
+}
+
+[data-profile=modal][data-modal=about] .rich-text-editor-toolbar {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile=modal][data-modal=about] .rich-text-editor-toolbar button {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile=modal][data-modal=about] .rich-text-editor-toolbar button[aria-pressed="true"] {
+  background: #24483e !important;
+  border-color: #8fd8bb !important;
+}
+
+[data-profile=modal][data-modal=about] [data-profile="modal-body"] [contenteditable="true"][role="textbox"][aria-label="Tell us about yourself..."] {
+  background: #193446 !important;
+  border-color: #91cfed !important;
+}
+
+[data-profile=modal][data-modal=about] [data-profile="modal-body"] [contenteditable="true"][role="textbox"][aria-label="Tell us about yourself..."][data-placeholder]::before {
+  color: #91cfed !important;
+}
+
+[data-profile=modal][data-modal=about] [data-profile="modal-body"] [contenteditable="true"][role="textbox"][aria-label="Tell us about yourself..."] .image-delete-btn {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile=modal][data-modal=about] [data-profile="modal-body"] [contenteditable="true"][role="textbox"][aria-label="Tell us about yourself..."] .image-frame-btn {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile=modal][data-modal=about] [data-profile="modal-body"] [contenteditable="true"][role="textbox"][aria-label="Tell us about yourself..."] .image-frame-btn.active {
+  outline: 2px solid #ffd580 !important;
+}
+
+[data-profile=modal][data-modal=about] [data-profile="modal-footer"] {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile=modal][data-modal=about] [data-profile="modal-footer"] button {
+  background: #49365e !important;
+  border: 1px solid #bd9bea !important;
+  color: #e0c7ff !important;
+}
+
+[data-profile=modal][data-modal=about] button[aria-label="Close"]:focus-visible {
+  outline: 2px solid #ffd580 !important;
+  outline-offset: 2px;
+}
+
+[data-profile=modal][data-modal=about] [data-profile="modal-header"] img[src="/img/pixel/idcard.webp"] {
+  filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(155deg) brightness(1.15) !important;
+}
+
+[data-profile=modal][data-modal=about] :is(i[data-profile="icon"],button[aria-label="Close"] > i) {
+  color: #b9e6ff !important;
+}
+
+[data-profile=modal][data-modal=about] .rich-text-editor-toolbar i {
+  color: #b9e6ff !important;
+}
+
+[data-profile=modal][data-modal=about] :is(.image-delete-btn,.image-frame-btn) i {
+  color: #e0c7ff !important;
+}
+```
+
+**Customization:** There is no composer-editor or comment-editor hook here. The editor and outer body each scroll. Footer buttons are styled together because Cancel lacks a dedicated semantic hook; Save can be distinguished by :has([data-icon="check"]). Keep the native 100–300px editor height range. This lesson intentionally avoids overriding authored descendant text and artwork.
+
+### Mobile Profile Details
+
+The details panel has its own `data-modal=details` wrapper. Apply the same palette to the shared panel parts when they are present.
+
+```css
+[data-profile=modal][data-modal=details] [data-profile=modal-panel] {
+  background: #193446;
+  border: 1px solid #91cfed;
+}
+
+[data-profile=modal][data-modal=details] [data-profile=modal-header] {
+  background: #49365e;
+}
+
+[data-profile=modal][data-modal=details] [data-profile=modal-title] {
+  color: #e0c7ff;
+}
+```
+
+### Followers and Following Dialogs
+
+**Followers and Following: Headers, Titles, Bodies, Search, Lists, and Footers**
+
+The examples share a palette defined on the panel inside `[data-modal=follow]`. The header, search, list, and footer use that dialog wrapper to scope their styles.
+
+![Followers and Following Dialog Surfaces](./images/profile/header-followers-and-following-dialog-surfaces.png)
+
+```css
+/* Follow dialog panel and shared palette. */
+[data-modal=follow] [data-profile=modal-panel] {
+  --fd-bg: #193446;
+  --fd-head: #49365e;
+  --fd-edge: #91cfed;
+  --fd-text: #e2f4ff;
+  --fd-title: #e0c7ff;
+  background: var(--fd-bg) !important;
+  border: 1px solid var(--fd-edge) !important;
+  color: var(--fd-text) !important;
+}
+
+/* Header variants. */
+
+  [data-modal=follow]
+:is([data-profile="modal-header"], .surface-header) {
+  background: var(--fd-head) !important;
+  border-bottom: 1px solid var(--fd-edge) !important;
+}
+
+/* Title hook or captured header h3. */
+
+  [data-modal=follow]
+:is([data-profile="modal-title"], .surface-header h3) {
+  background: none !important;
+  color: var(--fd-title) !important;
+  -webkit-text-fill-color: var(--fd-title) !important;
+  text-shadow: none !important;
+}
+
+/* Body hook where present. */
+
+  [data-modal=follow] 
+[data-profile="modal-body"] {
+  background: var(--fd-bg) !important;
+}
+
+/* Captured body variant containing the decorative sketch. */
+[data-modal=follow] [data-profile=modal-panel]
+> div:has(> img[src="/img/sketch/bary_pencil.webp"]) {
+  background: var(--fd-bg) !important;
+}
+
+/* Search area. */
+
+  [data-modal=follow]
+[data-profile="modal-search"] {
+  background: #122b39 !important;
+  border-bottom: 1px solid var(--fd-edge) !important;
+}
+
+/* Visible search-field wrapper. */
+  [data-modal=follow]
+[data-profile="modal-search"] .header-search {
+  background: #122b39 !important;
+  border: 1px solid var(--fd-edge) !important;
+  border-radius: 10px !important;
+}
+
+/* Search input text. */
+
+  [data-modal=follow]
+[data-profile="modal-search"] input {
+  background: transparent !important;
+  color: var(--fd-text) !important;
+  caret-color: #ffd580;
+}
+
+/* Search placeholder. */
+
+  [data-modal=follow]
+[data-profile="modal-search"] input::placeholder {
+  color: var(--fd-edge) !important;
+  opacity: 1 !important;
+}
+
+/* List surface. */
+
+  [data-modal=follow]
+[data-profile="modal-list"] {
+  background: transparent !important;
+}
+
+/* List rows. */
+
+  [data-modal=follow]
+[data-profile="modal-list"] > * {
+  border-bottom: 1px solid #416b80 !important;
+}
+
+/* Row hover. */
+
+  [data-modal=follow]
+[data-profile="modal-list"] > *:hover {
+  background: #24483e !important;
+}
+
+/* Footer variants. */
+
+  [data-modal=follow]
+:is([data-profile="modal-footer"], .surface-footer, [data-modal-footer="true"]) {
+  background: #122b39 !important;
+  border-top: 1px solid var(--fd-edge) !important;
+  color: var(--fd-text) !important;
+}
+```
+
+**Customization:** Change the five root variables for the shared palette, then adjust search, row-hover, and footer surfaces separately. For different palettes, define overrides on the individual Followers or Following root.
+
+Alternative hooks/classes accommodate the recorded markup variants; a missing hook simply does not match. The structural body rule identifies the container by its direct decorative image without recoloring that image.
+
+The title rule clears an existing gradient-text treatment so the solid title color can show. Existing theme rules with greater specificity may need editing.
+
+These examples keep native dialog positioning, sizing, scrolling, search behavior, and controls. Heading artwork, Bary sketch appearance, Close, avatars, badges, Follow buttons, and footer-button artwork receive separate examples.
+
+**Followers and Following: Heading Icon and Decorative Bary Sketch**
+
+These examples use exact native artwork paths inside the follow dialog. They do not require the palette variables from the preceding tutorial.
+
+![Followers and Following Heading Icon](./images/profile/header-followers-and-following-heading-icon.png)
+
+```css
+/* Heading icon inside the header. */
+
+  [data-modal=follow]
+:is([data-profile="modal-header"], .surface-header)
+img[src="/img/pixel/characters.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(220deg) ;
+}
+
+/* Decorative Bary sketch. */
+
+  [data-modal=follow] 
+img[src="/img/sketch/bary_pencil.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(155deg) ;
+  opacity: 0.2 ;
+  pointer-events: none ;
+}
+```
+
+**Customization:** Change the heading-icon tint and sketch tint/opacity independently. The exact sketch path keeps row avatars and badges separate. Pointer-events none makes the decorative image click-through; it does not alter the dialog’s controls.
+
+**Followers and Following: List-Row Avatars and Badges**
+
+These examples style the captured direct row-avatar images separately from nested native badge artwork.
+
+![List-Row Avatars and Badges](./images/profile/message-list-row-avatars-and-badges.png)
+
+```css
+/* Row avatars: border and shadow. */
+[data-modal=follow]
+[data-profile="modal-list"] > * > img {
+  border: 2px solid #8fd8bb ;
+  border-radius: 50% ;
+  box-shadow: 0 0 6px rgba(143, 216, 187, 0.3) ;
+  box-sizing: border-box ;
+  object-fit: cover ;
+  object-position: center ;
+}
+
+/* Native badge artwork within list rows. */
+
+ [data-modal=follow]
+[data-profile="modal-list"] img[src^="/img/Badges/"] {
+  filter: drop-shadow(0 0 3px rgba(189, 155, 234, 0.5)) ;
+}
+```
+
+**Customization:** Change avatar borders, rounding, shadow, and crop independently from badge glow. Avatar dimensions remain native; no color filter is applied to portraits.
+
+The avatar selector targets a direct image in a list row. The badge selector is restricted to the native /img/Badges/ directory within the list. Its drop shadow preserves badge colors but replaces any earlier filter on those matching images.
+
+The native-path badge rule does not cover uploaded custom badges. Do not broaden it to every row image, because that would also affect avatars. To treat one native badge differently, replace the path prefix with its exact captured filename.
+
+**Followers and Following: Shared Follow Button Styling**
+
+Both visible Follow and Following row buttons use modal-row-follow in these layouts.
+
+![Shared List-Row Follow Buttons](./images/profile/message-shared-list-row-follow-buttons.png)
+
+```css
+/* Shared row-button surface and text. */
+[data-modal=follow]
+[data-profile="modal-row-follow"] {
+  background: #24483e ;
+  border: 1px solid #8fd8bb ;
+  border-radius: 999px ;
+  color: #b8ffe0 ;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.3) ;
+}
+
+/* Enabled hover. */
+[data-modal=follow]
+[data-profile="modal-row-follow"]:enabled:hover {
+  background: #306052 ;
+  border-color: #b8ffe0 ;
+  color: #ffd580 ;
+}
+
+/* Keyboard focus. */
+[data-modal=follow]
+[data-profile="modal-row-follow"]:focus-visible {
+  outline: 2px solid #ffd580 ;
+  outline-offset: 2px;
+}
+```
+
+**Customization:** Change the shared surface, border, text, shadow, hover, and focus outline independently.
+
+**Follow Versus Following: Captured Selector Limitation**
+
+The captured Follow and Following row buttons have identical attributes and classes and differ only in visible text. No captured attribute or class establishes a CSS selector that distinguishes those two states.
+
+The shared `modal-row-follow` rule applies to both labels. Standard CSS cannot select an element by its text content; :has() does not supply a text-content selector.
+
+Do not invent aria-pressed, data-following, or state-class selectors for these buttons. :hover, :focus-visible, and :disabled describe interaction states, not whether a person is currently followed.
+
+The panel label `aria-label="Following"` identifies the Following list. Follow and Following row buttons share the `modal-row-follow` hook.
+
+### Followers and Following Close Button
+
+Use the Close label within the follow dialog.
+
+![Followers and Following Close Button](./images/profile/header-followers-and-following-close-button.png)
+
+```css
+/* Close-button surface and inherited font-icon color. */
+[data-modal=follow]
+button[aria-label="Close"] {
+  background: #49365e ;
+  border: 1px solid #bd9bea ;
+  border-radius: 50% ;
+  color: #e0c7ff ;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) ;
+}
+
+/* Enabled hover. */
+ [data-modal=follow]
+button[aria-label="Close"]:enabled:hover {
+  background: #604778 ;
+  color: #ffd580 ;
+}
+
+/* Keyboard focus. */
+[data-modal=follow]
+button[aria-label="Close"]:focus-visible {
+  outline: 2px solid #ffd580 ;
+  outline-offset: 2px;
+}
+```
+
+**Customization:** Change the button surface, border, rounding, color, shadow, hover, and focus outline independently. Color is intended to reach the Close font glyph through inheritance; an existing explicit icon color can override it.
+
+They target Close only in Followers and Following, leaving unrelated dialogs separate.
+
+### Send a Wave
+
+The `[data-modal=wave]` wrapper scopes the note, wish controls, and artwork. The dialog panel supplies the background and the variables used by the sketch treatment.
+
+**Header and sketch artwork**
+
+![Header and Sketch Artwork](./images/profile/header-wave-header-and-sketch-artwork.png)
+
+```css
+[data-modal=wave] :is([data-profile="modal-header"], .surface-header) {
+  background: #49365e ;
+  border-bottom: 1px solid #bd9bea ;
+}
+[data-modal=wave] :is([data-profile=modal-title], .surface-header h3) {
+  background: none ;
+  color: #e0c7ff ;
+  -webkit-text-fill-color: #e0c7ff ;
+}
+[data-modal=wave] :is([data-profile=modal-header], .surface-header) img[src="/img/pixel/wave.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(220deg) ;
+}
+
+```
+
+**Customization:** Change the header and sketch separately. The wave-image rule applies only to that exact artwork inside the header.
+
+**Two Bary animation frames**
+
+The static screenshot shows the frame artwork and glow; LoreBary controls the animation.
+
+![Bary Animation Frame Recolor](./images/profile/input-bary-animation-frame-recolor.png)
+
+```css
+[data-modal=wave] img:is(
+  [src="/img/Animation/animation_bary_wink1.webp"],
+  [src="/img/Animation/animation_bary_wink2.webp"]
+) {
+  filter: drop-shadow(0 0 4px #bd9bea) ;
+}
+```
+
+**Customization:** Both exact frame paths receive the same glow. Do not set opacity, display, animation, or frame positioning: LoreBary controls the frame changes. Avoid style-string matching such as [style*="opacity: 1"]; it depends on inline formatting and does not reliably describe intermediate animation states.
+
+**Dialog Background, Sketch Replacement, Close, and Unclipped Note**
+
+Replace earlier sketch styling with this block. It supplies the background and Close treatment, replaces the sketch with a click-through mask, and moves tape inside a rectangular note. Keep the Bary animation, wish, footer, and Send rules below.
+
+![Wave Note and Tape Fastener](./images/profile/input-wave-note-and-tape-fastener.png)
+
+```css
+/* Wave dialog panel and local replacement variables. */
+[data-modal=wave] [data-profile=modal-panel] {
+  --wv-bg: #193446;
+  --wv-sketch: url("/img/sketch/bary_pencil.webp");
+  --wv-sketch-color: #91cfed;
+  background: var(--wv-bg) ;
+  border: 1px solid #91cfed ;
+  color: #e2f4ff ;
+}
+
+/* Inner body surface. */
+[data-modal=wave] .surface-post {
+  background: var(--wv-bg) ;
+  border-color: #416b80 ;
+}
+
+/* Container holding the captured decorative sketch. */
+[data-modal=wave]
+div:has(> img[src="/img/sketch/bary_pencil.webp"]) {
+  position: relative ;
+  isolation: isolate;
+  background: var(--wv-bg) ;
+}
+
+/* Keep native sketch geometry while using a masked replacement. */
+[data-modal=wave]
+img[src="/img/sketch/bary_pencil.webp"] {
+  display: block ;
+  opacity: 0 ;
+  pointer-events: none ;
+}
+
+/* Decorative replacement, drawn within its container. */
+[data-modal=wave]
+div:has(> img[src="/img/sketch/bary_pencil.webp"])::before {
+  content: "" ;
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: min(176px, 70%);
+  height: 176px;
+  background: var(--wv-sketch-color);
+  -webkit-mask: var(--wv-sketch) center / contain no-repeat;
+  mask: var(--wv-sketch) center / contain no-repeat;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Close button. */
+[data-modal=wave] button[aria-label="Close"] {
+  background: #49365e ;
+  border: 1px solid #bd9bea ;
+  border-radius: 50% ;
+  color: #e0c7ff ;
+}
+[data-modal=wave] button[aria-label="Close"]:enabled:hover {
+  background: #604778 ;
+  color: #ffd580 ;
+}
+[data-modal=wave] button[aria-label="Close"]:focus-visible {
+  outline: 2px solid #ffd580 ;
+  outline-offset: 2px;
+}
+
+/* Rectangular note with room for an inset tape fastener. */
+[data-modal=wave] section.sketch-note {
+  position: relative ;
+  box-sizing: border-box ;
+  height: auto ;
+  min-height: 100px ;
+  padding: 44px 20px 18px ;
+  background: #122b39 ;
+  border: 1px solid #91cfed ;
+  border-radius: 14px ;
+  clip-path: none ;
+  -webkit-mask: none ;
+  mask: none ;
+  overflow: visible ;
+  color: #e2f4ff ;
+}
+
+/* Remove former note/replacement decoration layers. */
+[data-modal=wave] section.sketch-note::before,
+[data-modal=wave] section.sketch-note::after {
+  content: none ;
+}
+
+/* Let the captured text column fit the new note surface. */
+[data-modal=wave] section.sketch-note > div {
+  position: relative ;
+  width: 100% ;
+  min-width: 0 ;
+  box-sizing: border-box ;
+  padding: 0 ;
+}
+[data-modal=wave] section.sketch-note p {
+  color: #e2f4ff ;
+}
+
+/* Tape stays inside the note instead of crossing its top edge. */
+[data-modal=wave] section.sketch-note
+> img[src="/img/sketch/tape.webp"] {
+  position: absolute ;
+  top: 6px ;
+  left: 50% ;
+  right: auto ;
+  bottom: auto ;
+  transform: translateX(-50%) ;
+  translate: none ;
+  rotate: 0deg ;
+  width: min(140px, 60%) ;
+  height: 28px ;
+  object-fit: contain ;
+  filter: sepia(1) saturate(2) hue-rotate(285deg) ;
+  pointer-events: none ;
+  z-index: 2 ;
+}
+```
+
+**Customization:** Change --wv-bg, --wv-sketch-color, and --wv-sketch on the Wave root. The sketch variable supplies a silhouette mask. The note clears native clipping and decoration layers, and inset tape stays within the note bounds. Verify the longest wish after applying the note styling.
+
+**Changing wish text**
+
+```css
+[data-modal=wave] section.sketch-note [aria-live="polite"] {
+  color: #ffd580 ;
+  text-shadow: 0 1px 3px #10251e ;
+}
+```
+
+**Customization:** The aria-live element carries the changing wish. This selector follows the recorded note structure rather than matching a particular wish sentence.
+
+**Checked/unchecked wish pills**
+
+![Wave Wish Pills](./images/profile/input-wave-wish-pills.png)
+
+```css
+[data-modal=wave] [role="radiogroup"][aria-label="Wish"]
+button[role="radio"][aria-checked="false"] > span {
+  background: #193446 ;
+  border: 1px solid #91cfed ;
+  border-radius: 10px ;
+  color: #e2f4ff ;
+}
+[data-modal=wave] [role="radiogroup"][aria-label="Wish"]
+button[role="radio"][aria-checked="true"] > span {
+  background: #24483e ;
+  border: 1px solid #8fd8bb ;
+  border-radius: 10px ;
+  color: #b8ffe0 ;
+}
+[data-modal=wave] [role="radiogroup"][aria-label="Wish"]
+button[role="radio"]:focus-visible > span {
+  outline: 2px solid #ffd580 ;
+  outline-offset: 2px;
+}
+```
+
+**Customization:** The visible pill surface is the radio button’s child span. aria-checked is the captured radio state; :checked is for native checkbox/radio inputs and would miss these buttons.
+
+**Footer, Send button, plate, and wave icon**
+
+![Wave Footer and Send Button](./images/profile/footer-wave-footer-and-send-button.png)
+
+```css
+[data-modal=wave] :is([data-profile=modal-footer], .surface-footer, [data-modal-footer="true"]) {
+  background: #122b39 ;
+  border-top: 1px solid #416b80 ;
+  color: #e2f4ff ;
+}
+[data-modal=wave] [data-modal-footer-tip="true"] {
+  color: #91cfed ;
+}
+[data-modal=wave] button[aria-label="Send wave"] {
+  background: #24483e ;
+  border: 1px solid #8fd8bb ;
+  border-radius: 10px ;
+}
+[data-modal=wave] button[aria-label="Send wave"] > span {
+  color: #b8ffe0 ;
+}
+[data-modal=wave] button[aria-label="Send wave"]
+> img[src="/img/Icons/btn_pixel_plate_24.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(95deg) ;
+}
+[data-modal=wave] button[aria-label="Send wave"]
+img[src="/img/pixel/wave.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(285deg) ;
+}
+[data-modal=wave] button[aria-label="Send wave"]:enabled:hover {
+  border-color: #ffd580 ;
+}
+```
+
+**Customization:** The plate and nested wave icon receive separate filters. The plate covers much of the button background. Header and Send artwork are separated by their component scopes.
+
+### Section Dialogs
+
+Use `[data-profile="content-panel"][role="dialog"]` directly, without requiring a Profile-scope ancestor. The role distinguishes the dialog form from regular full-section panels.
+
+**Dialog root and surfaces — mobile**
+
+![Section Dialog Surfaces](./images/profile/header-section-dialog-surfaces.png)
+
+```css
+[data-profile="content-panel"][role="dialog"] {
+  --sd-bg: #193446;
+  --sd-edge: #91cfed;
+  --sd-text: #e2f4ff;
+  background: var(--sd-bg) !important;
+  border: 1px solid var(--sd-edge) !important;
+  color: var(--sd-text) !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="content-header"] {
+  background: #49365e !important;
+  border-bottom: 1px solid #bd9bea !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="content-title"] {
+  color: #e0c7ff !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="content-body"] {
+  background: var(--sd-bg) !important;
+}
+```
+
+**Customization:** The root retains content-panel, not modal-panel. Add [data-section="gallery"] or another captured section value directly to this root to limit a rule to one section. Keep the root-variable block with its dependent examples.
+
+**Previous/Next section arrows and Close**
+
+![Section Dialog Navigation and Close Buttons](./images/profile/header-section-dialog-navigation-and-close-buttons.png)
+
+```css
+[data-profile="content-panel"][role="dialog"] button:is(
+  [aria-label^="Previous section:"],
+  [aria-label^="Next section:"],
+  [aria-label="Close"]
+) {
+  background: #24483e !important;
+  border: 1px solid #8fd8bb !important;
+  color: #b8ffe0 !important;
+}
+[data-profile="content-panel"][role="dialog"] button[aria-label^="Previous section:"]
+img[src$="/arrow-left-v2.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(95deg) !important;
+}
+[data-profile="content-panel"][role="dialog"] button[aria-label^="Next section:"]
+img[src$="/arrow-right-v2.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(155deg) !important;
+}
+[data-profile="content-panel"][role="dialog"] button:is(
+  [aria-label^="Previous section:"],
+  [aria-label^="Next section:"],
+  [aria-label="Close"]
+):enabled:hover {
+  background: #306052 !important;
+  color: #ffd580 !important;
+}
+```
+
+**Customization:** Label-prefix matching accommodates changing destination names. The artwork selectors use recorded filename suffixes within the precise arrow buttons. Close font icons inherit button color unless explicitly colored elsewhere.
+
+**Header versus body action placement**
+
+```css
+[data-profile="content-panel"][role="dialog"] [data-profile="content-actions"] {
+  gap: 8px !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="content-header"]
+[data-profile="content-actions"] {
+  background: #49365e !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="content-body"]
+[data-profile="content-actions"] {
+  background: #122b39 !important;
+}
+```
+
+**Customization:** The recorded dialog layout can place actions in the body, whereas other content panels place them in the header. Target content-actions under the dialog root when both placements should match. The two placement-specific rules apply only where those relationships exist. Do not move controls to make the selectors match.
+
+**Search and Filter/Sort triggers**
+
+![Section Dialog Search and Sort](./images/profile/header-section-dialog-search-and-sort.png)
+
+```css
+[data-profile="content-panel"][role="dialog"] [data-profile="search"] .header-search {
+  background: #122b39 !important;
+  border: 1px solid var(--sd-edge) !important;
+  border-radius: 10px !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="search"] .header-search-input {
+  background: transparent !important;
+  color: var(--sd-text) !important;
+  caret-color: #ffd580;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="search"] .header-search-input::placeholder {
+  color: var(--sd-edge) !important;
+  opacity: 1 !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="search"] .fa-search {
+  color: #ffd580 !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="content-type-filter"]
+button[aria-label="Filter favorites by type"],
+[data-profile="content-panel"][role="dialog"] [data-profile="content-sort"]
+button[aria-label="Sort items"] {
+  background: #24483e !important;
+  border: 1px solid #8fd8bb !important;
+  color: #b8ffe0 !important;
+}
+[data-profile="content-panel"][role="dialog"] :is(
+  button[aria-label="Filter favorites by type"],
+  button[aria-label="Sort items"]
+) > span {
+  color: #b8ffe0 !important;
+}
+[data-profile="content-panel"][role="dialog"] :is(
+  button[aria-label="Filter favorites by type"],
+  button[aria-label="Sort items"]
+) > img {
+  filter: sepia(1) saturate(2) hue-rotate(95deg) !important;
+}
+```
+
+**Customization:** Root-based targeting reaches either action placement. The Filter label is specific to Favorites. Only existing matching controls are styled; not every section has Filter or Sort. This covers triggers, not menu contents. Image filtering stays inside named trigger buttons.
+
+**Scroll area**
+
+```css
+[data-profile="content-panel"][role="dialog"] [data-profile="content-scroll"] {
+  background: #122b39 !important;
+  scrollbar-color: #91cfed #122b39;
+}
+```
+
+**Customization:** Change the scroll surface and supported scrollbar colors. Keep native height, min-height, overflow, and scroll-container structure; these determine which area actually scrolls. This example does not force hidden scrollbars to appear or replace the dialog with page scrolling.
+
+**Footer, Back to top, and Okay**
+
+![Section Dialog Footer and Okay Button](./images/profile/footer-section-dialog-footer-and-okay-button.png)
+
+```css
+[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"] {
+  background: #122b39 !important;
+  border-top: 1px solid #416b80 !important;
+  color: var(--sd-text) !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"]
+[data-modal-footer-tip] {
+  color: #91cfed !important;
+}
+[data-profile="content-panel"][role="dialog"] .back-to-top-button button {
+  background: #24483e !important;
+  border: 1px solid #8fd8bb !important;
+  border-radius: 50% !important;
+}
+[data-profile="content-panel"][role="dialog"] .back-to-top-button
+img[src="/img/sketch/arrow_up.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(95deg) !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"]
+button.dashboard-action-button:has(img[src="/img/pixel/check.webp"]) {
+  border: 1px solid #8fd8bb !important;
+  border-radius: 10px !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"]
+button.dashboard-action-button:has(img[src="/img/pixel/check.webp"])
+> img[src="/img/Icons/btn_pixel_plate_24.webp"] {
+  filter: sepia(1) saturate(2) hue-rotate(95deg) !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"]
+button.dashboard-action-button:has(img[src="/img/pixel/check.webp"]) > span {
+  color: #b8ffe0 !important;
+}
+[data-profile="content-panel"][role="dialog"] [data-profile="content-footer"]
+button.dashboard-action-button img[src="/img/pixel/check.webp"] {
+  filter: drop-shadow(0 0 3px #8fd8bb) !important;
+}
+```
+
+**Customization:** Back to top can appear floating in the body or in the footer; the dialog-root selector accommodates both without moving it or forcing it visible. Okay is identified by the footer action button containing its native checkmark, not by invented aria-label text. Its plate, label, and checkmark stay separate.
+
+---
+
 ## Profile Selector Quick Reference
 
 ### Additional Component and State Selectors
