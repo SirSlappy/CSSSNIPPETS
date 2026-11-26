@@ -42,6 +42,7 @@
 - [Profile Background and Layout](#profile-background-and-layout)
   - [Background Size, Position, and Tint](#background-size-position-and-tint)
   - [Body and Grid Spacing](#body-and-grid-spacing)
+  - [Scrollable Screen Assets](#scrollable-screen-assets)
 - [Profile Actions](#profile-actions)
   - [Letter, Wave, Follow, and Alerts](#letter-wave-follow-and-alerts)
 - [Content Sections](#content-sections)
@@ -3104,11 +3105,11 @@ These examples adjust the background selected in LoreBary’s native settings. T
 `cover` fills the background area while keeping the image’s proportions. Some artwork may be cropped.
 
 ```css
-/* Background image: fill the area without repeating. */
+/* Background image: repeat a 240px-wide tile. */
 [data-profile="page-background"] {
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
+  background-size: 240px auto !important;
+  background-position: left top !important;
+  background-repeat: repeat ;
 }
 ```
 
@@ -3246,6 +3247,71 @@ For different vertical and horizontal padding:
 ```
 
 **Gap note:** These rules space the grid’s direct sections. They do not change spacing inside individual cards.
+
+## Scrollable Screen Assets
+
+Use the Profile’s page-tint layer for foreground artwork that follows visitors as they scroll. This example puts matching artwork in the upper corners and repeats a decorative strip along the bottom. Clicks and taps pass through to the profile controls.
+
+Paste this block into **Profile CSS** and replace the two image URLs. If you installed the earlier Scrollable Screen Assets example, replace that whole block with this one.
+
+```css
+[data-profile=page-tint] {
+  --screen-corner: url("/api/images/YOUR_CORNER_IMAGE_ID");
+  --screen-border: url("/api/images/YOUR_BORDER_IMAGE_ID");
+  --screen-top: 75px;
+  --screen-corner-width: 200px;
+  --screen-border-height: 30px;
+
+  /* Start below the header and let the artwork extend past the strip. */
+  position: sticky !important;
+  inset: auto !important;
+  top: var(--screen-top) !important;
+  margin-top: -120svh !important;
+  width: 100% !important;
+  height: 120px !important;
+  overflow: visible !important;
+  background: transparent !important;
+  transform: none !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  z-index: 80 !important;
+}
+
+/* Both layers reach from the header clearance to the visible bottom edge. */
+[data-profile=page-tint]::before,
+[data-profile=page-tint]::after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(100dvh - var(--screen-top));
+  pointer-events: none;
+  animation: none;
+}
+
+/* Upper-left corner and a repeating strip along the bottom. */
+[data-profile=page-tint]::before {
+  background:
+    var(--screen-corner) left top / var(--screen-corner-width) auto no-repeat,
+    var(--screen-border) left bottom / auto var(--screen-border-height) repeat-x;
+}
+
+/* Mirror the corner artwork on the right. */
+[data-profile=page-tint]::after {
+  background: var(--screen-corner) left top / var(--screen-corner-width) auto no-repeat;
+  transform: scaleX(-1);
+}
+
+@media (max-width: 780px) {
+  [data-profile=page-tint] {
+    --screen-top: 12px;
+    --screen-corner-width: 76px;
+    --screen-border-height: 20px;
+  }
+}
+```
+
+Adjust `--screen-top` if the upper corners overlap your header. The decoration height accounts for that same offset, so the bottom strip still reaches the visible bottom edge. For bottom artwork only, set `--screen-corner: none;`.
 
 ## Profile Actions
 
@@ -3692,14 +3758,14 @@ Content chains use background artwork, not `<img>` elements. Both use `/img/nav/
 ```css
 /* Left content chain: artwork, size, and position. */
 [data-profile="content-chain-left"] {
-  background-image: url("/img/nav/break_link.webp") !important;
+  background-image: url("/img/nav/break_link.webp") ;
   filter: sepia(1) saturate(2) hue-rotate(95deg)
     drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55)) !important;
 }
 
 /* Right content chain: independent tint and position. */
 [data-profile="content-chain-right"] {
-  background-image: url("/img/nav/break_link.webp") !important;
+  background-image: url("/img/nav/break_link.webp") ;
   filter: sepia(1) saturate(2) hue-rotate(285deg)
     drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55)) !important;
 }
@@ -4219,7 +4285,7 @@ The captured Bundles section still uses `[data-profile="grid"][data-section="bun
 [data-card="bundles"] [data-profile="card-tip"] > p {
   color: #ffeadf ;
 }
-
+```
 **Customization:** Style the card title strip and description separately from the section heading.
 
 The captured header includes search but no sort trigger. Use `bundles` with the shared body, scroll, grid, empty-state, and footer examples in the shared content-section examples. The heading image is `templates.webp`, despite the section being named Bundles.
@@ -5533,7 +5599,7 @@ The exact wrapper is `[data-profile="post-embed"][data-embed="published"]`. This
 
 ```css
 /* Published embed-card surface. */
-[data-profile="post-embed"][data-embed="published"] [data-profile="embed-card"] {
+[data-embed="published"] [data-profile="embed-card"] {
   background: #24483e ;
   border: 1px solid #8fd8bb ;
   border-radius: 12px ;
@@ -5541,27 +5607,27 @@ The exact wrapper is `[data-profile="post-embed"][data-embed="published"]`. This
 }
 
 /* Embedded content title. */
-[data-profile="post-embed"][data-embed="published"] [data-profile="embed-title"] {
+[data-embed="published"] [data-profile="embed-title"] {
   color: #b8ffe0 ;
   text-shadow: 0 1px 3px #10251e ;
 }
 
 /* Native corner artwork, separate from the content cover. */
-[data-profile="post-embed"][data-embed="published"] [data-profile="embed-card"]
+[data-embed="published"] [data-profile="embed-card"]
 > img[src="/img/Icons/icon_action_create_clean.svg"] {
   filter: sepia(1) saturate(2) hue-rotate(95deg) !important;
   opacity: 0.65 ;
 }
 
 /* Published corner-ribbon surface and text. */
-[data-profile="post-embed"][data-embed="published"] [data-profile="embed-card"] .rotate-45 {
+[data-embed="published"] [data-profile="embed-card"] .rotate-45 {
   background: #24483e !important;
   color: #b8ffe0 !important;
   text-shadow: none ;
 }
 
 /* Description paragraph in the captured text column. */
-[data-profile="post-embed"][data-embed="published"] [data-profile="embed-card"]
+[data-embed="published"] [data-profile="embed-card"]
 > div > p {
   color: #e2f4ff ;
 }
@@ -5579,7 +5645,7 @@ The exact wrapper is `[data-profile="post-embed"][data-embed="updated"]`. This i
 
 ```css
 /* Updated embed-card surface. */
-[data-profile="post-embed"][data-embed="updated"] [data-profile="embed-card"] {
+[data-embed="updated"] [data-profile="embed-card"] {
   background: #193446 ;
   border: 1px solid #91cfed ;
   border-radius: 12px ;
@@ -5587,27 +5653,27 @@ The exact wrapper is `[data-profile="post-embed"][data-embed="updated"]`. This i
 }
 
 /* Embedded content title. */
-[data-profile="post-embed"][data-embed="updated"] [data-profile="embed-title"] {
+[data-embed="updated"] [data-profile="embed-title"] {
   color: #b9e6ff ;
   text-shadow: 0 1px 3px #10251e ;
 }
 
 /* Native corner artwork, separate from the content cover. */
-[data-profile="post-embed"][data-embed="updated"] [data-profile="embed-card"]
+[data-embed="updated"] [data-profile="embed-card"]
 > img[src="/img/Icons/feed_filter_updates.webp"] {
   filter: sepia(1) saturate(2) hue-rotate(155deg) ;
   opacity: 0.65 ;
 }
 
 /* Updated corner-ribbon surface and text. */
-[data-profile="post-embed"][data-embed="updated"] [data-profile="embed-card"] .rotate-45 {
+[data-embed="updated"] [data-profile="embed-card"] .rotate-45 {
   background: #193446 !important;
   color: #b9e6ff !important;
   text-shadow: none ;
 }
 
 /* Description paragraph in the captured text column. */
-[data-profile="post-embed"][data-embed="updated"] [data-profile="embed-card"]
+[data-embed="updated"] [data-profile="embed-card"]
 > div > p {
   color: #e2f4ff ;
 }
@@ -6351,15 +6417,6 @@ The supplied native CSS now establishes that div.editor-divider-paws draws `/img
 
 The example filters only this dedicated divider, preserving paw size, repetition, and native pixel rendering. It does not filter its post parent or user artwork. Set opacity back to .75 for native softness; filter:none restores original artwork colors. The filter changes the rendered divider artwork; adjust its hue and opacity to suit your palette.
 
-For an About-editor variant or another editor, confirm that its own captured ancestor and divider markup match before adapting the published-post scope.
-
-The capture also contains inline-timestamp elements. Their detailed styling is not covered by this divider tutorial.
-
-**Table overflow: additional evidence**
-
-The supplied long-table example still has no dedicated table-only scroll wrapper. A long unbroken number appears in a td. The preview’s ancestor clips content and sets max-height:240px; post-more links to View all.
-
-Opening a full post does not by itself establish horizontal table scrolling. Keep table layout changes separate from the overall post clipping.
 ---
 
 ## HTML Profile Options
