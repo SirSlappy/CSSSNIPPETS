@@ -32,6 +32,7 @@
   - [Custom Header Button Icons](#custom-header-button-icons)
   - [Custom Navigation Icons](#custom-navigation-icons)
   - [Custom Footer Button Icons](#custom-footer-button-icons)
+  - [Story Goals Footer Button](#story-goals-footer-button)
   - [Icon Glow — Search Example](#icon-glow-search-example)
   - [Rainbow Button Background — Search Example](#rainbow-button-background-search-example)
   - [Icon Hover Enlargement — Gallery Example](#icon-hover-enlargement-gallery-example)
@@ -46,12 +47,24 @@
   - [Shared Button Hover Brightness — Header Examples](#shared-button-hover-brightness-header-examples)
   - [Button Keyboard Focus Outlines — Header Examples](#button-keyboard-focus-outlines-header-examples)
   - [Rainbow Icon Recoloring — Gallery Example](#rainbow-icon-recoloring-gallery-example)
+  - [Add Character Button](#add-character-button)
+- [Time Skip](#time-skip)
+  - [Time Skip Message](#time-skip-message)
+  - [Time Skip Edit and Delete Buttons](#time-skip-edit-and-delete-buttons)
 - [Message Actions and Input Controls](#message-actions-and-input-controls)
   - [Individual Message Action Colors and Hover](#individual-message-action-colors-and-hover)
   - [Custom Menu Button Icon](#custom-menu-button-icon)
   - [Custom Input Button Icons](#custom-input-button-icons)
   - [Custom Draft Version Controls](#custom-draft-version-controls)
   - [Custom Message Action Icons](#custom-message-action-icons)
+  - [Calls and Fast Forward](#calls-and-fast-forward)
+  - [Call Notifications](#call-notifications)
+  - [Disconnected Call Indicator](#disconnected-call-indicator)
+  - [Call Entry Options](#call-entry-options)
+  - [Fast Forward / Speed Up](#fast-forward--speed-up)
+- [Message Decorations and Indicators](#message-decorations-and-indicators)
+  - [Bookmarked Message Indicator](#bookmarked-message-indicator)
+  - [Backup Model Icon](#backup-model-icon)
   - [Managing Tinting, Filters, and Icon Replacements](#managing-tinting-filters-and-icon-replacements)
 - [Write for Me](#write-for-me)
   - [Write Menu Heading Colors](#write-menu-heading-colors)
@@ -87,6 +100,56 @@
   - [Scene Notes Additional Buttons](#scene-notes-additional-buttons)
   - [Scene Notes Keyboard Focus](#scene-notes-keyboard-focus)
   - [Custom Scene Notes Template Icons](#custom-scene-notes-template-icons)
+- [Multiplayer](#multiplayer)
+  - [Multiplayer Island Background and Controls](#multiplayer-island-background-and-controls)
+  - [Multiplayer Icon Recoloring](#multiplayer-icon-recoloring)
+  - [Custom Multiplayer Icon](#custom-multiplayer-icon)
+  - [Multiplayer Participant Avatars](#multiplayer-participant-avatars)
+  - [Multiplayer Author Names](#multiplayer-author-names)
+  - [Multiplayer Session Notification Cards](#multiplayer-session-notification-cards)
+  - [Multiplayer Notification Delete Button](#multiplayer-notification-delete-button)
+  - [Multiplayer Message Reaction Button](#multiplayer-message-reaction-button)
+  - [Multiplayer Reaction Counters](#multiplayer-reaction-counters)
+  - [Floating Player-Chat Toggle](#floating-player-chat-toggle)
+  - [Player-Chat Window Background and Header](#player-chat-window-background-and-header)
+  - [Player-Chat Text and Buttons](#player-chat-text-and-buttons)
+  - [Player-Chat Message Bubbles](#player-chat-message-bubbles)
+  - [Player-Chat Composer](#player-chat-composer)
+  - [Player-Chat Images GIFs and Stickers](#player-chat-images-gifs-and-stickers)  
+- [Universes](#universes)
+  - [Universe Sidebar Background and Header](#universe-sidebar-background-and-header)
+  - [Universe Sidebar Titles and Text](#universe-sidebar-titles-and-text)
+  - [Universe Selection Radio Buttons](#universe-selection-radio-buttons)
+  - [Universe Cards and Content Panels](#universe-cards-and-content-panels)
+  - [Universe Input Fields and Dropdowns](#universe-input-fields-and-dropdowns)
+  - [Universe Buttons and Icons](#universe-buttons-and-icons)
+  - [Universe Header Badge](#universe-header-badge)
+  - [Universe Pills and Tags](#universe-pills-and-tags)
+  - [Universe Additional Input Controls](#universe-additional-input-controls)
+  - [Universe Sidebar Scrollbar](#universe-sidebar-scrollbar)
+  - [Universe Clock](#universe-clock)
+  - [Universe Minimap](#universe-minimap)
+  - [Universe Recall Button](#universe-recall-button)  
+- [Reply Choices](#reply-choices)
+  - [Reply Choices Container](#reply-choices-container)
+  - [Reply Choices Gradient Border](#reply-choices-gradient-border)
+  - [Reply Choices Question](#reply-choices-question)
+  - [Individual Reply Choices](#individual-reply-choices)
+  - [Alternating Reply Choice Colors](#alternating-reply-choice-colors)
+  - [Rainbow Reply Choice Borders](#rainbow-reply-choice-borders)
+  - [Reply Choice Icons](#reply-choice-icons)
+  - [Rainbow Reply Choice Icons and Pointers](#rainbow-reply-choice-icons-and-pointers)
+  - [Reply Choice Dialogue Text](#reply-choice-dialogue-text)
+  - [Remove Dialogue Background Decorations](#remove-dialogue-background-decorations)
+  - [Reply Choices Action Buttons](#reply-choices-action-buttons)
+  - [Regenerate and Dismiss Suggestions](#regenerate-and-dismiss-suggestions)
+- [Pinned Scenes](#pinned-scenes)
+  - [Pinned Scene Card](#pinned-scene-card)
+  - [Pinned Scene Decorative Tape](#pinned-scene-decorative-tape)
+  - [Custom Pinned Scene Tape](#custom-pinned-scene-tape)
+  - [Pinned Scene Unpin Button](#pinned-scene-unpin-button)
+
+
 ---
 
 ### How to Import CSS Images in Lorebary
@@ -813,6 +876,56 @@ Replace the footer control icons for Web Search, Director Pass, Auto Mode, Revie
 
 ---
 
+The Story Goals button appears in the Laboratory footer. Its appearance can be customized to match the rest of your chat controls.
+Use [data-lab="story-goals"] to customize the Story Goals button without changing the other footer controls.
+```
+/* Story Goals footer button */
+[data-lab="footer"] [data-lab="story-goals"] {
+  background: #30243f;
+  border: 1px solid #b49aff;
+  border-radius: 10px;
+  color: #ffe3f4;
+}
+
+/* Story Goals icon */
+[data-lab="footer"] [data-lab="story-goals"] img {
+  filter: brightness(0) saturate(100%)
+    invert(79%) sepia(28%) saturate(1060%)
+    hue-rotate(288deg);
+}
+
+/* Hover */
+@media (hover: hover) {
+  [data-lab="footer"] [data-lab="story-goals"]:hover {
+    background: #453457;
+    border-color: #ff79ca;
+  }
+}
+
+/* Story Goals enabled */
+[data-lab="story-goals"][aria-pressed="true"] {
+  background: #453457;
+  box-shadow: 0 0 0 1px #ff79ca, 0 0 8px #ff79ca55;
+  color: #ffe17b;
+}
+
+/* Story Goals disabled */
+[data-lab="story-goals"][aria-pressed="false"] {
+  background: #30243f;
+  box-shadow: none;
+}
+```
+Customization:
+- background changes the button's surface.
+- border controls its outline.
+- border-radius adjusts its corners.
+- color changes the button's text color.
+- filter recolors the Story Goals icon.
+- :hover provides a separate appearance when the pointer is over the button.
+The button can also be targeted directly using [data-lab="story-goals"] if you prefer a shorter selector.
+
+---
+
 ### Icon Glow — Search Example
 
 Give an icon a neon halo, using Search as the example. ![Glowing Search Icon preview](./images/header-glowing-search-icon.png)
@@ -1187,9 +1300,156 @@ Give keyboard users a visible pale-yellow outline on the main header actions.
 - `saturate(1.8)` strengthens the icon colors; `contrast(1.2)` sharpens their separation.
 - The existing **Animated Rainbow Gallery Button** tutorial animates `filter: hue-rotate(...)` on the *parent button*. This icon filter is static on the child image; together they create the observed changing rainbow icon.
 
+## Additional Characters
+
+The Laboratory includes an Add Character button for introducing additional characters into the current scene. Its circular button and image icon can be styled independently.
+
+### Add Character Button
+
+Use `[aria-label="Add a character to this scene"]` to customize the button's appearance.
+
+```css
+/* Add Character button */
+button[aria-label="Add a character to this scene"] {
+  background: #211b31;
+  border: 2px solid #65ef9a;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px #0005;
+}
+
+/* Add Character icon */
+button[aria-label="Add a character to this scene"] img {
+  filter: grayscale(1) sepia(1)
+    saturate(3) hue-rotate(85deg)
+    brightness(1.2);
+}
+```
+
+**Customization:**
+
+- `background` changes the button's surface.
+- `border` controls its outline and color.
+- `border-radius` adjusts the button's shape. Use `50%` for a circular appearance.
+- `box-shadow` adds depth beneath the button.
+- The nested `img` selector targets the Add Character icon.
+- `filter` recolors the icon without replacing its artwork.
+
+---
+## Time Skip
+
+Time Skip allows the story to advance forward in time. In the Laboratory, it includes a dedicated in-chat message, editing controls, and a menu for configuring the time skip.
+
+These elements can be customized independently of the regular chat messages.
+
+### Time Skip Message
+
+The in-chat Time Skip message includes a decorative card, clock icon, title, description, and separator.
+
+Use `[data-lab="time-skip"]` with its internal elements to style the message without changing the Time Skip button in the Laboratory footer.
+
+```css
+/* Time Skip message card */
+[data-lab="time-skip"] > div.relative > div {
+  background: #29243e;
+  border: 2px solid #ffad55;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px #0006;
+}
+
+/* Clock icon */
+[data-lab="time-skip"] .fa-clock {
+  color: #ffe36b;
+}
+
+/* Clock icon container */
+[data-lab="time-skip"] div:has(> .fa-clock) {
+  background: #453457;
+  border: 1px solid #ffe36b;
+}
+
+/* Main message text */
+[data-lab="time-skip"] p {
+  color: #ffe3f4;
+}
+
+/* Highlighted text */
+[data-lab="time-skip"] p span {
+  color: #ffe36b;
+}
+
+/* Description */
+[data-lab="time-skip"] p.mt-1 {
+  color: #c5afd4;
+}
+
+/* Decorative separator */
+[data-lab="time-skip"] > .flex-1 {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #cf83ff,
+    #54e8ef,
+    transparent
+  );
+}
+```
+
+**Customization:**
+- `div.relative > div` styles the in-chat Time Skip card.
+- `.fa-clock` recolors the clock icon.
+- `div:has(> .fa-clock)` styles the clock's surrounding container.
+- `p` controls the main message text.
+- `p span` highlights text inside the message.
+- `p.mt-1` styles the secondary description.
+- `.flex-1` creates the decorative separator beside the message.
+
+The gradient separator can be replaced with a solid color or a different gradient.
 
 ---
 
+### Time Skip Edit and Delete Buttons
+
+Time Skip messages include separate Edit and Delete controls. Each button can use its own border, background, and icon color.
+
+```css
+/* Edit button */
+[data-lab="time-skip"] > button[aria-label="Edit"] {
+  background: #30243f;
+  border: 1px solid #b49aff;
+  border-radius: 9px;
+}
+
+/* Edit icon */
+[data-lab="time-skip"] > button[aria-label="Edit"] img {
+  filter: sepia(1) saturate(2)
+    hue-rotate(355deg);
+}
+
+/* Delete button */
+[data-lab="time-skip"] > button[aria-label="Delete"] {
+  background: #30243f;
+  border: 1px solid #ff548d;
+  border-radius: 9px;
+}
+
+/* Delete icon */
+[data-lab="time-skip"] > button[aria-label="Delete"] img {
+  filter: sepia(1) saturate(3)
+    hue-rotate(285deg);
+}
+```
+
+**Customization:**
+- `[aria-label="Edit"]` targets the Time Skip editing control.
+- `[aria-label="Delete"]` targets its deletion control.
+- `background` changes the button surface.
+- `border` creates a colored outline.
+- `border-radius` adjusts the corners.
+- The nested `img` selectors recolor each button's icon.
+
+The direct-child selector (`> button`) keeps these rules focused on the in-chat message controls.
+
+---
 
 ## Message Actions and Input Controls
 
@@ -1403,6 +1663,233 @@ Replace the icons on individual chat messages, including Bookmark, Regenerate, B
 - The Regenerate selector targets the main image inside its button rather than other nested artwork.
 - `filter: none` = preserves your image colors.
 - Replace each sample image URL with your own.
+
+---
+## Calls and Fast Forward
+
+The Laboratory includes in-chat call notifications and a Fast Forward control for accelerating text streaming. These elements can be customized separately from ordinary messages and footer controls.
+
+### Call Notifications
+
+Call notifications use `[data-lab="call"]`. Customize their text and decorative separator lines.
+
+```css
+/* Call notification text */
+[data-lab="call"] {
+  color: #ffe3f4;
+}
+
+/* Decorative separator */
+[data-lab="call"] > div.flex-1.h-px {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #b49aff,
+    transparent
+  );
+}
+
+/* Notification label */
+[data-lab="call"] span.text-gray-400 {
+  color: #ffe3f4;
+}
+
+/* Call duration */
+[data-lab="call"] span.tabular-nums {
+  color: #c5afd4;
+}
+```
+
+**Customization:**
+
+- `[data-lab="call"]` targets the call notification.
+- `color` changes the notification's text color.
+- `.flex-1.h-px` styles its decorative separator.
+- `.text-gray-400` targets the secondary notification label.
+- `.tabular-nums` styles the call duration.
+
+---
+
+### Disconnected Call Indicator
+
+The disconnected-call indicator includes a phone icon inside a decorated container.
+
+```css
+/* Disconnected call container */
+[data-lab="call"] > div:has(> i.fa-phone-slash) {
+  background: #29243e;
+  border: 1px solid #b49aff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #0005;
+}
+
+/* Disconnected phone icon */
+[data-lab="call"] i.fa-phone-slash {
+  color: #ff548d;
+}
+```
+
+**Customization:**
+
+- `div:has(> i.fa-phone-slash)` targets the container holding the disconnected-call icon.
+- `background` changes the container's fill.
+- `border` controls its outline.
+- `border-radius` adjusts its corners.
+- `box-shadow` adds depth.
+- `.fa-phone-slash` recolors the disconnected-call icon.
+
+---
+
+### Call Entry Options
+
+Call notifications include an Entry Options button, which can be styled independently from ordinary message actions.
+
+```css
+/* Call Entry Options button */
+[data-lab="call"] button[aria-label="Entry options"] {
+  background: #211b31;
+  border: 1px solid #54e8ef;
+  border-radius: 9px;
+  color: #54e8ef;
+}
+
+/* Entry Options icon */
+[data-lab="call"] button[aria-label="Entry options"] i {
+  color: #54e8ef;
+}
+```
+
+**Customization:**
+
+- `[aria-label="Entry options"]` targets the call's options button.
+- `background` changes its surface.
+- `border` controls its outline.
+- `border-radius` adjusts its corners.
+- `color` changes the button's text.
+- The nested `i` selector recolors its icon.
+
+---
+
+### Fast Forward / Speed Up
+
+The Fast Forward control uses `[data-lab="speed-up-stream"]`. Customize its background, border, text, and icons independently from the regular Laboratory controls.
+
+```css
+/* Fast Forward control */
+[data-lab="speed-up-stream"] {
+  background: #211b31;
+  border: 1px solid #ffad55;
+  border-radius: 9px;
+  color: #ffad55;
+}
+
+/* Fast Forward image icon */
+[data-lab="speed-up-stream"] img {
+  filter: grayscale(1) sepia(1)
+    saturate(2.2) hue-rotate(355deg)
+    brightness(1.18);
+}
+
+/* Fast Forward SVG icon */
+[data-lab="speed-up-stream"] svg {
+  color: #ffad55;
+}
+```
+
+**Customization:**
+
+- `background` changes the control's surface.
+- `border` sets its outline.
+- `border-radius` adjusts its corners.
+- `color` changes its text color.
+- `img` recolors image-based icons.
+- `svg` recolors SVG icons.
+
+### Fast Forward Speed Multiplier Badge
+
+The Fast Forward button displays a small multiplier badge indicating the current streaming speed, such as `8×`. Customize its background, text, border, and positioning.
+
+```css
+/* Fast Forward multiplier badge */
+[data-lab="speed-up-stream"] > span[aria-hidden="true"] {
+  background: #ff79ca;
+  color: #211b31;
+  border: 1px solid #ffe36b;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px #0005;
+  font-size: 9px;
+  font-weight: 800;
+}
+```
+
+**Customization:**
+
+- `background` changes the badge's fill.
+- `color` changes the multiplier text.
+- `border` creates a decorative outline.
+- `border-radius` controls the badge's shape.
+- `box-shadow` adds depth beneath the badge.
+- `font-size` adjusts the multiplier's size.
+- `font-weight` controls its emphasis.
+
+The badge's position can also be adjusted using `bottom` and `right`:
+
+```css
+/* Adjust multiplier badge position */
+[data-lab="speed-up-stream"] > span[aria-hidden="true"] {
+  bottom: -3px;
+  right: -5px;
+}
+```
+
+---
+
+## Message Decorations and Indicators
+
+The Laboratory uses small icons and indicators to communicate additional information about messages. These elements can be recolored independently from message text, backgrounds, and action buttons.
+
+### Bookmarked Message Indicator
+
+Bookmarked messages display a small bookmark icon. Customize its color and optional glow without changing the Bookmark action button.
+
+```css
+/* Bookmarked message indicator */
+i.fa-bookmark[title="Bookmarked"] {
+  color: #ffad55;
+  text-shadow: 0 0 5px #ffad5566;
+}
+```
+
+**Customization:**
+
+- `color` changes the bookmark indicator's color.
+- `text-shadow` adds a soft glow around the icon.
+- Increase the shadow's blur radius for a stronger glow.
+- Remove `text-shadow` for a flat appearance.
+
+---
+
+### Backup Model Icon
+
+The Laboratory includes a backup model indicator that uses an image icon. Its appearance can be adjusted using CSS filters.
+
+```css
+/* Backup model icon */
+[data-lab="backup-model"] {
+  filter: grayscale(1) sepia(1)
+    saturate(3) hue-rotate(285deg)
+    brightness(1.2);
+  opacity: 1;
+}
+```
+
+**Customization:**
+
+- `grayscale()` removes the original colors.
+- `sepia()` and `saturate()` prepare the icon for recoloring.
+- `hue-rotate()` changes its tint.
+- `brightness()` adjusts its lightness.
+- `opacity` controls the icon's transparency.
 
 ---
 
@@ -2282,3 +2769,1037 @@ Replace the artwork for all eight Scene Notes templates. ![Custom Scene Notes Te
 - Replace each `/api/images/...` address with your own uploaded image URL.
 
 ---
+## Multiplayer
+
+Multiplayer sessions introduce participant portraits, player-specific author names, session notifications, message reactions, and a separate player-chat window. These elements can be customized independently of the standard Laboratory interface.
+
+### Multiplayer Island Background and Controls
+
+The Multiplayer Island appears near the top of the Laboratory. It contains the multiplayer icon, participant portraits, session status, and Summon or Stop button.
+
+```css
+/* Multiplayer island */
+[data-lab="mp-island"] {
+  background: #29243e ;
+  border: 2px solid #8deaff !important;
+  border-radius: 999px ;
+  box-shadow: 0 3px 12px #0006, 0 0 10px #ff79ca33 !important;
+}
+
+/* Multiplayer label */
+[data-lab="mp-island"] > span:first-child,
+[data-lab="mp-island"] > span:first-child span {
+  color: #ffe17b ;
+  font-weight: 800 ;
+}
+
+/* Internal divider */
+[data-lab="mp-island"] > span:nth-child(2) {
+  background: #8deaff ;
+}
+
+/* Session status */
+[data-lab="mp-island"] > span:nth-last-of-type(1) {
+  color: #8deaff ;
+  font-weight: 700 ;
+  opacity: 1 ;
+}
+
+/* Summon / Stop button */
+[data-lab="mp-island"] > button:last-child {
+  background: #171b2b ;
+  border: 1px solid #ff79ca ;
+  border-radius: 999px ;
+  color: #ff79ca ;
+}
+
+/* Summon / Stop button text */
+[data-lab="mp-island"] > button:last-child span {
+  color: #ff79ca ;
+  font-weight: 800 ;
+}
+
+/* Button hover */
+@media (hover: hover) {
+  [data-lab="mp-island"] > button:last-child:hover {
+    background: #453457 ;
+    border-color: #ffe17b ;
+  }
+}
+```
+
+**Customization:**
+- `background` changes the island's main surface.
+- `border` and `box-shadow` control its outline and glow.
+- `span:first-child` targets the Multiplayer label.
+- `span:nth-child(2)` styles the internal divider.
+- `span:nth-last-of-type(1)` styles the session status.
+- `button:last-child` targets the Summon or Stop control.
+
+---
+
+### Multiplayer Icon Recoloring
+
+The Multiplayer Island uses the native image `/img/pixel/multiplayer.webp`. Recolor it without changing the surrounding island.
+
+```css
+[data-lab="mp-island"] img[src="/img/pixel/multiplayer.webp"] {
+  filter: brightness(0) invert(1) ;
+  opacity: 1 ;
+}
+```
+
+**Customization:**
+- `filter` changes the icon's appearance; the example produces white artwork.
+- `opacity: 1` keeps the icon fully visible.
+- Replace the filter with a different combination to create a colored tint.
+
+---
+
+### Custom Multiplayer Icon
+
+Replace the Multiplayer Island icon with your own uploaded artwork.
+
+```css
+[data-lab="mp-island"] img[src="/img/pixel/multiplayer.webp"] {
+  content: url("/api/images/YOUR_IMAGE_ID") ;
+  object-fit: contain ;
+  filter: none ;
+}
+```
+
+**Customization:**
+- `YOUR_IMAGE_ID` is the path of your uploaded artwork.
+- `content: url(...)` replaces the native image.
+- `filter: none` preserves the colors of your replacement.
+- `object-fit: contain` maintains its proportions.
+
+---
+
+### Multiplayer Participant Avatars
+
+Multiplayer participant portraits appear together inside the island. Their frames can be styled separately from the avatars beside ordinary chat messages.
+
+```css
+/* Participant avatar frames */
+[data-lab="avatar"][style*="rgba("]:not(
+  [data-lab="message"] [data-lab="avatar"]
+) {
+  background: #29243e !important;
+  border: 3px solid #8deaff ;
+  border-radius: 50% ;
+  outline: 2px solid #ff79ca ;
+  box-shadow: 0 0 10px #ff79ca55 ;
+}
+
+/* Participant portrait images */
+[data-lab="avatar"][style*="rgba("]:not(
+  [data-lab="message"] [data-lab="avatar"]
+) img {
+  border-radius: 50% ;
+  outline: 1px solid #ffe17b ;
+}
+```
+
+**Customization:**
+- `background` changes the portrait frame's backing.
+- `border` creates the inner outline.
+- `outline` adds a second decorative ring.
+- `box-shadow` produces a glow around the avatar.
+- The nested `img` rule styles the portrait image itself.
+
+---
+
+### Multiplayer Author Names
+
+Multiplayer messages display participant names through `[data-lab="mp-author"]`.
+
+Recolor the author name and its clickable identity control.
+
+```css
+/* Multiplayer author name */
+[data-lab="mp-author"] {
+  color: #ff79ca ;
+  font-weight: 800 ;
+  text-shadow: 0 0 6px #ff79ca66 ;
+}
+
+/* Clickable player identity */
+[data-lab="mp-author"] button[data-lab="identity"] {
+  color: #8deaff ;
+  font-weight: 800 ;
+  text-shadow: 0 0 5px #8deaff55 ;
+}
+```
+
+**Customization:**
+- `[data-lab="mp-author"]` styles multiplayer author names.
+- `button[data-lab="identity"]` targets the clickable player identity.
+- `color` overrides individual author colors with a shared theme color.
+- `text-shadow` adds a subtle glow.
+
+---
+
+### Multiplayer Session Notification Cards
+
+Multiplayer notifications announce events such as participants joining or changing their personas.
+
+Customize the notification card, text, avatar frame, and separator lines.
+
+```css
+/* Notification card */
+[data-lab="divider"] > div:nth-child(2) > div {
+  background: #29243e ;
+  border: 2px solid #8deaff !important;
+  border-radius: 14px ;
+  box-shadow: 0 3px 12px #0005 ;
+}
+
+/* Notification text */
+[data-lab="divider"] > div:nth-child(2) p,
+[data-lab="divider"] > div:nth-child(2) p span {
+  color: #ffe3f4 ;
+}
+
+/* Notification avatar frame */
+[data-lab="divider"] > div:nth-child(2) .rounded-full {
+  background: #453457 ;
+  border: 2px solid #ff79ca !important;
+}
+
+/* Separator lines */
+[data-lab="divider"] > div:first-child,
+[data-lab="divider"] > div:last-child {
+  background: #b49aff ;
+}
+```
+
+**Customization:**
+- `[data-lab="divider"]` identifies the notification row.
+- `div:nth-child(2) > div` styles the notification card.
+- `p` and `p span` recolor its message text.
+- `.rounded-full` targets the notification's circular avatar frame.
+- `div:first-child` and `div:last-child` style the decorative separator lines.
+
+---
+
+### Multiplayer Notification Delete Button
+
+The notification's Delete button can be styled separately from ordinary message deletion controls.
+
+```css
+/* Notification delete button */
+[data-lab="divider"] button[aria-label="Delete"] {
+  background: #211b31 ;
+  border: 1px solid #ff79ca ;
+  border-radius: 50% ;
+}
+
+/* Delete icon */
+[data-lab="divider"] button[aria-label="Delete"] img {
+  filter: brightness(0) invert(1) ;
+}
+```
+
+**Customization:**
+- `background` changes the delete button's fill.
+- `border` sets its outline color.
+- `border-radius: 50%` keeps the control circular.
+- `filter` recolors the icon independently.
+
+---
+
+### Multiplayer Message Reaction Button
+
+Messages can display a reaction control using a Font Awesome icon.
+
+```css
+/* Reaction button */
+[data-lab="message"] button[aria-label="React to message"] {
+  background: #211b31 ;
+  border: 2px solid #ff79ca ;
+  border-radius: 50% ;
+  color: #ffe17b ;
+  box-shadow: 0 0 8px #ff79ca44 ;
+}
+
+/* Reaction icon */
+[data-lab="message"] button[aria-label="React to message"] i {
+  color: #ffe17b ;
+}
+```
+
+**Customization:**
+- `button[aria-label="React to message"]` targets the reaction control.
+- `background` and `border` style the button.
+- The nested `i` selector recolors the Font Awesome icon.
+- `box-shadow` adds a soft glow.
+
+---
+
+### Multiplayer Reaction Counters
+
+When a message has reactions, a separate counter displays its reaction information.
+
+```css
+/* Reaction counter */
+[data-lab="message"] button[aria-label*="reactions. View who reacted"] {
+  background: #453457 ;
+  border: 1px solid #8deaff !important;
+  border-radius: 999px ;
+  box-shadow: 0 0 8px #8deaff33 ;
+}
+
+/* Reaction count */
+[data-lab="message"] button[aria-label*="reactions. View who reacted"] > span:last-child {
+  color: #ffe17b ;
+  font-weight: 800 ;
+}
+```
+
+**Customization:**
+- `[aria-label*="reactions. View who reacted"]` selects reaction counters.
+- `background` styles the counter's surface.
+- `border-radius: 999px` produces a pill shape.
+- `span:last-child` targets the reaction count label.
+
+---
+
+### Floating Player-Chat Toggle
+
+The floating Player Chat button opens or hides the conversation shared between multiplayer participants.
+
+```css
+/* Player-chat toggle */
+button:is(
+  [aria-label="Open player chat"],
+  [aria-label="Hide player chat"]
+) {
+  background: #211b31 ;
+  border: 2px solid #8deaff ;
+  border-radius: 50% ;
+  box-shadow: 0 0 10px #8deaff55 ;
+}
+
+/* Toggle icon */
+button:is(
+  [aria-label="Open player chat"],
+  [aria-label="Hide player chat"]
+) img {
+  filter: brightness(0) invert(1) ;
+  opacity: 1 ;
+}
+```
+
+**Customization:**
+- Both ARIA labels are included so the styling remains consistent when the chat is opened or hidden.
+- `background` changes the button's surface.
+- `border` and `box-shadow` provide the accent.
+- The nested `img` selector recolors the toggle icon.
+
+---
+
+### Player-Chat Window Background and Header
+
+The floating Player Chat window has its own header, conversation area, and lower controls.
+
+```css
+/* Player-chat window */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"]) {
+  background: #211b31 ;
+  border: 2px solid #b49aff ;
+  border-radius: 16px ;
+  box-shadow: 0 10px 26px #0008 ;
+}
+
+/* Window header */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"]) > div:first-child {
+  background: #453457 ;
+  border-bottom: 1px solid #ff79ca ;
+}
+
+/* Header text */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"]) > div:first-child * {
+  color: #ffe3f4 ;
+}
+
+/* Conversation and lower surfaces */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"]) > div:not(:first-child) {
+  background-color: #211b31 ;
+}
+```
+
+**Customization:**
+- `.home-widgets.surface-post:has(...)` targets the floating Player Chat window.
+- `background` changes the main window color.
+- `border` and `box-shadow` style its outer frame.
+- `div:first-child` targets the header.
+- `div:not(:first-child)` styles the remaining direct window sections.
+
+---
+
+### Player-Chat Text and Buttons
+
+Recolor the text and buttons inside the floating Player Chat window.
+
+```css
+/* Player-chat text */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"]) p,
+.home-widgets.surface-post:has(button[aria-label="Close player chat"]) span {
+  color: #e8d7f2 ;
+}
+
+/* Player-chat buttons */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"]) button {
+  background: #453457 ;
+  border: 1px solid #8deaff ;
+  border-radius: 10px ;
+  color: #ffe3f4 ;
+}
+```
+
+**Customization:**
+- `p` and `span` recolor text inside Player Chat.
+- `button` styles the window's interactive controls.
+- `background`, `border`, and `color` can be adjusted independently.
+
+**Compatibility:** These are shared styles for the entire Player Chat window. More specific button and bubble rules can be added afterward for individual elements.
+
+---
+
+### Player-Chat Message Bubbles
+
+Player Chat uses left- and right-aligned message bubbles. Give each side a different background, border, and decorative tail.
+
+```css
+/* Left-aligned message bubble */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"])
+.flex.flex-col.items-start > div.relative.max-w-\[85\%\] {
+  background: #30243f !important;
+  border: 1px solid #8deaff !important;
+  border-radius: 4px 14px 14px 14px ;
+  color: #ffe3f4 ;
+  box-shadow: 0 2px 8px #0005 !important;
+}
+
+/* Left bubble tail */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"])
+.flex.flex-col.items-start > div.relative.max-w-\[85\%\]
+> svg[data-lab="bubble-tail"] {
+  fill: #30243f ;
+}
+
+/* Right-aligned message bubble */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"])
+.flex.flex-col.items-end > div.relative.max-w-\[85\%\] {
+  background: #49304f !important;
+  border: 1px solid #ff79ca !important;
+  border-radius: 14px 4px 14px 14px ;
+  color: #ffe3f4 ;
+  box-shadow: 0 2px 8px #0005 ;
+}
+
+/* Right bubble tail */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"])
+.flex.flex-col.items-end > div.relative.max-w-\[85\%\]
+> svg[data-lab="bubble-tail"] {
+  fill: #49304f !important;
+  
+}
+```
+
+**Customization:**
+- `.items-start` identifies left-aligned messages.
+- `.items-end` identifies right-aligned messages.
+- `background` sets each bubble's color.
+- `border-radius` creates the different left and right bubble shapes.
+- `svg[data-lab="bubble-tail"]` styles each bubble's decorative pointer.
+- Keep each tail's `fill` matched to its bubble's `background` for a seamless appearance.
+
+---
+
+### Player-Chat Composer
+
+Customize the Player Chat text field, typed text, cursor, and placeholder.
+
+```css
+/* Player-chat text input */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"]) textarea {
+  background: #171b2b ;
+  border: 1px solid #8deaff ;
+  border-radius: 10px ;
+  color: #ffe3f4 ;
+  caret-color: #ff79ca ;
+}
+
+/* Input placeholder */
+.home-widgets.surface-post:has(button[aria-label="Close player chat"]) textarea::placeholder {
+  color: #b8a9cc ;
+  opacity: 1 ;
+}
+```
+
+**Customization:**
+- `background` changes the text field's fill.
+- `border` sets the input outline.
+- `color` controls typed text.
+- `caret-color` recolors the typing cursor.
+- `::placeholder` styles the text shown before typing.
+
+---
+
+### Player-Chat Images, GIFs, and Stickers
+
+Add decorative frames to images shared through Player Chat.
+
+```css
+.home-widgets.surface-post:has(button[aria-label="Close player chat"]) img {
+  border: 2px solid #8deaff ;
+  border-radius: 12px ;
+  box-shadow: 0 0 8px #ff79ca44 ;
+}
+```
+
+**Customization:**
+- `border` frames the image.
+- `border-radius` rounds its corners.
+- `box-shadow` creates a colored glow.
+- Change the border width or shadow intensity to make media decorations more or less prominent.
+
+**Note:** This rule affects images throughout the Player Chat window, including interface artwork. For media-only decoration, narrow the selector to the image container you want to customize.
+
+---
+
+## Universes
+
+LoreBary's Universes feature includes a dedicated sidebar, universe selection controls, an in-chat clock, a minimap, and a recall button. Each component can be customized independently to match your Laboratory theme.
+
+### Universe Sidebar Background and Header
+
+Customize the Universe sidebar's background, border, shadow, and header.
+
+```css
+/* Universe sidebar */
+[data-lab="universe-panel"] {
+  background: #211b31 ;
+  border-left: 2px solid #b49aff ;
+  color: #ffe3f4 ;
+  box-shadow: -8px 0 30px #0006 ;
+}
+
+/* Sidebar header */
+[data-lab="universe-panel"] > div > div:first-child {
+  background: #453457 ;
+  border-bottom: 1px solid #b49aff ;
+  box-shadow: 0 4px 12px #0003 ;
+}
+```
+
+**Customization:**
+- `background` sets the sidebar's main surface.
+- `border-left` adds an accent along the sidebar edge.
+- `box-shadow` creates depth between the sidebar and chat.
+- The second selector styles the header area independently.
+
+---
+
+### Universe Sidebar Titles and Text
+
+Recolor the Universe sidebar's headings, descriptions, and secondary labels.
+
+```css
+/* Headings */
+[data-lab="universe-panel"] h3 {
+  color: #ffe3f4 ;
+  font-family: Georgia, serif ;
+  letter-spacing: .04em ;
+}
+
+/* Descriptions */
+[data-lab="universe-panel"] p {
+  color: #d1bddf ;
+}
+
+/* Secondary labels */
+[data-lab="universe-panel"] :is(
+  .text-slate-400,
+  .text-slate-500
+) {
+  color: #c5afd4 ;
+}
+```
+
+**Customization:**
+- `h3` styles section headings.
+- `p` recolors descriptive text.
+- `.text-slate-400` and `.text-slate-500` target additional muted labels.
+- `font-family` and `letter-spacing` can give the headings a different personality.
+
+---
+
+### Universe Selection Radio Buttons
+
+Universes use a radio group to display selectable options. Style the group, unselected buttons, and selected option independently.
+
+```css
+/* Radio group container */
+[data-lab="universe-panel"] [role="radiogroup"] {
+  background: #171b2b ;
+  border: 1px solid #b49aff ;
+  border-radius: 12px ;
+}
+
+/* Unselected options */
+[data-lab="universe-panel"] [role="radio"] {
+  color: #d1bddf ;
+  border: 1px solid transparent ;
+  border-radius: 10px ;
+}
+
+/* Selected option */
+[data-lab="universe-panel"] [role="radio"][aria-checked="true"] {
+  background: #ffb36b ;
+  color: #211b31 ;
+  border-color: #ffb36b ;
+  box-shadow: 0 2px 8px #0003 ;
+}
+```
+
+**Customization:**
+- `[role="radiogroup"]` styles the container around the options.
+- `[role="radio"]` targets individual options.
+- `[aria-checked="true"]` identifies the selected option.
+- `background` and `color` distinguish the active selection.
+
+---
+
+### Universe Cards and Content Panels
+
+Recolor the smaller content panels displayed inside the Universe sidebar.
+
+```css
+[data-lab="universe-panel"] .surface-post {
+  background: #30243f ;
+  border: 1px solid #b49aff ;
+  border-radius: 12px ;
+  box-shadow: 0 3px 10px #0003 ;
+}
+```
+
+**Customization:**
+- `.surface-post` targets the sidebar's internal content surfaces.
+- `background` changes the card fill.
+- `border` defines its outline.
+- `border-radius` and `box-shadow` control its shape and depth.
+
+---
+
+### Universe Input Fields and Dropdowns
+
+Customize text inputs, text areas, and dropdown menus inside the Universe sidebar.
+
+```css
+/* Input fields */
+[data-lab="universe-panel"] :is(input, textarea, select) {
+  background: #171b2b ;
+  border: 1px solid #b49aff ;
+  border-radius: 8px ;
+  color: #ffe3f4 ;
+  caret-color: #ff79ca ;
+}
+
+/* Placeholder text */
+[data-lab="universe-panel"] :is(input, textarea)::placeholder {
+  color: #c5afd4 ;
+  opacity: .8 ;
+}
+
+/* Focused fields */
+[data-lab="universe-panel"] :is(input, textarea):focus {
+  outline: 2px solid #ffb36b ;
+  outline-offset: 1px ;
+}
+```
+
+**Customization:**
+- `input`, `textarea`, and `select` share the same field colors.
+- `color` controls typed text.
+- `caret-color` recolors the typing cursor.
+- `::placeholder` changes the hint text.
+- `:focus` highlights an active text field.
+
+---
+
+### Universe Buttons and Icons
+
+Style the sidebar's regular buttons and recolor its Font Awesome and pixel-art icons.
+
+```css
+/* Regular buttons */
+[data-lab="universe-panel"] button:not([role="radio"]) {
+  border-color: #b49aff ;
+  color: #ffe3f4 ;
+}
+
+/* Font Awesome icons */
+[data-lab="universe-panel"] i {
+  color: #ffb36b ;
+}
+
+/* Pixel-art icons */
+[data-lab="universe-panel"] img[src^="/img/pixel/"] {
+  filter: sepia(1) saturate(2) hue-rotate(330deg) ;
+}
+
+/* Hover */
+@media (hover: hover) {
+  [data-lab="universe-panel"] button:not([role="radio"]):hover {
+    filter: brightness(1.15) ;
+  }
+}
+```
+
+**Customization:**
+- `button:not([role="radio"])` styles regular controls without changing the radio selections.
+- `i` recolors Font Awesome icons.
+- `img[src^="/img/pixel/"]` targets native pixel-art images.
+- `filter` changes their tint.
+- `brightness(1.15)` makes buttons slightly brighter on hover.
+
+---
+
+### Universe Header Badge
+
+Recolor the small badge displayed in the Universe sidebar's header.
+
+```css
+[data-lab="universe-panel"] .surface-header > span.rounded-md {
+  background: #453457 ;
+  border: 1px solid #b49aff ;
+  border-radius: 8px ;
+  color: #ffb36b ;
+  box-shadow: inset 0 1px 2px #0003 ;
+}
+```
+
+**Customization:**
+- `background` sets the badge fill.
+- `border` creates its outline.
+- `color` changes the badge text.
+- `box-shadow` adds subtle inner depth.
+
+---
+
+### Universe Pills and Tags
+
+Customize the small pill-shaped controls used inside the Universe sidebar.
+
+```css
+/* Universe pills */
+[data-lab="universe-panel"] .group\/pill {
+  background: #453457 ;
+  border: 1px solid #b49aff ;
+  border-radius: 999px ;
+  color: #ffe3f4 ;
+  box-shadow: 0 2px 4px #0003 ;
+}
+
+/* Pill buttons and icons */
+[data-lab="universe-panel"] .group\/pill button,
+[data-lab="universe-panel"] .group\/pill button i {
+  color: #ffb36b ;
+}
+
+/* Hover */
+@media (hover: hover) {
+  [data-lab="universe-panel"] .group\/pill:hover {
+    background: #30243f ;
+    border-color: #ffb36b ;
+  }
+}
+```
+
+**Customization:**
+- `.group\/pill` targets the pill container.
+- `background` and `border` define its appearance.
+- The nested button and icon selectors style its controls.
+- `border-radius: 999px` maintains the rounded pill shape.
+
+---
+
+### Universe Additional Input Controls
+
+Some Universe controls use the `data-no-haptic` attribute. These can be styled separately from the regular inputs.
+
+```css
+[data-lab="universe-panel"] [data-no-haptic] {
+  background: #171b2b ;
+  border: 1px solid #b49aff ;
+  border-radius: 10px ;
+}
+
+/* Active input group */
+[data-lab="universe-panel"] [data-no-haptic]:focus-within {
+  border-color: #ffb36b ;
+}
+```
+
+**Customization:**
+- `[data-no-haptic]` targets the additional control.
+- `background` and `border` style its surface.
+- `:focus-within` highlights the container when an internal input receives focus.
+
+---
+
+### Universe Clock
+
+The Universe Clock appears in the chat interface and can be styled independently from the sidebar.
+
+```css
+/* Clock container */
+[data-lab="universe-clock"] {
+  background: #211b31 ;
+  border: 1px solid #ffb36b ;
+  border-top: 0 ;
+  color: #ffe3f4 ;
+  box-shadow: 0 3px 10px #0006 ;
+}
+
+/* Clock icon */
+[data-lab="universe-clock"] img {
+  filter: sepia(1) saturate(2) hue-rotate(330deg) ;
+  opacity: 1 ;
+}
+
+/* Clock labels */
+[data-lab="universe-clock"] span {
+  color: #d1bddf ;
+}
+
+/* First clock label */
+[data-lab="universe-clock"] span:first-of-type {
+  color: #ffe17b ;
+  font-weight: 800 ;
+}
+
+/* Final clock label */
+[data-lab="universe-clock"] span:last-child {
+  color: #8deaff ;
+}
+
+/* Hover */
+@media (hover: hover) {
+  [data-lab="universe-clock"]:hover {
+    background: #453457 ;
+  }
+}
+```
+
+**Customization:**
+- `background` changes the clock's surface.
+- `border` sets its outline.
+- `border-top: 0` removes the upper border.
+- `img` styles the clock icon.
+- `span:first-of-type` and `span:last-child` allow different text accents.
+- The hover rule changes the clock's background when the pointer is over it.
+
+---
+
+### Universe Minimap
+
+The Universe Minimap can be styled with a gradient border, shadow, and colored badge.
+
+```css
+/* Minimap container */
+[data-lab="universe-minimap"] {
+  border: 3px solid transparent ;
+  border-radius: 14px ;
+  background:
+    linear-gradient(#171b2b, #171b2b) padding-box,
+    linear-gradient(135deg, #ff79ca, #ffe17b, #8deaff, #b49aff) border-box ;
+  box-shadow: 0 4px 16px #0009, 0 0 12px #b49aff55 ;
+}
+
+/* Minimap badge */
+[data-lab="universe-minimap"] > span:last-child {
+  background: #211b31 ;
+  border: 1px solid #b49aff ;
+  color: #ffe17b ;
+  box-shadow: 0 0 7px #b49aff55 ;
+}
+
+/* Hover glow */
+@media (hover: hover) {
+  [data-lab="universe-minimap"]:hover {
+    box-shadow: 0 4px 18px #000a, 0 0 18px #8deaff88 ;
+  }
+}
+```
+
+**Customization:**
+- `border: 3px solid transparent` makes room for the gradient outline.
+- The first gradient paints the interior.
+- The second gradient paints the border.
+- `span:last-child` styles the minimap's badge.
+- `box-shadow` adds a decorative glow.
+
+---
+
+### Universe Recall Button
+
+The Universe Recall button can have its own pill-shaped appearance, icon tint, and hover treatment.
+
+```css
+/* Recall button */
+[data-lab="universe-recall"] {
+  background: #171b2b ;
+  border: 1px solid #b49aff ;
+  border-radius: 999px ;
+  padding: 3px 7px ;
+  color: #ffe17b ;
+  box-shadow: 0 0 8px #b49aff33 ;
+}
+
+/* Recall icon */
+[data-lab="universe-recall"] img {
+  filter: sepia(1) saturate(2) hue-rotate(135deg) ;
+  opacity: 1 ;
+}
+
+/* Recall text */
+[data-lab="universe-recall"] span {
+  color: #ffe17b ;
+  font-weight: 800 ;
+}
+
+/* Hover */
+@media (hover: hover) {
+  [data-lab="universe-recall"]:hover {
+    background: #453457 ;
+    border-color: #8deaff ;
+  }
+}
+```
+
+**Customization:**
+- `background` sets the Recall button's fill.
+- `border` controls its outline.
+- `border-radius: 999px` creates the pill shape.
+- `padding` adjusts the spacing around its contents.
+- `img` styles the Recall icon.
+- `span` recolors and emphasizes the button text.
+
+---
+
+## Pinned Scenes
+
+Pinned Scenes display saved moments inside the Laboratory chat. Their appearance includes a decorative card, tape artwork, a scene preview, and an Unpin control.
+
+Each element can be customized independently.
+
+### Pinned Scene Card
+
+Use `[data-lab="scene-pin"]` to customize the pinned scene's main card.
+
+```css
+/* Pinned Scene card */
+[data-lab="scene-pin"] > div > div.relative.p-1\.5 {
+  background: #29243e !important;
+  border: 2px solid #b49aff !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px #0006;
+}
+```
+
+**Customization:**
+
+- `background` changes the card's surface.
+- `border` controls its outline.
+- `border-radius` adjusts the corners.
+- `box-shadow` creates depth beneath the card.
+
+---
+
+### Pinned Scene Decorative Tape
+
+Pinned Scenes use decorative tape artwork that can be recolored independently of the card.
+
+```css
+/* Pinned Scene tape */
+[data-lab="scene-pin"] img[src="/img/sketch/tape_plain.webp"] {
+  filter:
+    grayscale(1)
+    sepia(1)
+    saturate(3)
+    hue-rotate(285deg)
+    brightness(1.12)
+    drop-shadow(0 2px 3px #0008);
+}
+```
+
+**Customization:**
+
+- `grayscale()` removes the original colors.
+- `sepia()` and `saturate()` prepare the image for recoloring.
+- `hue-rotate()` changes the tape's tint.
+- `brightness()` adjusts its lightness.
+- `drop-shadow()` adds depth beneath the artwork.
+
+---
+
+### Custom Pinned Scene Tape
+
+Replace the native tape with your own uploaded artwork.
+
+```css
+/* Custom Pinned Scene tape */
+[data-lab="scene-pin"] img[src="/img/sketch/tape_plain.webp"] {
+  content: url("/api/images/YOUR_IMAGE_ID");
+  object-fit: contain;
+  filter: none;
+}
+```
+
+**Customization:**
+
+- Replace `YOUR_IMAGE_ID` with your uploaded artwork's path.
+- `content: url(...)` replaces the original tape image.
+- `object-fit: contain` preserves the replacement's proportions.
+- `filter: none` displays the artwork's original colors.
+
+---
+
+### Pinned Scene Unpin Button
+
+The Unpin control can be styled independently from the other Laboratory message actions.
+
+```css
+/* Unpin button */
+[data-lab="scene-pin"] button[aria-label="Unpin scene"] {
+  background: #171421;
+  border: 1px solid #ff548d;
+  border-radius: 9px;
+  color: #ff548d;
+}
+
+/* Unpin icon */
+[data-lab="scene-pin"] button[aria-label="Unpin scene"] img {
+  filter:
+    grayscale(1)
+    sepia(1)
+    saturate(3)
+    hue-rotate(285deg)
+    brightness(1.12);
+}
+```
+
+**Customization:**
+
+- `background` changes the Unpin button's surface.
+- `border` sets its outline.
+- `border-radius` adjusts its corners.
+- `color` changes the button's text color.
+- The nested `img` selector recolors its icon.
+
+---
+
